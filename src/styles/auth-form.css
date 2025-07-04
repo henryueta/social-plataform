@@ -1,0 +1,93 @@
+.authFormSection{
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100dvh;
+    width: 100dvw;
+    background-color: cornflowerblue;
+}
+
+.authFormSection .formSection{
+    background-color: white;
+    border: 0.1rem solid gray;
+    width: 30%;
+    border-radius: 0.5rem;
+    /* height: 90%; */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+    padding: 3rem;
+}
+
+.authFormSection .headerSection{
+    width: 100%;
+    padding: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.authFormSection .headerSection>*{
+    text-align: center;
+
+}
+
+.authFormSection .headerSection .titleContainer{
+    font-size: 1.5rem;
+    margin-bottom:0.5rem;
+    
+}
+
+.authFormSection .headerSection .subtitleContainer{
+    font-size: 1.2rem;
+}
+
+.authFormSection form{
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    padding: 1rem;
+    width: 100%;
+    /* height: 50%; */
+}
+
+.authFormSection form>div{
+    margin-bottom: 2.5rem;
+}
+
+.authFormSection form>div>label>input{
+    width: 100%;
+    padding: 0.5rem;
+    font-size: 1rem;
+}
+
+.authFormSection form button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    border: none;
+    font-size: 0.9rem;
+    cursor: pointer;
+    border-radius: 0.5rem;
+    background-color: rgb(226, 239, 250);
+    border: 0.1rem solid gray;
+    font-weight: bolder;
+    height: 4rem;
+}
+
+.authFormSection form button:hover{
+    background-color: rgb(195, 209, 222);
+}
+
+@media(max-width: 1024px) {
+
+.authFormSection .formSection{
+    width: auto;
+    height: auto;
+}
+
+}

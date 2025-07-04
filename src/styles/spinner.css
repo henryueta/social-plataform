@@ -1,0 +1,20 @@
+
+@keyframes spinner_rotate {
+
+    0%{
+        transform: rotate(0deg);
+    }
+    100%{
+        transform: rotate(360deg);
+    }
+
+}
+
+.spinnerContainer{
+    height: 25px;
+    width: 25px;
+    border-radius: 100%;
+    border: 0.2rem solid black;
+    border-style: outset;
+    animation: spinner_rotate 1.5s infinite ease-in-out;
+}
