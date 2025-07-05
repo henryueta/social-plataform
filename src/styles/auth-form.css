@@ -1,18 +1,19 @@
 .authFormSection{
-    padding: 2rem;
+    /* padding: 1rem; */
+    padding-top: 3rem;
+    padding-bottom: 3rem;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 100dvh;
+    /* height: 100dvh; */
     width: 100dvw;
-    background-color: cornflowerblue;
 }
 
 .authFormSection .formSection{
     background-color: white;
-    border: 0.1rem solid gray;
-    width: 30%;
+    /* border: 0.1rem solid gray; */
+    width: 500px;
     border-radius: 0.5rem;
     /* height: 90%; */
     display: flex;
@@ -20,7 +21,7 @@
     align-items: center;
     justify-content: center;
     gap: 2rem;
-    padding: 3rem;
+    padding: 2rem;
 }
 
 .authFormSection .headerSection{
@@ -37,7 +38,6 @@
 .authFormSection .headerSection .titleContainer{
     font-size: 1.5rem;
     margin-bottom:0.5rem;
-    
 }
 
 .authFormSection .headerSection .subtitleContainer{
@@ -53,14 +53,22 @@
     /* height: 50%; */
 }
 
-.authFormSection form>div{
-    margin-bottom: 2.5rem;
+.authFormSection form .warningContainer{
+    padding: 0.5rem;
+    height: 30px;
+    margin-top: 0.5rem;
+    color: red;
+}
+
+.authFormSection form>.fieldFormContainer{
+    margin-bottom: 0.5rem;
 }
 
 .authFormSection form>div>label>input{
     width: 100%;
     padding: 0.5rem;
     font-size: 1rem;
+    border-radius: 0.2rem;
 }
 
 .authFormSection form button{
@@ -73,21 +81,47 @@
     font-size: 0.9rem;
     cursor: pointer;
     border-radius: 0.5rem;
-    background-color: rgb(226, 239, 250);
-    border: 0.1rem solid gray;
+    color: white;
+    background-color: dodgerblue;
+    border: 0.1rem solid darkcyan;
     font-weight: bolder;
-    height: 4rem;
+    height: 3.5rem;
 }
 
 .authFormSection form button:hover{
-    background-color: rgb(195, 209, 222);
+    background-color: rgb(20, 105, 191);
+}
+
+.authAskSpan{
+    margin-right: 0.1rem;
+}
+
+.authReplyRedirect{
+    text-decoration: none;
+    color: deepskyblue;
 }
 
 @media(max-width: 1024px) {
 
+
+
 .authFormSection .formSection{
-    width: auto;
+    width: 100%;
     height: auto;
+}
+
+.authFormSection .headerSection .titleContainer{
+    font-size: 1.2rem;
+    margin-bottom:0.5rem;
+}
+
+.authFormSection .headerSection .subtitleContainer{
+    font-size: 1.1rem;
+}
+
+.authFormSection form button{
+    height: 3rem;
+    font-size: 0.8rem;
 }
 
 }

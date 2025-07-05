@@ -7,9 +7,9 @@ import { AxiosHttpClientFactory } from "../adapters/axios-adapter"
 
 const initialQueryState:QueryStateType = {
 
-    isLoading:false,
-    hasError:false,
-    hasSuccess:false
+    isLoading:null,
+    hasError:null,
+    hasSuccess:null
 
 }
 
@@ -37,6 +37,7 @@ const handleQueryState = (state:QueryStateType,action:QueryActionType)=>{
 const useHandleQuery = ()=>{
 
     const [queryState,setQueryState] = useReducer(handleQueryState,initialQueryState);
+    
 
     const onQuery  = (data:HttpDataType,treatment?:QueryTreatmentType) =>{
 

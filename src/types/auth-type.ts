@@ -6,7 +6,7 @@ interface AuthStructureType {
     type:AuthType,
     header:Record<'title'|'subtitle',string>,
     form: Record<'model',ModelType> & Record<'url'|'submitTitle',string>
-    otherOption: Record<'title'|'redirectTo',string>
+    otherOption: Record<'ask'|'reply'|'redirectTo',string>
 }
 
 export type {

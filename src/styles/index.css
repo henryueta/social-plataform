@@ -5,3 +5,7 @@
   font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
   transition: 0.2s ease-in-out;
 }
+
+body{
+    overflow-x: hidden;
+}

@@ -1,25 +1,40 @@
-import { useEffect } from "react";
-import { useHandleAuth } from "../context/AuthContext"
-import { useNavigate } from "react-router-dom";
+import useHandlePath from "../hooks/useHandlePath";
+import { useEffect, useState } from "react";
+import useHandleAuth from "../hooks/useHandleAuth";
 
 const Private = ({children}:{children:React.ReactElement}) => {
 
-  const {isAuth} = useHandleAuth();
-  const onNavigate = useNavigate();
+  const {currentAuthContext,authQueryState} = useHandleAuth();
+ const {onTransition} = useHandlePath();
+ const [isAllow,setIsAllow] = useState<boolean  | null>(null);
+
   useEffect(()=>{
-
-    !!isAuth
-      ? onNavigate("/")
-      : (()=>{
-        onNavigate("/auth/login")
-      })()
-
-  },[]) 
-  return (
     
-      <></>
-    
-  )
+    (authQueryState.isLoading !== null
+    &&
+    !authQueryState.isLoading)
+    &&
+    currentAuthContext.isAuth !== null
+    &&
+    setIsAllow(currentAuthContext.isAuth)
+
+      console.log("bvalue",currentAuthContext.isAuth)
+
+  },[currentAuthContext.isAuth,authQueryState.isLoading])
+
+  useEffect(()=>{
+    isAllow !== null
+    &&
+    (()=>{
+      !isAllow
+    &&
+    onTransition("/auth/login",true)
+    })()
+
+  },[isAllow])
+
+
+  return children
 }
 
 export default Private

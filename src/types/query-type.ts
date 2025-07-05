@@ -1,16 +1,16 @@
 
 interface QueryStateType {
 
-    isLoading:boolean,
-    hasError:boolean,
-    hasSuccess:boolean
+    isLoading:boolean | null,
+    hasError:boolean | null,
+    hasSuccess:boolean | null
 
 }
 
 type QueryActionType = 
 {
     type:"loading",
-    value:boolean
+    value:boolean | null
 }
 |
 {

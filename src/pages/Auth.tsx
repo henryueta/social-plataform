@@ -7,6 +7,7 @@ import type { AuthStructureType } from "../types/auth-type"
 import api_endpoints from "../config/api"
 import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
+import useHandlePath from "../hooks/useHandlePath"
 
 const Auth = () => {
 
@@ -26,7 +27,8 @@ const Auth = () => {
         submitTitle:"Criar conta"
       },
       otherOption:{
-        title:"Já possui conta? Faça seu login",
+        ask:'Já possui conta?',
+        reply:"Faça seu login",
         redirectTo:"/auth/login"
       }
 
@@ -50,7 +52,8 @@ const Auth = () => {
         submitTitle:"Entrar"   
       },
       otherOption:{
-        title:"Não possui conta? Crie sua conta",
+        ask:'Não possui conta?',
+        reply:"Crie sua conta",
         redirectTo:"/auth/register"
       }
     }
@@ -58,6 +61,7 @@ const Auth = () => {
   ]
 
   const [authStructure,setAuthStructure] = useState<AuthStructureType| null>(null)
+  const {onTransition} = useHandlePath();
 
   useEffect(()=>{
 
@@ -66,10 +70,23 @@ const Auth = () => {
     &&
     setAuthStructure(currentStructure)
 
+    
+
   },[type])
 
   return (
     <section className="authFormSection">
+      <h1
+      style={{
+        fontSize:"3rem",
+        border:"0.1rem solid deepskyblue",
+        borderRadius:"100%",
+        borderStyle:"outset",
+        padding:"0.5rem"
+      }}
+      >
+        🌊
+      </h1>
       {
         !!authStructure
         &&
@@ -84,14 +101,31 @@ const Auth = () => {
         submit={{
           url:authStructure.form.url
         }}
+        treatment={{
+          onThen() {
+            onTransition("/",true)
+          },
+          onCatch() {
+            
+          },
+        }}
         />
-        <Link
-        to={authStructure.otherOption.redirectTo}
-        >
-          {
-            authStructure.otherOption.title
-          }
-        </Link>
+        
+        <span className="authOtherOptionSpan">
+            <span className="authAskSpan">
+              {
+                authStructure.otherOption.ask
+              }
+            </span>
+            <Link className="authReplyRedirect"
+              to={authStructure.otherOption.redirectTo}
+              >
+              {
+                authStructure.otherOption.reply
+              }
+          </Link>
+        </span>
+
       </section>
       }
      

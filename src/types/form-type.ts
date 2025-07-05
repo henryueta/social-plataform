@@ -1,4 +1,5 @@
 import type { ModelType } from "./model_type"
+import type { QueryTreatmentType } from "./query-type"
 
 interface FormComponentProps {
     model:ModelType,
@@ -6,7 +7,8 @@ interface FormComponentProps {
         url:string,
         onAction?:(data:any)=>void
     },
-    submitButtonTitle:string
+    submitButtonTitle:string,
+    treatment?:QueryTreatmentType
 }
 
 interface FormItemType {
