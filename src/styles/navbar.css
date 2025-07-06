@@ -1,0 +1,39 @@
+.navBar{
+    /* position: fixed; */
+    background-color: white;
+    box-shadow: 0rem 0rem 0.2rem rgb(0, 0, 0,0.2);
+    min-width: 18rem;
+}
+
+.navBar ul{
+    padding: 0.5rem;
+}
+
+.navBar li{
+    /* display: inline; */
+    margin: 1.5rem;
+    list-style: none;
+}
+
+.navBar li>a{
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    gap: 0.5rem;
+    text-decoration: none;
+}
+
+.navBar li img{
+    width: 32px;
+    height: 32px;
+    display: block;
+    /* background-color: rgb(228, 228, 228); */
+    border: none;
+}
+
+.navBar .logoContainer{
+    
+    padding: 2rem;
+    /* color: deepskyblue; */
+}
+

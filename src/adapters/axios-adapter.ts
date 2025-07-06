@@ -16,6 +16,7 @@ class AxiosHttpClientAdapter implements HttpClientType{
             })
         }
         catch(error){
+            console.error(error)
             const axiosError = error as AxiosError<{message:string}>;
             throw new Error(axiosError.response?.data.message);
         }

@@ -1,0 +1,7 @@
+.mainLayout{
+    place-self: center;
+    flex: 1;
+    height: 100dvh;
+    --mainContentWidth:75%;
+}
+

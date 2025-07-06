@@ -9,3 +9,23 @@
 body{
     overflow-x: hidden;
 }
+
+textarea{
+  resize: none;
+}
+
+#root{
+    display: flex;
+    --contentHeight:100dvh;
+    min-height: var(--contentHeight);
+}
+
+::-webkit-scrollbar-thumb{
+  background-color: rgb(166, 166, 166,0.8);
+  border-radius: 1rem;
+}
+
+::-webkit-scrollbar{
+  width: 0.3rem;
+  background-color: white;
+}

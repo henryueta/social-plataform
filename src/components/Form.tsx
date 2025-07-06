@@ -26,7 +26,7 @@ return (
     <form onSubmit={handleSubmit((data)=>{
         !!submit.onAction
         &&
-        submit.onAction(data)
+        submit.onAction(data);
 
         onQuery({
                 method:"post",
@@ -57,30 +57,41 @@ return (
                 treatment.onFinally()
               }
             })
-
     })}>
         {
             model.form.map((field)=>
                 
                {
+                const field_error_style = 
+                {
+                    outline:
+                    errors[field.registerId]?.message
+                    ? "0.1rem solid red"
+                    : "0.1rem solid gray",
+                    border:
+                    errors[field.registerId]?.message
+                    ? "0.1rem solid red"
+                    : "none"
+                }
                 let field_tag = null;
                  switch (field.tag) {
                     case "input":
                         field_tag = 
                         <input 
-                        style = {{
-                            outline:
-                            errors[field.registerId]?.message
-                            ? "0.1rem solid red"
-                            : "0.1rem solid gray",
-                            border:
-                            errors[field.registerId]?.message
-                            ? "0.1rem solid red"
-                            : "none"
-                        }}
+                        id={field.id}
+                        style = {field_error_style}
                         placeholder={field.title}
                         type={field.type} 
                         {...register(field.registerId)}/>
+                    break;
+                    case "textarea":
+                        field_tag = 
+                        <textarea 
+                        id={field.id}
+                        style={field_error_style}
+                        placeholder={field.title}
+                        {...register(field.registerId)}
+                        />
                     break;
                     default:
                         field_tag =  <></>

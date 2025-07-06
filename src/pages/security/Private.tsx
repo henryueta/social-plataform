@@ -1,6 +1,6 @@
-import useHandlePath from "../hooks/useHandlePath";
+import useHandlePath from "../../hooks/useHandlePath";
 import { useEffect, useState } from "react";
-import useHandleAuth from "../hooks/useHandleAuth";
+import useHandleAuth from "../../hooks/useHandleAuth";
 
 const Private = ({children}:{children:React.ReactElement}) => {
 
@@ -18,7 +18,6 @@ const Private = ({children}:{children:React.ReactElement}) => {
     &&
     setIsAllow(currentAuthContext.isAuth)
 
-      console.log("bvalue",currentAuthContext.isAuth)
 
   },[currentAuthContext.isAuth,authQueryState.isLoading])
 
