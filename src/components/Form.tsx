@@ -6,7 +6,7 @@ import Warning from "./Warning";
 import useHandleQuery from "../hooks/useHandleQuery";
 import Load from "./Load";
 
-const Form = ({model,submit,submitButtonTitle,treatment}:FormComponentProps) => {
+const Form = ({model,submit,submitButtonTitle,errorView,treatment}:FormComponentProps) => {
     
     const {register,formState,handleSubmit,reset} = useForm({
         mode:"all",
@@ -104,11 +104,15 @@ return (
                         <label htmlFor={field.id}>
                             {field_tag}
                         </label>
+                          {
+                            !!errorView
+                            &&
                             <Warning
                              message={
                             errors[field.registerId]?.message?.toString() || ""
                             }
-                        />
+                            />
+                          }
                     </div>
                 )
                }

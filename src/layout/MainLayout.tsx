@@ -1,5 +1,5 @@
-import NavBar from "../../components/NavBar"
-import "../../styles/main-layout.css"
+import NavBar from "../components/NavBar"
+import "../styles/layout/main-layout.css"
 
 const MainLayout = ({children}:{children:React.ReactElement}) => {
   return (

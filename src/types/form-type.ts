@@ -8,6 +8,7 @@ interface FormComponentProps {
         onAction?:(data:any)=>void
     },
     submitButtonTitle:string,
+    errorView?:boolean,
     treatment?:QueryTreatmentType
 }
 

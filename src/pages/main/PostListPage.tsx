@@ -1,14 +1,13 @@
 import "../../styles/post.css"
-import ProfileList from "../../components/ProfileList"
 import PostList from "../../components/PostList"
+import SocialLayout from "../../layout/SocialLayout"
 
 const PostListPage = () => {
 
   return (
-      <section className="postListSection">
+        <SocialLayout>
           <PostList/>
-          <ProfileList/>
-      </section>
+        </SocialLayout>
   )
 }
 

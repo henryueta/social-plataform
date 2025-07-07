@@ -1,0 +1,9 @@
+
+.socialContentContainer{
+       display: flex;
+    height: 100dvh;
+}
+
+.socialContentContainer>*:not(.profileListContainer){
+    width: var(--mainContentWidth);
+}

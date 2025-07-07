@@ -8,7 +8,7 @@ interface HttpDataType{
 
 interface HttpResponseType {
     status:number,
-    message:string
+    response:string
 }
 
 interface HttpClientType{

@@ -1,4 +1,5 @@
 import "../styles/post.css"
+import CommentCard from "./CommentCard"
 import TitleHeader from "./TitleHeader"
 import {} from "react"
 
@@ -21,11 +22,6 @@ const PostCard = () => {
             }
             />   
         </div>
-          <div className="titleContainer">
-            <h1>
-              Lorem.
-            </h1>
-          </div>
         <div className="descriptionContainer">
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere libero, reiciendis voluptate quaerat nisi sunt ea cumque beatae voluptatem inventore quidem vitae tenetur voluptatibus eos repudiandae amet eius nesciunt magni.
         </div>
@@ -49,6 +45,7 @@ const PostCard = () => {
             </span>
           </div>
         </div>
+        <CommentCard/>
     </article>
   )
 }

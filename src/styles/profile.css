@@ -1,0 +1,42 @@
+.profilePageContainer{
+    padding: 1rem;
+    overflow-y: auto;
+}
+
+.profilePageContainer .profileInfoContainer{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4rem;
+    width: 100%;
+    height: 40%;
+}
+
+.profilePageContainer .socialInfoContainer>*{
+    margin-top: 2rem;
+}
+
+.profilePageContainer .profileInfoContainer .profileImageContainer img{
+
+    height: 150px;
+    width: 150px;
+
+}
+
+.profileInfoContainer .countViewContainer>*{
+    margin-bottom: 0.2rem;
+}
+
+.profileInfoContainer .countViewContainer .valueContainer{
+    font-weight: bold;
+}
+
+.profilePageContainer .profileInfoContainer .activityContainer{
+    display: flex;
+    gap: 2rem;
+}
+
+.profilePageContainer .profileInfoContainer .usernameContainer{
+    display: flex;
+    gap: 2rem;
+}

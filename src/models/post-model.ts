@@ -5,9 +5,6 @@ import type { ModelType } from "../types/model_type";
 
 const post_schema = ZodSchemaFactory.draw({
     
-    title:z.string().min(1,{
-        message:"Campo título inválido"
-    }),
     description:z.string().min(1,{
         message:"Campo descrição inválido"
     })
@@ -16,14 +13,7 @@ const post_schema = ZodSchemaFactory.draw({
 
 const post_form:FormItemType[] = [
     {
-        title:"Título",
-        id:"title_id",
-        registerId:"title",
-        tag:"input",
-        type:"text"
-    },
-    {
-        title:"Descrição",
+        title:"O que você quer compartilhar hoje?",
         id:"description_id",
         registerId:"description",
         tag:"textarea",

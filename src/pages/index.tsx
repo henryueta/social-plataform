@@ -8,7 +8,7 @@ import SearchPage from "./main/SearchPage"
 import PostPage from "./main/PostPage"
 import PublishPage from "./main/PublishPage"
 import { Navigate } from "react-router-dom"
-import MainLayout from "./main/MainLayout"
+import MainLayout from "../layout/MainLayout"
 
 const router = RouterDomFactory.create([
     {

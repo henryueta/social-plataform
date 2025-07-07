@@ -1,13 +1,14 @@
+import type { UserCardComponentProps } from "../types/user-type"
 
-const UserCard = () => {
+const UserCard = ({username,image}:UserCardComponentProps) => {
   return (
     <article className="profileCardArticle">
         <div className="profileImageContainer">
-            <img src="" alt="" />
+            <img src={image} alt={username+"s image"} />
         </div>
         <div className="profileUsernameContainer">
             {
-                "guest_"+(Math.random()*10).toFixed(5).replace(".","")
+                username
             }
         </div>
     </article>
