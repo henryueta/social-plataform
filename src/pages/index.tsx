@@ -1,5 +1,5 @@
 import { RouterDomFactory } from "../adapters/router_dom-adapter"
-import PostList from "./main/PostListPage"
+import PostListPage from "./main/PostListPage"
 import AuthPage from "./security/AuthPage"
 import Private from "./security/Private"
 import NotificationPage from "./main/NotificationPage"
@@ -58,7 +58,7 @@ const router = RouterDomFactory.create([
         element:
         <Private>
             <MainLayout>
-                <PostList/>
+                <PostListPage key={Date.now()}/>
             </MainLayout>
         </Private>,
         handle:{

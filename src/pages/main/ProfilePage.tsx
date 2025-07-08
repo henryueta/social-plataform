@@ -5,7 +5,6 @@ import SocialLayout from "../../layout/SocialLayout"
 import "../../styles/profile.css"
 
 const ProfilePage = () => {
-
   return (
     <SocialLayout>
       <div className="profilePageContainer">
@@ -47,9 +46,7 @@ const ProfilePage = () => {
               </div>
             </div>
         </div>
-        <div className="profilePostListContainer">
-            <PostList />
-        </div>
+            <PostList/>
       </div>
     </SocialLayout>
   )

@@ -9,11 +9,11 @@ const api_endpoints = {
         logout:api_base+"auth/logout"
     },
     user:{
-        getSingle:api_base+"user/get/single",
-        getGroup:api_base+"user/get/group"
+        get:api_base+"user/get",
     },
     post:{
-        post:api_base+"publish/post"
+        post:api_base+"publish/post",
+        get:api_base+"publish/get"
     }
 }
 

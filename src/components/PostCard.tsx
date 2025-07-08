@@ -1,29 +1,31 @@
 import "../styles/post.css"
+import type { PostCardComponentProps } from "../types/post-type"
 import CommentCard from "./CommentCard"
 import TitleHeader from "./TitleHeader"
 import {} from "react"
 
-const PostCard = () => {
-
-  
-
+const PostCard = ({postData,liked}:{postData:PostCardComponentProps,liked:boolean}) => {
   return (
-    <article className="postCardArticle">
+    <article className="postCardArticle" key={postData.post_id}>
         <div className="headerContainer">
              <div className="profileImageContainer">
-                <img src="" alt="" />
+                <img src={postData.user_small_photo} alt={postData.username+"s image"} />
             </div>
             <TitleHeader
             title={
-                "guest_"+(Math.random()*10).toFixed(5).replace(".","")
+                postData.username
             }
             subtitle={
-              (Math.random()*10).toFixed()+" horas atrás"
+              postData.creation_date_interval
             }
             />   
         </div>
         <div className="descriptionContainer">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere libero, reiciendis voluptate quaerat nisi sunt ea cumque beatae voluptatem inventore quidem vitae tenetur voluptatibus eos repudiandae amet eius nesciunt magni.
+            <p>
+              {
+              postData.description
+              } 
+            </p>
         </div>
         {/* <div className="mediaContainer"
         style={{
@@ -35,13 +37,13 @@ const PostCard = () => {
           <div className="likeContainer">
             <img src={"https://img.icons8.com/?size=100&id=82788&format=png&color=000000"} alt="" />
             <span>
-              {(Math.random()*10).toFixed()}
+              {postData.like_qnt}
             </span>
           </div>
           <div className="commentContainer">
             <img src="https://img.icons8.com/?size=100&id=rtz2obYzAaeZ&format=png&color=000000" alt="" />
             <span>
-              {(Math.random()*10).toFixed()}
+              {postData.commentary_qnt}
             </span>
           </div>
         </div>

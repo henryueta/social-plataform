@@ -30,7 +30,7 @@ const ProfileList = () => {
       useEffect(()=>{
     
         AxiosHttpClientFactory.request({
-          url:api_endpoints.user.getSingle+"?type=small",
+          url:api_endpoints.user.get+"/single?type=small",
           method:"get",
           withCredentials:true
         })
@@ -45,7 +45,7 @@ const ProfileList = () => {
         })
         
         AxiosHttpClientFactory.request({
-          url:api_endpoints.user.getGroup+"?type=following",
+          url:api_endpoints.user.get+"/group?type=following",
           method:"get",
           withCredentials:true
         })
