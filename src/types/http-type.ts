@@ -1,9 +1,11 @@
+import type { CancelToken } from "axios"
 
 interface HttpDataType{
     method:'post'|'get'|'put'|'delete',
     url:string,
     body?:object,
-    withCredentials?:boolean
+    withCredentials?:boolean,
+    cancelToken:CancelToken
 }
 
 interface HttpResponseType {
@@ -12,7 +14,8 @@ interface HttpResponseType {
 }
 
 interface HttpClientType{
-    request:(data:HttpDataType)=>Promise<HttpResponseType>
+    request:(data:HttpDataType)=>Promise<HttpResponseType>,
+    createCancelToken:()=>CancelToken
 }
 
 export type{

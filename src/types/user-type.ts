@@ -1,27 +1,62 @@
 
-interface UserCardComponentProps{
+interface ProfileCardComponentProps{
     username:string,
     image:string
 }
 
-interface UserCardStateType {
-    user:UserCardComponentProps | null,
-    following:UserCardComponentProps[] | null
+interface ProfileCardStateType {
+    user:ProfileCardComponentProps | null,
+    following:ProfileCardComponentProps[] | null
 }
 
-type UserCardActionType = 
+type UserViewStatusType = 'post_qnt'|'followers_qnt'|'following_qnt'
+
+interface UserViewType {
+    username:string,
+    image:string,
+    social_status:{
+        post_qnt:number,
+        followers_qnt:number,
+        following_qnt:number
+    }
+}
+
+type ProfileCardActionType = 
 {
     type:"user",
-    value:UserCardComponentProps
+    value:ProfileCardComponentProps
 }
 |
 {
     type:"following",
-    value:UserCardComponentProps[]
+    value:ProfileCardComponentProps[]
+}
+
+type UserQueryGetType = 
+{
+    mode:'single',
+    hasImage:boolean,
+    type:'small'|'social'|'important'
+}
+|
+{
+    mode:'group',
+    hasImage:boolean,
+    type:'following'
+}
+
+interface ProfileViewState {
+    data:UserViewType,
+    isFollowing:boolean,
+    isSameUser:boolean
 }
 
 export type {
-    UserCardComponentProps,
-    UserCardStateType,
-    UserCardActionType
+    ProfileCardComponentProps,
+    ProfileCardStateType,
+    ProfileCardActionType,
+    UserQueryGetType,
+    ProfileViewState,
+    UserViewType,
+    UserViewStatusType
 }

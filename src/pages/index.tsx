@@ -66,7 +66,7 @@ const router = RouterDomFactory.create([
             name:"list-post",
             label:"Posts",
             type:"home_navigation",
-            params:["type"]//all or friends
+            params:["type"]//all or following
         }
     },
     {

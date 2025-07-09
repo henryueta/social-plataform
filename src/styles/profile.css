@@ -3,7 +3,7 @@
     overflow-y: auto;
 }
 
-.profilePageContainer .profileInfoContainer{
+ .profileInfoContainer{
     display: flex;
     align-items: center;
     justify-content: center;
@@ -12,11 +12,11 @@
     height: 40%;
 }
 
-.profilePageContainer .socialInfoContainer>*{
+ .socialInfoContainer>*{
     margin-top: 2rem;
 }
 
-.profilePageContainer .profileInfoContainer .profileImageContainer img{
+ .profileInfoContainer .profileImageContainer img{
 
     height: 150px;
     width: 150px;
@@ -31,12 +31,12 @@
     font-weight: bold;
 }
 
-.profilePageContainer .profileInfoContainer .activityContainer{
+ .profileInfoContainer .activityContainer{
     display: flex;
     gap: 2rem;
 }
 
-.profilePageContainer .profileInfoContainer .usernameContainer{
+ .profileInfoContainer .usernameContainer{
     display: flex;
     gap: 2rem;
 }

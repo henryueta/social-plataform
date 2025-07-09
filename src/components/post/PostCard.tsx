@@ -1,8 +1,8 @@
-import "../styles/post.css"
-import type { PostCardComponentProps } from "../types/post-type"
-import CommentCard from "./CommentCard"
-import TitleHeader from "./TitleHeader"
-import {} from "react"
+import "../../styles/post.css"
+import type { PostCardComponentProps } from "../../types/post-type"
+import CommentCard from "../CommentCard"
+import Like from "../Like"
+import TitleHeader from "../TitleHeader"
 
 const PostCard = ({postData,liked}:{postData:PostCardComponentProps,liked:boolean}) => {
   return (
@@ -34,12 +34,10 @@ const PostCard = ({postData,liked}:{postData:PostCardComponentProps,liked:boolea
         >
         </div> */}
         <div className="actionsContainer">
-          <div className="likeContainer">
-            <img src={"https://img.icons8.com/?size=100&id=82788&format=png&color=000000"} alt="" />
-            <span>
-              {postData.like_qnt}
-            </span>
-          </div>
+          <Like
+          isLiked={liked}
+          quantity={postData.like_qnt}
+          />
           <div className="commentContainer">
             <img src="https://img.icons8.com/?size=100&id=rtz2obYzAaeZ&format=png&color=000000" alt="" />
             <span>

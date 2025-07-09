@@ -1,8 +1,12 @@
-import axios, { AxiosError, type AxiosResponse } from "axios";
+import axios, { AxiosError, type AxiosResponse, type CancelToken } from "axios";
 import type { HttpClientType, HttpDataType } from "../types/http-type";
 
 class AxiosHttpClientAdapter implements HttpClientType{
 
+    createCancelToken(){
+        const source = axios.CancelToken.source();
+        return source.token
+    }
     async request(data:HttpDataType){
         
         let axiosResponse:AxiosResponse;
@@ -27,9 +31,10 @@ class AxiosHttpClientAdapter implements HttpClientType{
                 headers:{
                     "Content-Type":"multipart/form-data"
                 },
+                cancelToken:data.cancelToken,
                 withCredentials:!!data.withCredentials
             })
-
+            console.log(axiosResponse)
         }
         catch(error){
             console.error(error)

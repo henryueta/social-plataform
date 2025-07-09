@@ -3,6 +3,7 @@ import { AuthContext } from "../context/AuthContext"
 import api_endpoints from "../config/api";
 import useHandleQuery from "./useHandleQuery";
 import type { QueryStateType } from "../types/query-type";
+import { AxiosHttpClientFactory } from "../adapters/axios-adapter";
 
 const useHandleAuth = ()=>{
 
@@ -33,6 +34,7 @@ const useHandleAuth = ()=>{
              onQuery({
             method:"get",
             url:api_endpoints.auth.checkout,
+            cancelToken:AxiosHttpClientFactory.createCancelToken(),
             withCredentials:true
             },
             {

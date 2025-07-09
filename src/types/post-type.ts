@@ -1,16 +1,4 @@
 
-// interface PostCardComponentProps {
-
-//     commentary_qnt:number
-//     like_qnt:number
-//     creation_date:string
-//     description:string
-//     post_id:string
-//     user_id:string
-//     user_small_photo:string
-//     username: string
-// }
-
 interface PostListStateType {
     data:{
         value:PostCardComponentProps[] | null,
@@ -23,6 +11,8 @@ interface PostListStateType {
     }
 
 }
+
+type PostListType = 'all'|'following';
 
 type PostListActionType = 
 {
@@ -41,6 +31,21 @@ type PostListActionType =
         limit:number,
     }
 }
+|
+{
+    type:"reset",
+    value:{
+      data:{
+      value:null,
+      remaining:null,
+      liked:null
+    },
+    filter:{
+      dataType:"recent",
+      limit:5
+    }
+    }
+}
 
 type PostCardComponentProps = 
 Record<'commentary_qnt'|'like_qnt',number>
@@ -50,11 +55,14 @@ Record<
 'description'|
 'user_small_photo'|
 'username'|
-// 'user_id'|
+// 'user_username'|
 'post_id',string>
+
+
 
 export type {
     PostCardComponentProps,
     PostListStateType,
-    PostListActionType
+    PostListActionType,
+    PostListType
 }

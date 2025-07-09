@@ -1,16 +1,15 @@
 import { useEffect, useReducer } from "react"
-import { AxiosHttpClientFactory } from "../adapters/axios-adapter"
-import TitleHeader from "./TitleHeader"
-import UserCard from "./UserCard"
-import api_endpoints from "../config/api"
-import type { UserCardActionType, UserCardStateType } from "../types/user-type"
+import TitleHeader from "../TitleHeader"
+import ProfileCard from "./ProfileCard"
+import type { ProfileCardActionType, ProfileCardStateType } from "../../types/user-type"
+import useHandleProfile from "../../hooks/useHandleProfile"
 
-  const initialProfileListState:UserCardStateType = {
+  const initialProfileListState:ProfileCardStateType = {
       user:null,
       following:null
   }
 
-  const handleProfileListState = (state:UserCardStateType,action:UserCardActionType)=>{
+  const handleProfileListState = (state:ProfileCardStateType,action:ProfileCardActionType)=>{
     switch (action.type) {
       case "user":
         return {...state,user:action.value}
@@ -25,39 +24,42 @@ const ProfileList = () => {
 
       const [profileListState,setProfileListState] = 
       useReducer(handleProfileListState,initialProfileListState);
-
+      const {onGetUser} = useHandleProfile();
 
       useEffect(()=>{
-    
-        AxiosHttpClientFactory.request({
-          url:api_endpoints.user.get+"/single?type=small",
-          method:"get",
-          withCredentials:true
-        })
-        .then((result)=>{
-          setProfileListState({
+        
+        onGetUser({
+          mode:'single',
+          type:'small',
+          hasImage:true
+        },{
+          onThen(result) {
+            console.log(result)
+            setProfileListState({
             type:"user",
-            value:result.response.data
-          })
-        })
-        .catch((error)=>{
-          console.log(error)
+            value:result.response.data.user
+            })
+          },
+          onCatch(error) {
+            console.log(error)
+          },
         })
         
-        AxiosHttpClientFactory.request({
-          url:api_endpoints.user.get+"/group?type=following",
-          method:"get",
-          withCredentials:true
-        })
-        .then((result)=>{
-          console.log(result)
-          setProfileListState({
+        onGetUser({
+          mode:'group',
+          type:'following',
+          hasImage:true,
+        },{
+          onThen(result) {
+            console.log(result)
+            setProfileListState({
             type:"following",
             value:result.response.data
-          })
-        })
-        .catch((error)=>{
-          console.log(error)
+            })
+          },
+          onCatch(error) {
+            console.log(error)
+          },
         })
 
       },[])
@@ -70,7 +72,7 @@ const ProfileList = () => {
         {
           !!profileListState.user
           &&
-          <UserCard
+          <ProfileCard
           image={profileListState.user.image}
           username={profileListState.user.username}
         />
@@ -84,7 +86,7 @@ const ProfileList = () => {
                   !!profileListState.following
                   &&
                   profileListState.following.map((following)=>
-                    <UserCard
+                    <ProfileCard
                     image={following.image}
                     username={following.username}
                     />

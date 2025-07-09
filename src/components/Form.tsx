@@ -5,6 +5,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import Warning from "./Warning";
 import useHandleQuery from "../hooks/useHandleQuery";
 import Load from "./Load";
+import { AxiosHttpClientFactory } from "../adapters/axios-adapter";
 
 const Form = ({model,submit,submitButtonTitle,errorView,treatment}:FormComponentProps) => {
     
@@ -27,11 +28,12 @@ return (
         !!submit.onAction
         &&
         submit.onAction(data);
-
+        
         onQuery({
                 method:"post",
                 url:submit.url,
                 body:data,
+                cancelToken:AxiosHttpClientFactory.createCancelToken(),
                 withCredentials:true
               },
             {

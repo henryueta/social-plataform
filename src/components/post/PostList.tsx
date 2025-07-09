@@ -1,16 +1,16 @@
 import { Link } from "react-router-dom"
-import useHandlePath from "../hooks/useHandlePath"
+import useHandlePath from "../../hooks/useHandlePath"
 import PostCard from "./PostCard"
 import { useEffect, useReducer, useRef, useState } from "react";
-import Load from "./Load";
-import type { PostCardComponentProps, PostListActionType, PostListStateType } from "../types/post-type";
-import useHandleQuery from "../hooks/useHandleQuery";
-import api_endpoints from "../config/api";
-import type { QueryStateType } from "../types/query-type";
-
-
-
-const PostList = ({user_id}:{user_id?:string}) => {
+import Load from "../Load";
+import type { PostCardComponentProps, PostListActionType, PostListStateType } from "../../types/post-type";
+import useHandleQuery from "../../hooks/useHandleQuery";
+import api_endpoints from "../../config/api";
+import type { QueryStateType } from "../../types/query-type";
+import type { CancelToken } from "axios";
+import { AxiosHttpClientFactory } from "../../adapters/axios-adapter";
+import ProfileView from "../profile/ProfileView";
+import { post_list_filter } from "../../constants/post-constant";
 
   const initialPostListState:PostListStateType = {
     data:{
@@ -29,35 +29,43 @@ const handlePostListState = (state:PostListStateType,action:PostListActionType)=
     case "data":
       return {...state,data:action.value}
     case "filter":
-      return {...state,filter:action.value}    
+      return {...state,filter:action.value}
+    case "reset":
+      return {...state,...{
+        data:action.value.data,
+        filter:action.value.filter
+      }}
     default:
       return state
   }
 }
 
-
+const PostList = ({user_username}:{user_username?:string}) => {
 
     const [postListState,setPostListState] = useReducer(handlePostListState,initialPostListState);
     const {onQuery,queryState} = useHandleQuery();
     const [postQueryState,setPostQueryState] = useState<QueryStateType>(queryState);
-    
+
+
     useEffect(()=>{
 
         setPostQueryState(queryState)
 
     },[queryState])
 
-    const onQueryPostList = (user_id?:string)=>{
+    const onQueryPostList = (cancelToken:CancelToken,user_username?:string)=>{
         onQuery({
         url:api_endpoints.post.get
         +"/group?limit="
         +postListState.filter.limit
         +"&type="
-        +(!!user_id
+        +(!!user_username
           ? "especific"
           : "all"
-        ),
+        )
+        +"&username="+user_username,
         method:"get",
+        cancelToken:cancelToken,
         withCredentials:true
       },{
         onThen(result) {
@@ -86,20 +94,36 @@ const handlePostListState = (state:PostListStateType,action:PostListActionType)=
     const {onMatch,pathname} = useHandlePath();
     const postListDataRef = useRef<HTMLDivElement>(null);
 
-    console.log("page",postListState.filter.limit)
 
     useEffect(()=>{
-
+      console.log("remain",postListState.data.remaining)
       !!(postListState.data.remaining === null || !!(postListState.data.remaining > 0))
       &&
       (()=>{
         console.log("limite",postListState.filter.limit)
-        onQueryPostList(user_id)
+        onQueryPostList(AxiosHttpClientFactory.createCancelToken(),user_username)
       })()
 
-    },[postListState.filter.limit])
+    },[postListState.filter.limit,user_username,postListState.data.remaining])
 
+    useEffect(()=>{
 
+      setPostListState({
+        type:"reset",
+        value:{
+          data:{
+            liked:null,
+            remaining:null,
+            value:null
+          },
+          filter:{
+            dataType:"recent",
+            limit:5
+          }
+        }
+      })
+
+    },[user_username])
 
     useEffect(()=>{
 
@@ -124,9 +148,7 @@ const handlePostListState = (state:PostListStateType,action:PostListActionType)=
       postListDataRef.current?.addEventListener('scrollend',handleListScroll)
       
       return ()=>{
-        console.log("AAA")
         if(postListDataRef.current){
-          console.log("BBB")
           postListDataRef.current.removeEventListener('scroll',handleListScroll)
         }
       }
@@ -136,30 +158,32 @@ const handlePostListState = (state:PostListStateType,action:PostListActionType)=
 
   return (
     <div className="postListContainer" ref={postListDataRef}>
+            {
+              !!user_username
+              &&
+              <ProfileView username={user_username}/>
+            }
             <div className="postListFilter">
-              
-              <Link 
-              to={"/posts/all"}
-              style={{
-                borderBottom:
-                  onMatch("/posts/all" as string,pathname)
-                  ? "0.1rem solid gray"
-                  : "none"
-              }}
-              >
-              Recentes
-              </Link>
-              <Link 
-              to={"/posts/friends"}
-              style={{
-                borderBottom:
-                  onMatch("/posts/friends" as string,pathname)
-                  ? "0.1rem solid gray"
-                  : "none"
-              }}
-              >
-              Seguindo
-              </Link>
+              {
+                !user_username
+                &&
+                post_list_filter.map((post_filter)=>
+                
+                  <Link 
+                  to={'/posts/'+post_filter.type}
+                  style={{
+                  borderBottom:
+                    onMatch('/posts/'+post_filter.type as string,pathname)
+                    ? "0.1rem solid gray"
+                    : "none"
+                  }}
+                  >
+                  {
+                    post_filter.title
+                  }
+                  </Link>
+                )
+              }
             </div>
             <div className="postList">
               {

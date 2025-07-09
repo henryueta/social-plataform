@@ -1,5 +1,5 @@
 import "../../styles/post.css"
-import PostList from "../../components/PostList"
+import PostList from "../../components/post/PostList"
 import SocialLayout from "../../layout/SocialLayout"
 
 const PostListPage = () => {
