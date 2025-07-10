@@ -1,25 +1,20 @@
 import "../../styles/post.css"
 import type { PostCardComponentProps } from "../../types/post-type"
-import CommentCard from "../CommentCard"
-import Like from "../Like"
-import TitleHeader from "../TitleHeader"
+import CommentAction from "../commentary/CommentAction"
+import CommentInputCard from "../commentary/CommentInputCard"
+import LikeAction from "../like/LikeAction"
+import ProfileCard from "../profile/ProfileCard"
 
 const PostCard = ({postData,liked}:{postData:PostCardComponentProps,liked:boolean}) => {
   return (
     <article className="postCardArticle" key={postData.post_id}>
-        <div className="headerContainer">
-             <div className="profileImageContainer">
-                <img src={postData.user_small_photo} alt={postData.username+"s image"} />
-            </div>
-            <TitleHeader
-            title={
-                postData.username
-            }
-            subtitle={
-              postData.creation_date_interval
-            }
-            />   
-        </div>
+        <ProfileCard
+        userData={{
+          username:postData.username,
+          image:postData.user_small_photo
+        }}
+        intervalDate={postData.creation_date_interval}
+        />
         <div className="descriptionContainer">
             <p>
               {
@@ -34,18 +29,19 @@ const PostCard = ({postData,liked}:{postData:PostCardComponentProps,liked:boolea
         >
         </div> */}
         <div className="actionsContainer">
-          <Like
+          <LikeAction
+          type="post"
+          id={postData.post_id}
           isLiked={liked}
           quantity={postData.like_qnt}
           />
-          <div className="commentContainer">
-            <img src="https://img.icons8.com/?size=100&id=rtz2obYzAaeZ&format=png&color=000000" alt="" />
-            <span>
-              {postData.commentary_qnt}
-            </span>
-          </div>
+          <CommentAction
+          id={postData.post_id}
+          quantity={postData.commentary_qnt}
+          />
         </div>
-        <CommentCard/>
+        
+        {/* <CommentInputCard/> */}
     </article>
   )
 }

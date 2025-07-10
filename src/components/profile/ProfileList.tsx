@@ -73,8 +73,10 @@ const ProfileList = () => {
           !!profileListState.user
           &&
           <ProfileCard
-          image={profileListState.user.image}
-          username={profileListState.user.username}
+          userData={{
+            image:profileListState.user.image,
+          username:profileListState.user.username
+          }}
         />
         }
         <div className="followingListContainer">
@@ -87,8 +89,10 @@ const ProfileList = () => {
                   &&
                   profileListState.following.map((following)=>
                     <ProfileCard
-                    image={following.image}
-                    username={following.username}
+                    userData={{
+                      image:following.image,
+                    username:following.username
+                    }}
                     />
                   )
                 }

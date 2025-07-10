@@ -46,9 +46,9 @@ type UserQueryGetType =
 }
 
 interface ProfileViewState {
-    data:UserViewType,
-    isFollowing:boolean,
-    isSameUser:boolean
+    data:UserViewType | null,
+    isFollowing:boolean | null,
+    isSameUser:boolean | null
 }
 
 export type {

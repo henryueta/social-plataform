@@ -1,16 +1,13 @@
 import { Link } from "react-router-dom"
 import useHandlePath from "../../hooks/useHandlePath"
 import PostCard from "./PostCard"
-import { useEffect, useReducer, useRef, useState } from "react";
+import { useEffect, useReducer, useRef } from "react";
 import Load from "../Load";
 import type { PostCardComponentProps, PostListActionType, PostListStateType } from "../../types/post-type";
-import useHandleQuery from "../../hooks/useHandleQuery";
-import api_endpoints from "../../config/api";
-import type { QueryStateType } from "../../types/query-type";
-import type { CancelToken } from "axios";
-import { AxiosHttpClientFactory } from "../../adapters/axios-adapter";
 import ProfileView from "../profile/ProfileView";
 import { post_list_filter } from "../../constants/post-constant";
+import DataFetcher from "../data/DataFetcher";
+import useHandlePost from "../../hooks/useHandlePost";
 
   const initialPostListState:PostListStateType = {
     data:{
@@ -43,33 +40,24 @@ const handlePostListState = (state:PostListStateType,action:PostListActionType)=
 const PostList = ({user_username}:{user_username?:string}) => {
 
     const [postListState,setPostListState] = useReducer(handlePostListState,initialPostListState);
-    const {onQuery,queryState} = useHandleQuery();
-    const [postQueryState,setPostQueryState] = useState<QueryStateType>(queryState);
-
+    const {onGetPost,postQueryState} = useHandlePost();
+    const {onMatch,pathname} = useHandlePath();
+    const postListDataRef = useRef<HTMLDivElement>(null);
 
     useEffect(()=>{
-
-        setPostQueryState(queryState)
-
-    },[queryState])
-
-    const onQueryPostList = (cancelToken:CancelToken,user_username?:string)=>{
-        onQuery({
-        url:api_endpoints.post.get
-        +"/group?limit="
-        +postListState.filter.limit
-        +"&type="
-        +(!!user_username
+      console.log("remain",postListState.data.remaining)
+      !!(postListState.data.remaining === null || !!(postListState.data.remaining > 0))
+      &&
+      (()=>{
+        console.log("limite",postListState.filter.limit)
+        onGetPost({
+          mode:'group',
+          type:(!!user_username
           ? "especific"
-          : "all"
-        )
-        +"&username="+user_username,
-        method:"get",
-        cancelToken:cancelToken,
-        withCredentials:true
-      },{
-        onThen(result) {
-            console.log(result.response)
+          : "all")
+        },{
+          onThen(result) {
+        console.log(result.response)
         const current_response = result.response.data;
         setPostListState({
           type:"data",
@@ -81,27 +69,15 @@ const PostList = ({user_username}:{user_username?:string}) => {
             })
           }
         })
+          },
+          onCatch(error) {
+            console.log(error)
+          },
         },
-        onCatch(error) {
-        console.log(error)
-            
-        },
-      })
-
-    }
-
-
-    const {onMatch,pathname} = useHandlePath();
-    const postListDataRef = useRef<HTMLDivElement>(null);
-
-
-    useEffect(()=>{
-      console.log("remain",postListState.data.remaining)
-      !!(postListState.data.remaining === null || !!(postListState.data.remaining > 0))
-      &&
-      (()=>{
-        console.log("limite",postListState.filter.limit)
-        onQueryPostList(AxiosHttpClientFactory.createCancelToken(),user_username)
+        {
+          limit:postListState.filter.limit,
+          username:user_username
+        })
       })()
 
     },[postListState.filter.limit,user_username,postListState.data.remaining])
@@ -133,8 +109,6 @@ const PostList = ({user_username}:{user_username?:string}) => {
         &&
         !!(postListState.data.remaining === null || !!(postListState.data.remaining > 0))
         &&
-        // !postQueryState.isLoading
-        // &&
         setPostListState({
           type:"filter",
           value:{
@@ -187,19 +161,32 @@ const PostList = ({user_username}:{user_username?:string}) => {
             </div>
             <div className="postList">
               {
+                <DataFetcher
+                data={{
+                type:'array',
+                value:postListState.data.value as object[],
+                title:'Postagem',
+                word_gender:"f"
+                }}
+                isLoading={!!postQueryState.isLoading}
+              >
+                {
                 !!postListState.data.value
-                &&
-                postListState.data.value.map((post)=>
+                  &&
+                  postListState.data.value.map((post)=>
                   <PostCard
+
                   key={post.post_id}
                   postData={post}
                   liked={!!postListState.data.liked?.includes(post)}
                   />
-                )
+                  )
+                }
+              </DataFetcher>
               }
                 <div className="loadListContainer">
                   <Load
-                isLoading={postQueryState.isLoading as boolean}
+                isLoading={!!postQueryState.isLoading}
                 />
                 </div>
             </div>

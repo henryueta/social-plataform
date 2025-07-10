@@ -13,7 +13,11 @@ const api_endpoints = {
     },
     post:{
         post:api_base+"publish/post",
-        get:api_base+"publish/get"
+        get:api_base+"publish/get",
+        put:api_base+"publish/put"
+    },
+    like:{
+        post:api_base+"like/post"
     }
 }
 

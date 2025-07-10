@@ -47,6 +47,28 @@ type PostListActionType =
     }
 }
 
+type PostQueryPutType = 
+{
+    mode:'social_status',
+    type:'like'|'commentary'
+}
+|
+{
+    mode:'structure',
+    type:''
+}
+
+type PostQueryGetType = 
+{
+    mode:'single',
+    type:'especific'
+}
+|
+{
+    mode:'group',
+    type:'all'|'especific'
+}
+
 type PostCardComponentProps = 
 Record<'commentary_qnt'|'like_qnt',number>
 &
@@ -64,5 +86,7 @@ export type {
     PostCardComponentProps,
     PostListStateType,
     PostListActionType,
-    PostListType
+    PostListType,
+    PostQueryGetType,
+    PostQueryPutType
 }

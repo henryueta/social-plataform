@@ -38,6 +38,25 @@ const useHandleQuery = ()=>{
 
     const [queryState,setQueryState] = useReducer(handleQueryState,initialQueryState);
     
+    const treatmentProvider = (treatment:QueryTreatmentType|undefined)=>{
+        return {
+            onThen(result:any) {
+                !!treatment?.onThen
+                &&
+                treatment.onThen(result)
+            },
+            onCatch(error:unknown) {
+                !!treatment?.onCatch
+                &&
+                treatment.onCatch(error)
+            },
+            onFinally(){
+                !!treatment?.onFinally
+                && 
+                treatment.onFinally()
+            }
+        }
+    }
 
     const onQuery  = (data:HttpDataType,treatment?:QueryTreatmentType) =>{
 
@@ -94,7 +113,8 @@ const useHandleQuery = ()=>{
 
     return {
         queryState,
-        onQuery
+        onQuery,
+        treatmentProvider
     }
 
 }

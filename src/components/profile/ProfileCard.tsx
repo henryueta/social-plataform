@@ -1,20 +1,26 @@
 import useHandlePath from "../../hooks/useHandlePath"
 import type { ProfileCardComponentProps } from "../../types/user-type"
+import TitleHeader from "../TitleHeader"
 
-const ProfileCard = ({username,image}:ProfileCardComponentProps) => {
+const ProfileCard = ({userData,intervalDate}:{userData:ProfileCardComponentProps,intervalDate?:string}) => {
   const {onTransition} = useHandlePath()
   return (
     <article className="profileCardArticle" onClick={()=>{
-        onTransition('/profile/'+username)
+        onTransition('/profile/'+userData.username)
     }}>
         <div className="profileImageContainer">
-            <img src={image} alt={username+"s image"} />
+            <img src={userData.image} alt={userData.username+"s image"} />
         </div>
-        <div className="profileUsernameContainer">
-            {
-                username
+        <TitleHeader
+            title={
+                userData.username
             }
-        </div>
+            subtitle={
+              !!intervalDate
+              ? intervalDate
+              : ""
+            }
+            /> 
     </article>
   )
 }

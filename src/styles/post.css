@@ -39,31 +39,26 @@
     background-color: white;
 }
 
-.postCardArticle .headerContainer{
+.postCardArticle .profileCardArticle{
     display: flex;
     gap: 0.5rem;
     align-items: center;
     padding: 1rem 0rem 1rem 0rem;
 }
 
-.postCardArticle .headerContainer .profileImageContainer>img{
-    width: 40px;
-    height: 40px;
-    /* border: 0.1rem solid gray; */
-    /* border-radius: 100%; */
-}
 
-.postCardArticle>.headerContainer .headerSection{
+.postCardArticle>.profileCardArticle .headerSection{
     display: flex;
     align-items: center;
     gap: 0.5rem;
 }
 
-.postCardArticle>.headerContainer .headerSection .titleContainer{
+.postCardArticle>.profileCardArticle .headerSection .titleContainer{
     color: rgb(3, 128, 170);
+    font-size: 1.2rem;
 }
 
-.postCardArticle>.headerContainer .headerSection .subtitleContainer{
+.postCardArticle>.profileCardArticle .headerSection .subtitleContainer{
     font-size: 0.8rem;
     opacity: 90%;
 }
@@ -87,6 +82,11 @@
     align-items: center;
     justify-content: center;
     gap: 0.2rem;
+    cursor: pointer;
+}
+
+.postCardArticle .actionsContainer div:hover{
+    opacity: 60%;
 }
 
 .postCardArticle .actionsContainer div>img{
@@ -117,7 +117,13 @@
 }
 
 
- .profileListContainer  .headerSection{
+ .profileListContainer>.headerSection{
+    font-size: 0.8rem;
+    margin-top: 1rem;
+    padding: 1rem;
+}
+
+.followingListContainer>.headerSection{
     font-size: 0.8rem;
     margin-top: 1rem;
     padding: 1rem;
@@ -128,6 +134,10 @@
     height: 32px;
     width: 32px;
     /* border-radius: 100%; */
+}
+
+.profileCardArticle .headerSection .titleContainer>h1{
+    font-weight: 200;
 }
 
 .publishContainer{
@@ -170,17 +180,17 @@
     font-size: 0.9rem;
 }
 
-.postCardArticle .commentCardArticle{
+.postCardArticle .commentInputCardArticle{
     display: flex;
     gap: 0.5rem;
     height: 2rem;
 }
 
-.postCardArticle .commentCardArticle .fieldContainer{
+.postCardArticle .commentInputCardArticle .fieldContainer{
     width: 90%;
 }
 
-.postCardArticle .commentCardArticle .fieldContainer input{
+.postCardArticle .commentInputCardArticle .fieldContainer input{
     width: 100%;
     height: 100%;
     padding: 0.5rem;
@@ -189,11 +199,15 @@
     outline: none;
 }
 
-.postCardArticle .commentCardArticle .sendContainer{
+.postCardArticle .commentInputCardArticle .sendContainer{
     width: 10%;
 }
 
-.postCardArticle .commentCardArticle .sendContainer button{
+.postCardArticle .commentInputCardArticle .sendContainer button{
     height: 100%;
+    width: 100%;
+}
+
+.postInfoContainer{
     width: 100%;
 }

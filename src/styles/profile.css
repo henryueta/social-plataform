@@ -16,12 +16,6 @@
     margin-top: 2rem;
 }
 
- .profileInfoContainer .profileImageContainer img{
-
-    height: 150px;
-    width: 150px;
-
-}
 
 .profileInfoContainer .countViewContainer>*{
     margin-bottom: 0.2rem;

@@ -40,7 +40,8 @@ const useHandleProfile = ()=>{
 
 
     return {
-        onGetUser
+        onGetUser,
+        profileQueryState
     }
 
 }

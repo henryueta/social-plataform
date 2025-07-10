@@ -1,7 +1,7 @@
 
-const CommentCard = () => {
+const CommentInputCard = () => {
   return (
-    <article className="commentCardArticle">
+    <article className="commentInputCardArticle">
         <div className="fieldContainer">
             <input
             placeholder="Adicione um comentário"
@@ -14,4 +14,4 @@ const CommentCard = () => {
   )
 }
 
-export default CommentCard
+export default CommentInputCard

@@ -1,9 +1,17 @@
+import { useParams } from "react-router-dom"
+import SocialLayout from "../../layout/SocialLayout"
+import PostView from "../../components/post/PostView";
 
 const PostPage = () => {
+  const {id} = useParams();
   return (
-    <div>
-      
-    </div>
+    <SocialLayout>
+      {
+        !!id
+        &&
+        <PostView id={id}/>
+      }
+    </SocialLayout>
   )
 }
 
