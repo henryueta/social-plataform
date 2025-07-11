@@ -53,6 +53,7 @@ const AuthPage = () => {
         submit={{
           url:authStructure.form.url
         }}
+        errorView
         treatment={{
           onThen() {
             onTransition("/",true)

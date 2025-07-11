@@ -42,7 +42,7 @@ type PostListActionType =
     },
     filter:{
       dataType:"recent",
-      limit:5
+      limit:number
     }
     }
 }

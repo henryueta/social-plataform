@@ -5,7 +5,7 @@ import CommentInputCard from "../commentary/CommentInputCard"
 import LikeAction from "../like/LikeAction"
 import ProfileCard from "../profile/ProfileCard"
 
-const PostCard = ({postData,liked}:{postData:PostCardComponentProps,liked:boolean}) => {
+const PostCard = ({postData,liked,detailedView}:{postData:PostCardComponentProps,liked:boolean,detailedView:boolean}) => {
   return (
     <article className="postCardArticle" key={postData.post_id}>
         <ProfileCard
@@ -28,6 +28,7 @@ const PostCard = ({postData,liked}:{postData:PostCardComponentProps,liked:boolea
         }}
         >
         </div> */}
+
         <div className="actionsContainer">
           <LikeAction
           type="post"
@@ -35,13 +36,21 @@ const PostCard = ({postData,liked}:{postData:PostCardComponentProps,liked:boolea
           isLiked={liked}
           quantity={postData.like_qnt}
           />
-          <CommentAction
+          {
+            !detailedView
+            &&
+            <CommentAction
           id={postData.post_id}
           quantity={postData.commentary_qnt}
           />
+          }
         </div>
         
-        {/* <CommentInputCard/> */}
+        {
+          !detailedView
+          &&
+          <CommentInputCard/>
+        }
     </article>
   )
 }

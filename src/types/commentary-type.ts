@@ -11,6 +11,17 @@ string
 &
 Record<'like_qnt',number>
 
+
+
+interface CommentListComponentProps {
+
+    commentaryList:CommentCardComponentProps[],
+    likedCommentaryList:string[],
+    commentaryListRemaining:number
+
+}
+
 export type {
-    CommentCardComponentProps
+    CommentCardComponentProps,
+    CommentListComponentProps
 }

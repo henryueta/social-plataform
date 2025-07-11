@@ -1,15 +1,19 @@
 
+interface DataLabelType {
+    title:string,
+    word_gender:'m'|'f',
+}
+
 interface DataFetcherComponentPros {
     data:{
         value:object[] | object | null,
-        title:string,
-        word_gender:'m'|'f',
         type:'object'|'array'
-    },
+    } & DataLabelType,
     isLoading:boolean,
     children:React.ReactNode
 }
 
 export type {
-    DataFetcherComponentPros
+    DataFetcherComponentPros,
+    DataLabelType
 }

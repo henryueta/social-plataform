@@ -2,7 +2,7 @@ import type { CommentCardComponentProps } from "../../types/commentary-type"
 import LikeAction from "../like/LikeAction"
 import ProfileCard from "../profile/ProfileCard"
 
-const CommentCard = ({commentaryData}:{commentaryData:CommentCardComponentProps}) => {
+const CommentCard = ({commentaryData,isLiked}:{commentaryData:CommentCardComponentProps,isLiked:boolean}) => {
   return (
     <article className="commentCardArticle">
         <ProfileCard
@@ -19,14 +19,17 @@ const CommentCard = ({commentaryData}:{commentaryData:CommentCardComponentProps}
                 </p>
             </div>
             <div className="actionsContainer">
-                <span>Responder</span>
                 <LikeAction
                 type="commentary"
                 id={commentaryData.commentary_id}
-                isLiked={false}
+                isLiked={isLiked}
                 quantity={commentaryData.like_qnt}
                 />
+                <span>Responder</span>
             </div>
+        </div>
+        <div className="responseContainer">
+            4 Respostas 
         </div>
     </article>
   )

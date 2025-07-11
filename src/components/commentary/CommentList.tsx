@@ -1,17 +1,91 @@
-import type { CommentCardComponentProps } from "../../types/commentary-type"
+import { useRef } from "react";
+import useHandleComment from "../../hooks/useHandleComment"
 import CommentCard from "./CommentCard"
+import useHandleList from "../../hooks/useHandleList";
+import type { CommentCardComponentProps } from "../../types/commentary-type";
+import DataFetcher from "../data/DataFetcher";
+import Load from "../Load";
+import "../../styles/commentary.css"
 
-const CommentList = ({commentaryList}:{commentaryList:CommentCardComponentProps[]}) => {
+const CommentList = ({table_id,type,listDataContainerRef}:{table_id:string,type:'post'|'commentary',listDataContainerRef?:React.RefObject<HTMLDivElement | null>}) => {
+
+  const commentaryListDataRef = useRef<HTMLDivElement>(null);
+
+  const onQueryCommentaryList = ()=>{
+    onGetCommentaryList(type,table_id,listState.filter.limit,{
+      onThen(result) {
+        const current_result = result.response.data;
+
+        setListState({
+          type:"data",
+          value:{
+            remaining:current_result.commentary_list_count_remaining,
+            value:current_result.commentary_list,
+            liked:current_result.commentary_list.filter((commentary:CommentCardComponentProps)=>{
+                return current_result.liked_commentary_list.includes(commentary.commentary_id)
+            })
+          }
+        })
+      },
+      onCatch(error) {
+        console.log(error)
+      },
+    })
+  }
+
+  const {onGetCommentaryList,commentQueryState} = useHandleComment();
+  const {setListState,listState} = useHandleList<CommentCardComponentProps>({
+    config:{
+      limit:2,
+      mode:'automatic'
+    },
+    identifier:table_id,
+    functions:{
+      query:onQueryCommentaryList
+    },
+    references:{
+      listContainerRef:!listDataContainerRef
+      ?
+      commentaryListDataRef
+      : listDataContainerRef
+    }
+  });
+
+
   return (
-    <div className="commentaryListContainer">
-        {
-            commentaryList.map((commentary)=>
-                <CommentCard
-                commentaryData={commentary}
-                />
-            )
-        }
+    <div className="commentaryListContainer" ref={
+      !listDataContainerRef
+      ?
+      commentaryListDataRef
+      : null
+      }>
+
+          <DataFetcher
+            data={{
+            type:'array',
+            value:listState.data.value as object[],
+            title:'Comentário',
+            word_gender:"m"
+            }}
+            isLoading={!!commentQueryState.isLoading}
+          >
+            {
+            !!listState.data.value
+              &&
+              listState.data.value.map((commentary)=>
+              <CommentCard
+              commentaryData={commentary}
+              isLiked={!!(listState.data.liked?.includes(commentary))}
+              />
+              )
+            }
+          </DataFetcher>
+            <div className="loadListContainer">
+              <Load
+            isLoading={!!commentQueryState.isLoading}
+            />
     </div>
+  </div>
   )
 }
 

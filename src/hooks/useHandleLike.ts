@@ -5,18 +5,18 @@ import type { QueryStateType, QueryTreatmentType } from "../types/query-type";
 import useHandleQuery from "./useHandleQuery"
 import type { TableLikeType } from "../types/like-type";
 
-const useHandleEngagement = ()=>{
+const useHandleLike = ()=>{
 
     const {onQuery,queryState,treatmentProvider} = useHandleQuery();
-    const [engagementQueryState,setEngagementQueryState] = useState<QueryStateType>(queryState);
+    const [likeQueryState,setLikeQueryState] = useState<QueryStateType>(queryState);
 
     useEffect(()=>{
 
-        setEngagementQueryState(queryState)
+        setLikeQueryState(queryState)
 
     },[queryState])
 
-    const onPostEngagement = (type:TableLikeType,table_id:string,treatment?:QueryTreatmentType)=>{
+    const onPostLike = (type:TableLikeType,table_id:string,treatment?:QueryTreatmentType)=>{
 
         onQuery({
             url:api_endpoints.like.post+"?type="+type+"&table_id="+table_id,
@@ -25,14 +25,13 @@ const useHandleEngagement = ()=>{
             withCredentials:true
         },treatmentProvider(treatment))
 
-        
     }
 
     return {
-        onPostEngagement,
-        engagementQueryState
+        onPostLike,
+        likeQueryState
     }
 
 }
 
-export default useHandleEngagement
+export default useHandleLike

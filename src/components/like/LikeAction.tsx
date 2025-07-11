@@ -1,6 +1,6 @@
 import { useState } from "react";
 import DataLoader from "../data/DataLoader";
-import useHandleEngagement from "../../hooks/useHandleEngagement";
+import useHandleLike from "../../hooks/useHandleLike";
 import type { TableLikeType } from "../../types/like-type";
 
 const LikeAction = ({type,isLiked,quantity,id}:{type:TableLikeType,isLiked:boolean,quantity:number,id:string}) => {
@@ -11,14 +11,14 @@ const LikeAction = ({type,isLiked,quantity,id}:{type:TableLikeType,isLiked:boole
         : "gainsboro"
     }
     
-    const {onPostEngagement,engagementQueryState} = useHandleEngagement()
+    const {onPostLike,likeQueryState} = useHandleLike()
     const [likeQuantity,setLikeQuantity] = useState<number>(quantity);
     const [likeColor,setLikeColor] = useState(onSetLikeColor(isLiked));
 
     return (
     <div className="likeContainer"
     onClick={()=>{
-        onPostEngagement(type,id,{
+        onPostLike(type,id,{
             onThen(result) {
                 const current_result = result.response.data as {
                     like_qnt:number,
@@ -34,7 +34,7 @@ const LikeAction = ({type,isLiked,quantity,id}:{type:TableLikeType,isLiked:boole
     }}
     >
         <DataLoader
-        isLoading={!!engagementQueryState.isLoading}
+        isLoading={!!likeQueryState.isLoading}
         >
         <svg 
         width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">

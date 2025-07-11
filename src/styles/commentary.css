@@ -1,0 +1,44 @@
+
+.commentaryListContainer{
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.commentCardArticle>article{
+    display: flex;
+    gap: 0.5rem;
+}
+
+.commentCardArticle .headerSection{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+}
+
+.commentCardArticle .likeContainer{
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.commentCardArticle .headerSection .subtitleContainer{
+    font-size: 0.8rem;
+}
+
+.commentCardArticle .headerSection .titleContainer{
+    color: var(--usernameCardFontColor);
+    font-size: 1.2rem;
+}
+
+.commentCardArticle .commentaryInfoContainer .descriptionContainer{
+    padding: 0.5rem;
+}
+
+.commentCardArticle .commentaryInfoContainer .actionsContainer{
+    display: flex;
+    gap: 1rem;
+    padding: 0.5rem;
+}

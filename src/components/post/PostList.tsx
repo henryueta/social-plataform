@@ -1,65 +1,31 @@
 import { Link } from "react-router-dom"
 import useHandlePath from "../../hooks/useHandlePath"
 import PostCard from "./PostCard"
-import { useEffect, useReducer, useRef } from "react";
+import { useRef } from "react";
 import Load from "../Load";
-import type { PostCardComponentProps, PostListActionType, PostListStateType } from "../../types/post-type";
+import type { PostCardComponentProps } from "../../types/post-type";
 import ProfileView from "../profile/ProfileView";
 import { post_list_filter } from "../../constants/post-constant";
 import DataFetcher from "../data/DataFetcher";
 import useHandlePost from "../../hooks/useHandlePost";
-
-  const initialPostListState:PostListStateType = {
-    data:{
-      value:null,
-      remaining:null,
-      liked:null
-    },
-    filter:{
-      dataType:"recent",
-      limit:5
-    }
-}
-
-const handlePostListState = (state:PostListStateType,action:PostListActionType)=>{
-  switch (action.type) {
-    case "data":
-      return {...state,data:action.value}
-    case "filter":
-      return {...state,filter:action.value}
-    case "reset":
-      return {...state,...{
-        data:action.value.data,
-        filter:action.value.filter
-      }}
-    default:
-      return state
-  }
-}
+import useHandleList from "../../hooks/useHandleList";
 
 const PostList = ({user_username}:{user_username?:string}) => {
 
-    const [postListState,setPostListState] = useReducer(handlePostListState,initialPostListState);
     const {onGetPost,postQueryState} = useHandlePost();
     const {onMatch,pathname} = useHandlePath();
     const postListDataRef = useRef<HTMLDivElement>(null);
 
-    useEffect(()=>{
-      console.log("remain",postListState.data.remaining)
-      !!(postListState.data.remaining === null || !!(postListState.data.remaining > 0))
-      &&
-      (()=>{
-        console.log("limite",postListState.filter.limit)
-        onGetPost({
+    const onQueryPostList = ()=>{
+      onGetPost({
           mode:'group',
           type:(!!user_username
           ? "especific"
           : "all")
         },{
           onThen(result) {
-        console.log(result.response)
         const current_response = result.response.data;
-        setPostListState({
+        setListState({
           type:"data",
           value:{
             value:current_response.post_list,
@@ -75,60 +41,24 @@ const PostList = ({user_username}:{user_username?:string}) => {
           },
         },
         {
-          limit:postListState.filter.limit,
+          limit:listState.filter.limit,
           username:user_username
         })
-      })()
+    }
 
-    },[postListState.filter.limit,user_username,postListState.data.remaining])
-
-    useEffect(()=>{
-
-      setPostListState({
-        type:"reset",
-        value:{
-          data:{
-            liked:null,
-            remaining:null,
-            value:null
-          },
-          filter:{
-            dataType:"recent",
-            limit:5
-          }
-        }
-      })
-
-    },[user_username])
-
-    useEffect(()=>{
-
-      const handleListScroll = ()=>{
-        if(postListDataRef.current){
-          postListDataRef.current.scrollTop + postListDataRef.current.clientHeight >= postListDataRef.current.scrollHeight - 1
-        &&
-        !!(postListState.data.remaining === null || !!(postListState.data.remaining > 0))
-        &&
-        setPostListState({
-          type:"filter",
-          value:{
-            limit:postListState.filter.limit+=2,
-            dataType:"recent"
-          }
-        })
-        }
+    const {listState,setListState} = useHandleList<PostCardComponentProps>({
+      config:{
+        limit:5,
+        mode:"automatic"
+      },
+      functions:{
+        query:onQueryPostList
+      },
+      identifier:user_username,
+      references:{
+        listContainerRef:postListDataRef
       }
-
-      postListDataRef.current?.addEventListener('scrollend',handleListScroll)
-      
-      return ()=>{
-        if(postListDataRef.current){
-          postListDataRef.current.removeEventListener('scroll',handleListScroll)
-        }
-      }
-
-    },[postListDataRef.current])
-
+    });
 
   return (
     <div className="postListContainer" ref={postListDataRef}>
@@ -164,21 +94,21 @@ const PostList = ({user_username}:{user_username?:string}) => {
                 <DataFetcher
                 data={{
                 type:'array',
-                value:postListState.data.value as object[],
+                value:listState.data.value as object[],
                 title:'Postagem',
                 word_gender:"f"
                 }}
                 isLoading={!!postQueryState.isLoading}
               >
                 {
-                !!postListState.data.value
+                !!listState.data.value
                   &&
-                  postListState.data.value.map((post)=>
+                  listState.data.value.map((post)=>
                   <PostCard
-
+                  detailedView={false}
                   key={post.post_id}
                   postData={post}
-                  liked={!!postListState.data.liked?.includes(post)}
+                  liked={!!listState.data.liked?.includes(post)}
                   />
                   )
                 }

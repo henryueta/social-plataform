@@ -17,6 +17,8 @@ const Form = ({model,submit,submitButtonTitle,errorView,treatment}:FormComponent
     const {errors} = formState
     const {onQuery,queryState} = useHandleQuery()
     
+    console.log(errors)
+
     useEffect(()=>{
 
         reset()
