@@ -83,14 +83,16 @@ const ProfileView = ({username}:{username:string}) => {
                 title={profileViewState.data.username}
                 />
                 <div className="actionsContainer">
-                    {
-                        profileViewState.isSameUser
-                        ? <button>Editar Perfil</button>
-                        : 
-                        profileViewState.isFollowing
-                        ? <button>Amigos</button>
-                        : <button>Seguir</button>
-                    }
+                    <button className="profileActionButton">
+                        {
+                            profileViewState.isSameUser
+                            ? "Editar Perfil"
+                            : 
+                            profileViewState.isFollowing
+                            ? "Seguindo"
+                            : "Seguir"
+                        }
+                    </button>
                 </div>
             </div>
             <div className="activityContainer">

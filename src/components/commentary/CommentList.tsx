@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import useHandleComment from "../../hooks/useHandleComment"
 import CommentCard from "./CommentCard"
 import useHandleList from "../../hooks/useHandleList";
@@ -7,9 +7,26 @@ import DataFetcher from "../data/DataFetcher";
 import Load from "../Load";
 import "../../styles/commentary.css"
 
-const CommentList = ({table_id,type,listDataContainerRef}:{table_id:string,type:'post'|'commentary',listDataContainerRef?:React.RefObject<HTMLDivElement | null>}) => {
+const CommentList = (
+  {table_id,type,listDataContainerRef,mode,pushElement}
+  :{table_id:string,
+    type:'post'|'commentary',
+    listDataContainerRef?:React.RefObject<HTMLDivElement | null>,
+    mode:'automatic'|'manual',
+    pushElement:CommentCardComponentProps | null
+}
+) => {
 
   const commentaryListDataRef = useRef<HTMLDivElement>(null);
+  const commentaryListExpansionRef = useRef<HTMLButtonElement>(null) 
+
+  useEffect(()=>{
+
+    // !!pushElement
+    // &&
+
+
+  },[pushElement])
 
   const onQueryCommentaryList = ()=>{
     onGetCommentaryList(type,table_id,listState.filter.limit,{
@@ -37,7 +54,7 @@ const CommentList = ({table_id,type,listDataContainerRef}:{table_id:string,type:
   const {setListState,listState} = useHandleList<CommentCardComponentProps>({
     config:{
       limit:2,
-      mode:'automatic'
+      mode:mode
     },
     identifier:table_id,
     functions:{
@@ -47,13 +64,15 @@ const CommentList = ({table_id,type,listDataContainerRef}:{table_id:string,type:
       listContainerRef:!listDataContainerRef
       ?
       commentaryListDataRef
-      : listDataContainerRef
+      : listDataContainerRef,
+      listExpansionContainerRef:commentaryListExpansionRef
     }
   });
-
+  
 
   return (
-    <div className="commentaryListContainer" ref={
+    <div className="commentaryListContainer"
+    ref={
       !listDataContainerRef
       ?
       commentaryListDataRef
@@ -80,11 +99,22 @@ const CommentList = ({table_id,type,listDataContainerRef}:{table_id:string,type:
               )
             }
           </DataFetcher>
-            <div className="loadListContainer">
-              <Load
-            isLoading={!!commentQueryState.isLoading}
-            />
-    </div>
+            {
+              mode === 'automatic'
+              ? <div className="loadListContainer">
+                <Load
+                isLoading={!!commentQueryState.isLoading}
+                />
+              </div>
+              : 
+              listState.data.remaining
+              &&
+              listState.data.remaining > 0
+              ? <button ref={commentaryListExpansionRef}>
+                  Mostrar mais respostas
+                </button>
+              : <></>
+            }
   </div>
   )
 }

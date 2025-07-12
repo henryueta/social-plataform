@@ -21,6 +21,10 @@
     margin-bottom: 0.2rem;
 }
 
+.profileImageContainer>img{
+    border-radius: 100%;
+}
+
 .profileInfoContainer .countViewContainer .valueContainer{
     font-weight: bold;
 }

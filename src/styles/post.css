@@ -14,7 +14,7 @@
 
 .postListContainer .postList{
     padding: 2rem;
-    background-color: rgb(241, 241, 241);
+    background-color: rgb(247, 247, 247);
 }
 
 .postListContainer .postList .loadListContainer{
@@ -131,10 +131,9 @@
 
  .profileListContainer .profileCardArticle .profileImageContainer>img{
     display: block;
-    height: 32px;
-    width: 32px;
-    /* border-radius: 100%; */
 }
+
+
 
 .profileCardArticle .headerSection .titleContainer>h1{
     font-weight: 200;
@@ -199,11 +198,11 @@
     outline: none;
 }
 
- .commentInputCardArticle .sendContainer{
+ .commentInputCardArticle .responseActionButtonContainer{
     width: 10%;
 }
 
- .commentInputCardArticle .sendContainer button{
+ .commentInputCardArticle .responseActionButtonContainer button{
     height: 100%;
     width: 100%;
 }
@@ -221,6 +220,6 @@
 }
 
 
-.postInfoContainer .commentInputCardArticle{
+.postInfoContainer>.commentInputCardArticle{
     padding: 0rem 2rem 0rem 2rem;
 }

@@ -9,7 +9,7 @@ Record<
 string
 >
 &
-Record<'like_qnt',number>
+Record<'like_qnt'|'response_quantity',number>
 
 
 

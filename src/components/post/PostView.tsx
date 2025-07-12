@@ -5,11 +5,13 @@ import type { PostCardComponentProps } from "../../types/post-type";
 import PostCard from "./PostCard";
 import CommentList from "../commentary/CommentList";
 import CommentInputCard from "../commentary/CommentInputCard";
+import useHandleComment from "../../hooks/useHandleComment";
 
 const PostView = ({id}:{id:string}) => {
 
   const {onGetPost} = useHandlePost();
   const postViewRef = useRef<HTMLDivElement>(null)
+  const {currentCommentary,setCurrentCommentary} = useHandleComment();
   const [postViewState,setPostViewState] = useState<{
     data:PostCardComponentProps | null,
     isLiked:boolean | null,
@@ -22,6 +24,7 @@ const PostView = ({id}:{id:string}) => {
       type:'especific'
     },{
       onThen(result) {
+        console.log("resultado")
         setPostViewState({
           data:result.response.data.post,
           isLiked:result.response.data.liked_post,
@@ -35,6 +38,7 @@ const PostView = ({id}:{id:string}) => {
     })
 
   },[])
+
 
   return (
     <div className="postInfoContainer" ref={postViewRef}>
@@ -56,8 +60,16 @@ const PostView = ({id}:{id:string}) => {
         +" Comentário"+(postViewState.data.commentary_qnt > 1 ? "s" : "")
         }
       </div>
-      <CommentInputCard/>
+      <CommentInputCard 
+      type="post"
+      table_id={id}
+      onComment={(commentary)=>{
+          setCurrentCommentary(commentary)
+      }}
+      isResponse={false}/>
       <CommentList
+      pushElement={currentCommentary}
+      mode="automatic"
       listDataContainerRef={postViewRef}
       table_id={id}
       type="post"

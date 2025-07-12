@@ -49,7 +49,7 @@ const PostCard = ({postData,liked,detailedView}:{postData:PostCardComponentProps
         {
           !detailedView
           &&
-          <CommentInputCard/>
+          <CommentInputCard isResponse={false}/>
         }
     </article>
   )

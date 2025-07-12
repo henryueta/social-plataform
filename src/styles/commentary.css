@@ -6,7 +6,13 @@
     gap: 2rem;
 }
 
-.commentCardArticle>article{
+.commentaryListContainer .commentaryListContainer{
+    padding: 0rem;
+    padding-top: 1rem;
+    padding-left: 1rem;
+}
+
+.commentCardArticle>article:not(.commentInputCardArticle){
     display: flex;
     gap: 0.5rem;
 }
@@ -28,9 +34,18 @@
     font-size: 0.8rem;
 }
 
+.commentaryListContainer .commentaryListContainer .headerSection .subtitleContainer{
+    font-size: 0.7rem;
+}
+
 .commentCardArticle .headerSection .titleContainer{
     color: var(--usernameCardFontColor);
     font-size: 1.2rem;
+}
+
+.commentCardArticle .commentaryListContainer .headerSection .titleContainer{
+    font-size: 1.3rem;
+
 }
 
 .commentCardArticle .commentaryInfoContainer .descriptionContainer{
@@ -39,6 +54,47 @@
 
 .commentCardArticle .commentaryInfoContainer .actionsContainer{
     display: flex;
-    gap: 1rem;
+    gap: 3rem;
     padding: 0.5rem;
+}
+
+.commentCardArticle .commentaryInfoContainer .actionsContainer .respondCommentaryButton{
+    border: none;
+    background: none;
+    padding: 0rem 0.5rem 0rem 0.5rem;
+    
+}
+
+.commentCardArticle .commentaryInfoContainer .actionsContainer .respondCommentaryButton:hover{
+    background-color: rgb(207, 207, 207);
+    cursor: pointer;
+}
+
+.commentCardArticle .responseExpansionButton{
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    margin-top: 0.5rem;
+    padding: 0.3rem;
+    width: 100%;
+    text-align: start;
+    border: none;
+    background: none;
+}
+
+.commentCardArticle .responseExpansionButton:hover{
+    background-color: rgb(207, 207, 207);
+    cursor: pointer;
+}
+
+.commentCardArticle .commentInputCardArticle .fieldContainer{
+    width: 100%;
+}
+
+.commentCardArticle .commentInputCardArticle  button{
+    font-size: 0.7rem;
+}
+
+.commentCardArticle .commentInputCardArticle .fieldContainer input{
+    width: 100%;
 }
