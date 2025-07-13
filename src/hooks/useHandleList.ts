@@ -3,13 +3,14 @@ import type { ListDataHookType } from "../types/lits-type"
 
 interface ListStateType<T> {
     data:{
-        value:T[] | null,
+        value:T[],
         liked:T[] | null,
-        remaining:number | null
+        remaining:boolean | null
     },
     filter:{
         dataType:'following'|'recent',
         limit:number,
+        page:number
     }
 }
 
@@ -17,9 +18,9 @@ interface ListStateType<T> {
 {
     type:"data",
     value:{
-        value:T[] | null,
+        value:T[],
         liked:T[] | null,
-        remaining:number | null
+        remaining:boolean | null
     }
 }
 |
@@ -28,6 +29,7 @@ interface ListStateType<T> {
     value:{
         dataType:'following'|'recent',
         limit:number,
+        page:number
     }
 }
 |
@@ -35,13 +37,14 @@ interface ListStateType<T> {
     type:"reset",
     value:{
       data:{
-      value:null,
-      remaining:null,
+      value:[],
+      remaining:true,
       liked:null
     },
     filter:{
       dataType:"recent",
-      limit:5 | number
+      limit:5 | number,
+      page:1 | number
     }
     }
 }
@@ -53,15 +56,16 @@ const useHandleList = <C>({
     references
 }:ListDataHookType)=>{
 
-    const initialListState:ListStateType<C> = {
+const initialListState:ListStateType<C> = {
     data:{
-      value:null,
-      remaining:null,
+      value:[],
+      remaining:true,
       liked:null
     },
     filter:{
       dataType:"recent",
-      limit:!!config.limit ? config.limit : 5
+      limit:!!config.limit ? config.limit : 5,
+      page:!!config.page ? config.page : 1
     }
 }
 
@@ -83,16 +87,25 @@ const handleListState = (state:ListStateType<C>,action:ListActionType<C>)=>{
 
     const [listState,setListState] = useReducer(handleListState,initialListState);
 
+  useEffect(()=>{
+    console.log("page",listState.filter.page)
+  },[listState.filter.page])
 
 
     useEffect(()=>{
-      !!(listState.data.remaining === null || !!(listState.data.remaining > 0))
+      !!((listState.data.remaining))
       &&
       (()=>{
         functions.query()
       })()
 
-    },[listState.filter.limit,identifier,listState.data.remaining])
+    },[listState.filter.page,identifier,listState.data.remaining])
+
+    useEffect(()=>{
+
+      console.log("state",listState.data)
+
+    },[listState])
 
     useEffect(()=>{
 
@@ -101,51 +114,78 @@ const handleListState = (state:ListStateType<C>,action:ListActionType<C>)=>{
         value:{
           data:{
             liked:null,
-            remaining:null,
-            value:null
+            remaining:true,
+            value:[]
           },
           filter:{
             dataType:"recent",
-            limit:!!config.limit ? config.limit : 5
+            limit:!!config.limit ? config.limit : 5,
+            page:!!config.page ? config.page : 1
           }
         }
       })
-
     },[identifier])
 
     useEffect(()=>{
 
+    !!(config.mode === 'manual' && !!references.listExpansionContainerRef)
+    &&
+    (()=>{
+        if(!!references.listExpansionContainerRef && references.listExpansionContainerRef.current){
+          references.listExpansionContainerRef.current.addEventListener('click',()=>{
+            !!(listState.data.remaining)
+            &&
+            (()=>{
+                setListState({
+                type:"filter",
+                value:{
+                  limit:listState.filter.limit,
+                  page:listState.filter.page++,
+                  dataType:"recent"
+                }
+                })
+            })()
+          })
+        }
+    })()
+
     !!(config.mode === 'automatic' && !!references.listContainerRef)
     &&
     (()=>{
-
       const handleListScroll = ()=>{
-        
         if(!!references.listContainerRef && references.listContainerRef.current){
           references.listContainerRef.current.scrollTop + references.listContainerRef.current.clientHeight >= references.listContainerRef.current.scrollHeight - 1
         &&
-        !!(listState.data.remaining === null || !!(listState.data.remaining > 0))
-        &&
-        setListState({
-          type:"filter",
-          value:{
-            limit:listState.filter.limit+=(!!config.limit ? config.limit : 5),
-            dataType:"recent"
-          }
-        })
+        !!listState.data.remaining
+        ?
+        (()=>{
+            setListState({
+            type:"filter",
+            value:{
+              limit:listState.filter.limit,
+              page:listState.filter.page++,
+              dataType:"recent"
+            }
+            })
+        })()
+        :
+        (()=>{
+          console.error(listState.data)
+        })()
         }
       }
 
       references.listContainerRef.current?.addEventListener('scrollend',handleListScroll)
       
       return ()=>{
+        
         if(!!references.listContainerRef && references.listContainerRef.current){
-          references.listContainerRef.current.removeEventListener('scroll',handleListScroll)
+          references.listContainerRef.current.removeEventListener('scrollend',handleListScroll)
         }
       }
     })()
 
-    },[references.listContainerRef])
+    },[listState.data.remaining])
 
     return {
         listState,

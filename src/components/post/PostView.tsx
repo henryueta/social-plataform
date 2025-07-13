@@ -62,7 +62,9 @@ const PostView = ({id}:{id:string}) => {
       </div>
       <CommentInputCard 
       type="post"
-      table_id={id}
+      data={{
+        post_id:id
+      }}
       onComment={(commentary)=>{
           setCurrentCommentary(commentary)
       }}

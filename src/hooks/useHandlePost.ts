@@ -18,7 +18,8 @@ const useHandlePost = ()=>{
   const onGetPost = (query:PostQueryGetType,treatment?:QueryTreatmentType,params?:{
     id?:string,
     username?:string
-    limit?:number
+    limit?:number,
+    page?:number
   })=>{
 
     const postGetUrlParams = {
@@ -29,7 +30,7 @@ const useHandlePost = ()=>{
     ? "&id="+params.id
     : "",
       limit:!!params?.limit
-    ? "&limit="+params.limit
+    ? "&limit="+params.limit+"&page="+params.page
     : ""
     }
 

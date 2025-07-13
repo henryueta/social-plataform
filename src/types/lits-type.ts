@@ -9,7 +9,8 @@ interface ListDataComponentProps {
     } & DataLabelType,
     config:{
         mode:'automatic'|'manual',
-        limit:number
+        limit:number,
+        page:number
     },
     functions:{
         // map:(item:T,index:number)=>T[]

@@ -20,19 +20,12 @@ const CommentList = (
   const commentaryListDataRef = useRef<HTMLDivElement>(null);
   const commentaryListExpansionRef = useRef<HTMLButtonElement>(null) 
 
-  useEffect(()=>{
 
-    // !!pushElement
-    // &&
-
-
-  },[pushElement])
 
   const onQueryCommentaryList = ()=>{
     onGetCommentaryList(type,table_id,listState.filter.limit,{
       onThen(result) {
         const current_result = result.response.data;
-
         setListState({
           type:"data",
           value:{
@@ -50,10 +43,13 @@ const CommentList = (
     })
   }
 
+  
+
   const {onGetCommentaryList,commentQueryState} = useHandleComment();
   const {setListState,listState} = useHandleList<CommentCardComponentProps>({
     config:{
       limit:2,
+      page:1,
       mode:mode
     },
     identifier:table_id,
@@ -69,6 +65,22 @@ const CommentList = (
     }
   });
   
+
+  useEffect(()=>{
+
+    !!(!!pushElement
+    &&
+    !!listState.data.value)
+    &&
+    setListState({
+      type:'data',
+      value:{...listState.data,value:(()=>{
+        const currentList = listState.data.value;
+        currentList?.unshift(pushElement)
+        return currentList
+      })()}
+    })
+  },[pushElement])
 
   return (
     <div className="commentaryListContainer"
@@ -91,8 +103,9 @@ const CommentList = (
             {
             !!listState.data.value
               &&
-              listState.data.value.map((commentary)=>
+              listState.data.value.map((commentary,index)=>
               <CommentCard
+              key={index+Date.now()}
               commentaryData={commentary}
               isLiked={!!(listState.data.liked?.includes(commentary))}
               />
@@ -107,9 +120,7 @@ const CommentList = (
                 />
               </div>
               : 
-              listState.data.remaining
-              &&
-              listState.data.remaining > 0
+              !!listState.data.remaining
               ? <button ref={commentaryListExpansionRef}>
                   Mostrar mais respostas
                 </button>

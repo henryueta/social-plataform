@@ -28,13 +28,25 @@ const PostList = ({user_username}:{user_username?:string}) => {
         setListState({
           type:"data",
           value:{
-            value:current_response.post_list,
+            value:!!listState.data.value.length 
+            ? [...listState.data.value,...current_response.post_list]
+            : current_response.post_list,
             remaining:current_response.post_list_count_remaining,
             liked:current_response.post_list.filter((post:PostCardComponentProps)=>{
               return current_response.liked_posts.includes(post.post_id)
             })
           }
         })
+            // !!current_response.post_list_count_remaining
+            // &&
+            // setListState({
+            //       type:"filter",
+            //       value:{
+            //         dataType:"recent",
+            //         limit:5,
+            //         page:listState.filter.page+=1
+            //       }
+            //     })
           },
           onCatch(error) {
             console.log(error)
@@ -42,12 +54,14 @@ const PostList = ({user_username}:{user_username?:string}) => {
         },
         {
           limit:listState.filter.limit,
-          username:user_username
+          page:listState.filter.page,
+          username:user_username,
         })
     }
 
     const {listState,setListState} = useHandleList<PostCardComponentProps>({
       config:{
+        page:1,
         limit:5,
         mode:"automatic"
       },

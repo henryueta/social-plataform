@@ -3,7 +3,7 @@ import { AxiosHttpClientFactory } from "../adapters/axios-adapter"
 import api_endpoints from "../config/api"
 import type { QueryStateType, QueryTreatmentType } from "../types/query-type"
 import useHandleQuery from "./useHandleQuery"
-import type { CommentCardComponentProps } from "../types/commentary-type"
+import type { CommentCardComponentProps, CommentPostType } from "../types/commentary-type"
 
 const useHandleComment = ()=>{
 
@@ -20,19 +20,17 @@ const useHandleComment = ()=>{
 
     const onPostCommentary = (
         type:"post"|"commentary",
-        table_id:string,
-        body:{
-            post_id:string,
-            description:string
-        },
+        body:CommentPostType,
         treatment?:QueryTreatmentType)=>{
 
         onQuery({
-            url:api_endpoints.commentary.post+"?type="+type+"&table_id="+table_id,
+            url:api_endpoints.commentary.post+"?type="+type,
             method:'post',
             body:{
                 description:body.description,
-                post_id:body.post_id
+                post_id:body.post_id,
+                thread_id:body.thread_id,
+                for_respond_id:body.for_respond_id
             },
             cancelToken:AxiosHttpClientFactory.createCancelToken(),
             withCredentials:true
