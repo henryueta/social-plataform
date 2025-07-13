@@ -23,14 +23,16 @@ const CommentList = (
 
 
   const onQueryCommentaryList = ()=>{
-    onGetCommentaryList(type,table_id,listState.filter.limit,{
+    onGetCommentaryList(type,{
       onThen(result) {
         const current_result = result.response.data;
         setListState({
           type:"data",
           value:{
             remaining:current_result.commentary_list_count_remaining,
-            value:current_result.commentary_list,
+            value:!!listState.data.value.length 
+            ? [...listState.data.value,...current_result.commentary_list]
+            : current_result.commentary_list,
             liked:current_result.commentary_list.filter((commentary:CommentCardComponentProps)=>{
                 return current_result.liked_commentary_list.includes(commentary.commentary_id)
             })
@@ -40,6 +42,10 @@ const CommentList = (
       onCatch(error) {
         console.log(error)
       },
+    },{
+      table_id:table_id,
+      limit:listState.filter.limit,
+      page:listState.filter.page
     })
   }
 

@@ -38,10 +38,18 @@ const useHandleComment = ()=>{
 
     }
 
-    const onGetCommentaryList = (type:'post'|'commentary',table_id:string,limit:number,treatment?:QueryTreatmentType)=>{
+    const onGetCommentaryList = (type:'post'|'commentary',treatment?:QueryTreatmentType,params?:{
+        table_id:string,
+        limit:number,
+        page:number
+    })=>{
 
         onQuery({
-            url:api_endpoints.commentary.get+"?type="+type+"&table_id="+table_id+"&limit="+limit,
+            url:api_endpoints.commentary.get
+            +"?type="+type
+            +"&table_id="+params?.table_id
+            +"&limit="+params?.limit
+            +"&page="+params?.page,
             method:'get',
             cancelToken:AxiosHttpClientFactory.createCancelToken(),
             withCredentials:true
