@@ -10,10 +10,10 @@ import "../../styles/commentary.css"
 const CommentList = (
   {table_id,type,listDataContainerRef,mode,pushElement}
   :{table_id:string,
-    type:'post'|'commentary',
+    type:'post'|'commentary'|'response',
     listDataContainerRef?:React.RefObject<HTMLDivElement | null>,
     mode:'automatic'|'manual',
-    pushElement:CommentCardComponentProps | null
+    pushElement:CommentCardComponentProps | null,
 }
 ) => {
 
@@ -23,7 +23,9 @@ const CommentList = (
 
 
   const onQueryCommentaryList = ()=>{
-    onGetCommentaryList(type,{
+    onGetCommentaryList(!!(type === 'response' || type === 'commentary')
+      ? 'commentary'
+      : 'post',{
       onThen(result) {
         const current_result = result.response.data;
         setListState({
@@ -74,6 +76,8 @@ const CommentList = (
 
   useEffect(()=>{
 
+    console.log("element",pushElement)
+
     !!(!!pushElement
     &&
     !!listState.data.value)
@@ -98,6 +102,9 @@ const CommentList = (
       }>
 
           <DataFetcher
+          noDataMessage={
+            !!(type !== 'response')
+          }
             data={{
             type:'array',
             value:listState.data.value as object[],
@@ -109,9 +116,13 @@ const CommentList = (
             {
             !!listState.data.value
               &&
-              listState.data.value.map((commentary,index)=>
+              listState.data.value.map((commentary)=>
               <CommentCard
-              key={index+Date.now()}
+              key={commentary.commentary_id}
+              type={!!(type === 'post' || type === 'commentary')
+                ? 'commentary'
+                : 'response'
+              }
               commentaryData={commentary}
               isLiked={!!(listState.data.liked?.includes(commentary))}
               />

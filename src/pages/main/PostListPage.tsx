@@ -6,7 +6,7 @@ const PostListPage = () => {
 
   return (
         <SocialLayout>
-          <PostList key={Date.now()}/>
+          <PostList/>
         </SocialLayout>
   )
 }

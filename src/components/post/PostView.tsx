@@ -70,6 +70,7 @@ const PostView = ({id}:{id:string}) => {
       }}
       isResponse={false}/>
       <CommentList
+      isResponse={false}
       pushElement={currentCommentary}
       mode="automatic"
       listDataContainerRef={postViewRef}

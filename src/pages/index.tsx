@@ -58,7 +58,7 @@ const router = RouterDomFactory.create([
         element:
         <Private>
             <MainLayout>
-                <PostListPage key={Date.now()}/>
+                <PostListPage/>
             </MainLayout>
         </Private>,
         handle:{

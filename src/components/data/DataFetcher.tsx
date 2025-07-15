@@ -4,7 +4,8 @@ import NoData from "../NoData"
 const DataFetcher = ({
     data,
     isLoading,
-    children
+    children,
+    noDataMessage
 }:DataFetcherComponentPros) => {
     
     const checkDataValue = 
@@ -30,7 +31,7 @@ const DataFetcher = ({
     ?
     children
     :
-    !checkDataValue
+    !!(!checkDataValue && noDataMessage)
     &&
     <NoData 
     data_title={data.title} 

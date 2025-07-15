@@ -10,7 +10,8 @@ interface DataFetcherComponentPros {
         type:'object'|'array'
     } & DataLabelType,
     isLoading:boolean,
-    children:React.ReactNode
+    children:React.ReactNode,
+    noDataMessage:boolean
 }
 
 export type {

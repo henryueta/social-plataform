@@ -67,6 +67,7 @@ const ProfileView = ({username}:{username:string}) => {
       </div>
       <div className="socialInfoContainer">
             <DataFetcher 
+            noDataMessage
             data={{
                 type:'object',
                 value:profileViewState.data,

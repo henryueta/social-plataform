@@ -106,6 +106,7 @@ const PostList = ({user_username}:{user_username?:string}) => {
             <div className="postList">
               {
                 <DataFetcher
+                noDataMessage
                 data={{
                 type:'array',
                 value:listState.data.value as object[],

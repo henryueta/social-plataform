@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import type { CommentCardComponentProps } from "../../types/commentary-type"
 import LikeAction from "../like/LikeAction"
 import ProfileCard from "../profile/ProfileCard"
@@ -6,13 +6,16 @@ import CommentList from "./CommentList"
 import CommentInputCard from "./CommentInputCard"
 import useHandleComment from "../../hooks/useHandleComment"
 
-const CommentCard = ({commentaryData,isLiked}:{commentaryData:CommentCardComponentProps,isLiked:boolean}) => {
+const CommentCard = ({commentaryData,isLiked,type}:
+    {commentaryData:CommentCardComponentProps,isLiked:boolean,type:'commentary'|'response'}) => {
         const [expandResponse,setExpandResponse] = useState(false);
         const [expandResponseInput,setExpandResponseInput] = useState(false);
           const {currentCommentary,setCurrentCommentary} = useHandleComment();
         
+
     return (
     <article className="commentCardArticle">
+        
         <ProfileCard
         userData={{
             username:commentaryData.username,
@@ -23,7 +26,7 @@ const CommentCard = ({commentaryData,isLiked}:{commentaryData:CommentCardCompone
         <div className="commentaryInfoContainer">
             <div className="descriptionContainer">
                 <p>
-                    {commentaryData.description}
+                    {commentaryData.description+"("+type+")"}
                 </p>
             </div>
             <div className="actionsContainer">
@@ -62,7 +65,8 @@ const CommentCard = ({commentaryData,isLiked}:{commentaryData:CommentCardCompone
                     : commentaryData.commentary_id
                 )
             }}
-            onComment={(commentary)=>{setCurrentCommentary(commentary)}}
+            onComment={(commentary)=>{
+                setCurrentCommentary(commentary)}}
             isResponse={true}
             />
         }
@@ -91,13 +95,13 @@ const CommentCard = ({commentaryData,isLiked}:{commentaryData:CommentCardCompone
             </button>
         }
         {
-            !!expandResponse
+            (!!expandResponse || type === 'response')
             &&
             <CommentList
             pushElement={currentCommentary}
             mode="manual"
             table_id={commentaryData.commentary_id}
-            type="commentary"
+            type={"response"}
             />
         }
 

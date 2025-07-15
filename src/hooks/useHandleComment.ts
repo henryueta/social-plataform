@@ -11,7 +11,7 @@ const useHandleComment = ()=>{
 
     const [commentQueryState,setCommentQueryState] = useState<QueryStateType>(queryState);
     const [currentCommentary,setCurrentCommentary] = useState<CommentCardComponentProps | null>(null);
-
+    
     useEffect(()=>{
 
         setCommentQueryState(queryState)
