@@ -3,6 +3,7 @@ import type { PostCardComponentProps } from "../../types/post-type"
 import CommentAction from "../commentary/CommentAction"
 import CommentInputCard from "../commentary/CommentInputCard"
 import LikeAction from "../like/LikeAction"
+import LikeUserList from "../like/LikeUserList"
 import ProfileCard from "../profile/ProfileCard"
 
 const PostCard = ({postData,liked,detailedView}:{postData:PostCardComponentProps,liked:boolean,detailedView:boolean}) => {
@@ -45,12 +46,15 @@ const PostCard = ({postData,liked,detailedView}:{postData:PostCardComponentProps
           />
           }
         </div>
-        
-        {
+        <LikeUserList
+        hasImage={false}
+        post_id={postData.post_id}        
+        />
+        {/* {
           !detailedView
           &&
           <CommentInputCard isResponse={false}/>
-        }
+        } */}
     </article>
   )
 }

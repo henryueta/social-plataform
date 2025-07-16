@@ -6,7 +6,7 @@ import type { UserQueryGetType } from "../types/user-type"
 import useHandleQuery from "./useHandleQuery"
 
 const useHandleProfile = ()=>{
-    const {onQuery,queryState} = useHandleQuery();
+    const {onQuery,queryState,treatmentProvider} = useHandleQuery();
 
     const [profileQueryState,setProfileQueryState] = useState<QueryStateType>(queryState);
 
@@ -16,6 +16,20 @@ const useHandleProfile = ()=>{
 
     },[queryState])
 
+    const onPostFollow = (username:string,treatment?:QueryTreatmentType)=>{
+
+        onQuery({
+            url:api_endpoints.follow.post,
+            method:'post',
+            body:{
+                username:username
+            },
+            cancelToken:AxiosHttpClientFactory.createCancelToken(),
+            withCredentials:true
+        },treatmentProvider(treatment))
+
+    }
+
     const onGetUser = (query:UserQueryGetType,treatment?:QueryTreatmentType,username?:string)=>{
 
         onQuery({
@@ -23,24 +37,14 @@ const useHandleProfile = ()=>{
             method:'get',
             cancelToken:AxiosHttpClientFactory.createCancelToken(),
             withCredentials:true
-        },{
-            onThen(result) {
-                !!treatment?.onThen
-                &&
-                treatment.onThen(result)
-            },
-            onCatch(error) {
-                !!treatment?.onCatch
-                &&
-                treatment.onCatch(error)
-            },
-        })
+        },treatmentProvider(treatment))
 
     }
 
 
     return {
         onGetUser,
+        onPostFollow,
         profileQueryState
     }
 

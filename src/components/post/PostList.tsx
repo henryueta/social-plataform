@@ -37,16 +37,6 @@ const PostList = ({user_username}:{user_username?:string}) => {
             })
           }
         })
-            // !!current_response.post_list_count_remaining
-            // &&
-            // setListState({
-            //       type:"filter",
-            //       value:{
-            //         dataType:"recent",
-            //         limit:5,
-            //         page:listState.filter.page+=1
-            //       }
-            //     })
           },
           onCatch(error) {
             console.log(error)

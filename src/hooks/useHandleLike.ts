@@ -16,6 +16,24 @@ const useHandleLike = ()=>{
 
     },[queryState])
 
+    const onGetUserLikeList = (post_id:string,hasImage:boolean,filter:{
+        limit:number,
+        page:number
+    },treatment?:QueryTreatmentType)=>{
+
+        onQuery({
+            url:api_endpoints.like.get
+            +"?post_id="+post_id
+            +"&hasImage="+hasImage
+            +"&limit="+filter.limit
+            +"&page="+filter.page,
+            method:'get',
+            cancelToken:AxiosHttpClientFactory.createCancelToken(),
+            withCredentials:true
+        },treatmentProvider(treatment))
+
+    }
+
     const onPostLike = (type:TableLikeType,table_id:string,treatment?:QueryTreatmentType)=>{
 
         onQuery({
@@ -29,6 +47,7 @@ const useHandleLike = ()=>{
 
     return {
         onPostLike,
+        onGetUserLikeList,
         likeQueryState
     }
 

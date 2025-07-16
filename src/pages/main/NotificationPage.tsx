@@ -1,9 +1,11 @@
+import NotificationList from "../../components/notification/NotificationList"
+import SocialLayout from "../../layout/SocialLayout"
 
 const NotificationPage = () => {
   return (
-    <div>
-      
-    </div>
+    <SocialLayout>
+      <NotificationList/>
+    </SocialLayout>
   )
 }
 export default NotificationPage

@@ -11,9 +11,45 @@ import useHandlePath from "../../hooks/useHandlePath";
 const ProfileView = ({username}:{username:string}) => {
 
     const {pathname} = useHandlePath();
-    const {onGetUser,profileQueryState} = useHandleProfile();
+    const {onGetUser,profileQueryState,onPostFollow} = useHandleProfile();
     const [profileViewState,setProfileViewState] = useState<ProfileViewState|null>(null);
     
+    const onFollow = ()=>{
+
+        !!profileViewState?.data
+        &&
+        onPostFollow(profileViewState.data.username,{
+            onThen(result) {
+                console.log(result)
+                const current_result = result.response.data; 
+                setProfileViewState((prev)=>{
+                    const social_status = prev?.data?.social_status
+                    return !!social_status
+                    ?
+                        ({...prev,...{
+                            isFollowing:current_result.isFollowing,
+                            data:{
+                                    ...prev.data,
+                                    ...{
+                                    social_status:{
+                                        ...social_status,
+                                        followers_qnt: 
+                                        !!current_result.isFollowing
+                                        ? social_status?.followers_qnt+1
+                                        : social_status?.followers_qnt-1
+                                    }
+                                }
+                            }
+                        }} as ProfileViewState)
+                    : prev
+                })
+            },
+            onCatch(error) {
+                console.log(error)
+            },
+        })
+
+    }
 
     useEffect(()=>{
 
@@ -84,7 +120,14 @@ const ProfileView = ({username}:{username:string}) => {
                 title={profileViewState.data.username}
                 />
                 <div className="actionsContainer">
-                    <button className="profileActionButton">
+                    <button 
+                    className="profileActionButton"
+                    onClick={()=>{
+                        return !profileViewState.isSameUser
+                        ? onFollow()
+                        : ()=>{}
+                    }}
+                    >
                         {
                             profileViewState.isSameUser
                             ? "Editar Perfil"

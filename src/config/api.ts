@@ -8,6 +8,9 @@ const api_endpoints = {
         checkout:api_base+"auth/checkout",
         logout:api_base+"auth/logout"
     },
+    follow:{
+        post:api_base+"user/post/follow"
+    },
     user:{
         get:api_base+"user/get",
     },
