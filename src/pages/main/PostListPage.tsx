@@ -4,10 +4,12 @@ import SocialLayout from "../../layout/SocialLayout"
 
 const PostListPage = () => {
 
+    
+
   return (
-        <SocialLayout>
-          <PostList/>
-        </SocialLayout>
+      <SocialLayout>
+        <PostList/>
+      </SocialLayout>
   )
 }
 

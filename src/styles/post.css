@@ -12,9 +12,25 @@
     border-bottom: 0.1rem solid rgb(165, 165, 165);
 }
 
+
+
 .postListContainer .postList{
     padding: 2rem;
     background-color: rgb(247, 247, 247);
+    /* border: 1px solid red; */
+    min-height: 100dvh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.postListContainer .postList:has(.postCardArticle){
+    justify-content: start;
+}
+
+.postListContainer .postList>.spinnerContainer{
+    display: none;
 }
 
 .postListContainer .postList .loadListContainer{
@@ -39,6 +55,11 @@
     background-color: white;
 }
 
+.postCardArticle .likeUserListContainer a{
+    text-decoration: none;
+    color: black;
+}
+
 .postCardArticle .profileCardArticle{
     display: flex;
     gap: 0.5rem;
@@ -54,7 +75,6 @@
 }
 
 .postCardArticle>.profileCardArticle .headerSection .titleContainer{
-    color: rgb(3, 128, 170);
     font-size: 1.2rem;
 }
 
@@ -99,7 +119,7 @@
 } */
 
 .postCardArticle .descriptionContainer{
-    margin-bottom: 1rem;
+    margin-bottom: 2rem;
 }
 
  .profileListContainer{
@@ -148,7 +168,6 @@
     align-items: center;
     justify-content: center;
     background-color: rgb(241, 241, 241);
-
 }
 
 .publishContainer .headerSection {
@@ -222,4 +241,20 @@
 
 .postInfoContainer>.commentInputCardArticle{
     padding: 0rem 2rem 0rem 2rem;
+}
+@media (max-width:1024px) {
+
+
+    .postListContainer {
+        margin-bottom: 7rem;    
+    }
+
+    .postListContainer .postList{
+        padding: 1rem;
+    }
+
+    .postCardArticle>.profileCardArticle .headerSection .titleContainer{
+        font-size: 1.3rem;
+    }
+
 }

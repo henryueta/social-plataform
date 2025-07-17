@@ -8,6 +8,10 @@ const api_endpoints = {
         checkout:api_base+"auth/checkout",
         logout:api_base+"auth/logout"
     },
+    notification:{
+        post:api_base+"notification/post",
+        get:api_base+"notification/get"
+    },
     follow:{
         post:api_base+"user/post/follow"
     },

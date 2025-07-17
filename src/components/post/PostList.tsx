@@ -119,11 +119,15 @@ const PostList = ({user_username}:{user_username?:string}) => {
                 }
               </DataFetcher>
               }
-                <div className="loadListContainer">
-                  <Load
-                isLoading={!!postQueryState.isLoading}
-                />
-                </div>
+                {
+                  listState.data.remaining
+                  &&
+                  <div className="loadListContainer">
+                      <Load
+                    isLoading={!!postQueryState.isLoading}
+                    />
+                  </div>
+                }
             </div>
     </div>
   )

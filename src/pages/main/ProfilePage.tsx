@@ -7,13 +7,11 @@ const ProfilePage = () => {
   const {username} = useParams();
   return (
     <SocialLayout>
-      {/* <div className="profilePageContainer"> */}
         {
           !!username
           &&
           <PostList user_username={username}/>
         }
-      {/* </div> */}
     </SocialLayout>
   )
 }

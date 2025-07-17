@@ -7,7 +7,7 @@ const profile_social_status:{
     type:UserViewStatusType
 }[] = [
     {   
-        title:"Publicações",
+        title:"Posts",
         type:"post_qnt"
     },
     {

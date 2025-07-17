@@ -1,5 +1,4 @@
 .navBar{
-    /* position: fixed; */
     background-color: white;
     box-shadow: 0rem 0rem 0.2rem rgb(0, 0, 0,0.2);
     min-width: 18rem;
@@ -37,3 +36,23 @@
     /* color: deepskyblue; */
 }
 
+@media (max-width:1024px) {
+    
+    .navBar{
+        position: fixed;
+        bottom: 2%;
+        left: 50%;
+        transform: translate(-50%);
+        z-index: 10;
+        width: 90%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .navBar ul{
+        display: flex;
+        font-size: 0.8rem;
+    }
+
+}

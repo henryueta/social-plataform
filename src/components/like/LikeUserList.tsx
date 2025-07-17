@@ -2,6 +2,7 @@ import { useEffect, useRef } from "react"
 import useHandleLike from "../../hooks/useHandleLike"
 import useHandleList from "../../hooks/useHandleList";
 import type { ProfileCardComponentProps } from "../../types/user-type";
+import { Link } from "react-router-dom";
 
 const LikeUserList = ({post_id,hasImage}:{post_id:string,hasImage:boolean}) => {
 
@@ -72,13 +73,14 @@ const LikeUserList = ({post_id,hasImage}:{post_id:string,hasImage:boolean}) => {
         ? <></>
         : <span>
           Curtido por
-          <b style={{
-            cursor:"pointer"
-          }}>{` ${listState.data.value[0].username} `}</b>
+          <Link to={"/profile/"+listState.data.value[0].username}>
+          <b style={{cursor:"pointer"}}>
+              {` ${listState.data.value[0].username} `}</b>
+          </Link>
           {
             listState.data.value.length > 1
             &&
-            <span>
+            <span >
              e
             <b style={{
               cursor:"pointer"

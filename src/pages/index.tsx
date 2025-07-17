@@ -37,22 +37,22 @@ const router = RouterDomFactory.create([
             params:[]
         }
     },
-    {
-        path:"/search",
-        element:
-        <Private>
-            <MainLayout>
-                <SearchPage/>
-            </MainLayout>
-        </Private>,
-        handle:{
-            alt:"search",
-            name:"search",
-            label:"Pesquisar",
-            type:"home_navigation",
-            params:[]
-        }
-    },
+    // {
+    //     path:"/search",
+    //     element:
+    //     <Private>
+    //         <MainLayout>
+    //             <SearchPage/>
+    //         </MainLayout>
+    //     </Private>,
+    //     handle:{
+    //         alt:"search",
+    //         name:"search",
+    //         label:"Pesquisar",
+    //         type:"home_navigation",
+    //         params:[]
+    //     }
+    // },
     {
         path:"/posts/:type",
         element:
@@ -101,22 +101,22 @@ const router = RouterDomFactory.create([
             params:["id"]//any string value
         }
     },
-    {
-        path:"/notifications",
-        element:
-        <Private>
-            <MainLayout>
-                <NotificationPage/>
-            </MainLayout>
-        </Private>,
-        handle:{
-            alt:"notifications",
-            name:"notification",
-            label:"Notificação",
-            type:"home_navigation",
-            params:[]
-        }
-    },
+    // {
+    //     path:"/notifications",
+    //     element:
+    //     <Private>
+    //         <MainLayout>
+    //             <NotificationPage/>
+    //         </MainLayout>
+    //     </Private>,
+    //     handle:{
+    //         alt:"notifications",
+    //         name:"notification",
+    //         label:"Notificação",
+    //         type:"home_navigation",
+    //         params:[]
+    //     }
+    // },
     {
         path:"/profile/:username",
         element:

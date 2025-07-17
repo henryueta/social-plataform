@@ -1,7 +1,3 @@
-.profilePageContainer{
-    padding: 1rem;
-    overflow-y: auto;
-}
 
  .profileInfoContainer{
     display: flex;
@@ -37,4 +33,40 @@
  .profileInfoContainer .usernameContainer{
     display: flex;
     gap: 2rem;
+}
+
+
+@media (max-width:1024px) {
+
+
+
+    .profileInfoContainer{
+        padding: 4rem 0.5rem 3rem 0.5rem;
+        gap: 1rem;
+        align-items: start;
+        height: auto;
+    }
+
+    .profileInfoContainer>*{
+    }
+
+    .profileInfoContainer .profileImageContainer{
+        height: 100%;
+    }
+
+    .profileInfoContainer img {
+        width: 60px;
+    }
+
+    .profileInfoContainer .usernameContainer{
+        font-size: 0.9rem;
+    }
+
+    .profileInfoContainer .socialInfoContainer>*{
+        margin-top: 1rem;
+    }
+
+    .profileInfoContainer .countViewContainer{
+        font-size: 0.9rem;
+    }
 }

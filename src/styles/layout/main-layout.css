@@ -5,3 +5,9 @@
     --mainContentWidth:75%;
 }
 
+@media (max-width:1024px){
+    .mainLayout{
+    --mainContentWidth:100%; 
+    }
+}
+

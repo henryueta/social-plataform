@@ -4,11 +4,13 @@ import "../styles/navbar.css"
 import useHandlePath from "../hooks/useHandlePath"
 import useHandleProfile from "../hooks/useHandleProfile"
 import { useEffect, useState } from "react"
+import { useHandleScreen } from "../context/ScreenContext"
 
 const NavBar = () => {
     const {onMatch,pathname} = useHandlePath();
     const {onGetUser} = useHandleProfile()
     const [currentUserUsername,setCurrentUserUsername] = useState<string|null>(null);
+    const {isMobile} = useHandleScreen();
 
     useEffect(()=>{
 
@@ -29,11 +31,15 @@ const NavBar = () => {
 
   return (
     <nav className="navBar">
+        {
+        !isMobile
+        &&
         <div className="logoContainer">
             <h1>
                 🌊 Seaddy
             </h1>
         </div>
+        }
         <ul>
         {
             home_routers.map((route)=>

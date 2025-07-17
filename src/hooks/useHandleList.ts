@@ -87,13 +87,36 @@ const handleListState = (state:ListStateType<C>,action:ListActionType<C>)=>{
 
     const [listState,setListState] = useReducer(handleListState,initialListState);
 
+  const handleListScroll = ()=>{
+
+        if(!!references.listContainerRef && references.listContainerRef.current){
+          console.log("remain",!!listState.data.remaining)
+          references.listContainerRef.current.scrollTop + references.listContainerRef.current.clientHeight >= references.listContainerRef.current.scrollHeight - 1
+        ?
+        (()=>{
+            setListState({
+            type:"filter",
+            value:{
+              limit:listState.filter.limit,
+              page:listState.filter.page++,
+              dataType:"recent"
+            }
+            })
+        })()
+        :
+        (()=>{
+          console.error(listState.data)
+        })()
+        }
+      }
+
   useEffect(()=>{
     console.log("page",listState.filter.page)
   },[listState.filter.page])
 
 
     useEffect(()=>{
-      !!((listState.data.remaining))
+      !!(listState.data.remaining)
       &&
       (()=>{
         functions.query()
@@ -149,43 +172,25 @@ const handleListState = (state:ListStateType<C>,action:ListActionType<C>)=>{
         }
     })()
 
+    
+
     !!(config.mode === 'automatic' && !!references.listContainerRef)
     &&
     (()=>{
-      const handleListScroll = ()=>{
-        if(!!references.listContainerRef && references.listContainerRef.current){
-          references.listContainerRef.current.scrollTop + references.listContainerRef.current.clientHeight >= references.listContainerRef.current.scrollHeight - 1
-        &&
+      references.listContainerRef.current?.addEventListener('scrollend',
         !!listState.data.remaining
-        ?
-        (()=>{
-            setListState({
-            type:"filter",
-            value:{
-              limit:listState.filter.limit,
-              page:listState.filter.page++,
-              dataType:"recent"
-            }
-            })
-        })()
-        :
-        (()=>{
-          console.error(listState.data)
-        })()
-        }
-      }
+        ? handleListScroll
+        : ()=>console.log("NAO")
+      )
+    })()
 
-      references.listContainerRef.current?.addEventListener('scrollend',handleListScroll)
-      
       return ()=>{
-        
         if(!!references.listContainerRef && references.listContainerRef.current){
           references.listContainerRef.current.removeEventListener('scrollend',handleListScroll)
         }
       }
-    })()
 
-    },[listState.data.remaining])
+    },[listState.data.remaining,references.listContainerRef])
 
     return {
         listState,
