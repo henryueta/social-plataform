@@ -20,8 +20,6 @@ const CommentList = (
   const commentaryListDataRef = useRef<HTMLDivElement>(null);
   const commentaryListExpansionRef = useRef<HTMLButtonElement>(null) 
 
-
-
   const onQueryCommentaryList = ()=>{
     onGetCommentaryList(!!(type === 'response' || type === 'commentary')
       ? 'commentary'
@@ -75,9 +73,7 @@ const CommentList = (
   
 
   useEffect(()=>{
-
-    console.log("element",pushElement)
-
+    
     !!(!!pushElement
     &&
     !!listState.data.value)
@@ -114,7 +110,8 @@ const CommentList = (
             isLoading={!!commentQueryState.isLoading}
           >
             {
-            !!listState.data.value
+              
+            (!!listState.data.value)
               &&
               listState.data.value.map((commentary)=>
               <CommentCard
@@ -137,11 +134,15 @@ const CommentList = (
                 />
               </div>
               : 
-              !!listState.data.remaining
-              ? <button ref={commentaryListExpansionRef}>
+              !!commentQueryState.isLoading
+              ? <Load
+                isLoading={!!commentQueryState.isLoading}
+                />
+              :
+              (!!listState.data.remaining && !listState.data.value)
+              && <button ref={commentaryListExpansionRef}>
                   Mostrar mais respostas
                 </button>
-              : <></>
             }
   </div>
   )

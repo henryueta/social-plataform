@@ -77,10 +77,23 @@ const NavBar = () => {
                             : "black"
                         }} 
                         to={formated_path as string}>
-                          <img src="" alt="" />
-                          <span>
+                          <img 
+                          style={
+                            isMobile
+                            ? {padding:"0.2rem"}
+                            : {padding:"0.1rem"}
+                            }
+                          src={route.handle['icon']} 
+                          alt={route.handle['name']+"´s icon"} />
+                          {
+                            !isMobile
+                            &&
+                            <span
+                            
+                            >
                             {route.handle['label']}
-                          </span>
+                            </span>
+                          }
                         </Link>
                     </li>
                 )

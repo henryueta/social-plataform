@@ -9,6 +9,10 @@ import PostPage from "./main/PostPage"
 import PublishPage from "./main/PublishPage"
 import { Navigate } from "react-router-dom"
 import MainLayout from "../layout/MainLayout"
+import posts_icon from "../assets/icons/posts_icon.png"
+import profile_icon from "../assets/icons/profile_icon.png"
+import upload_icon from "../assets/icons/upload_icon.png"
+
 
 const router = RouterDomFactory.create([
     {
@@ -16,6 +20,7 @@ const router = RouterDomFactory.create([
         path:"/auth/:type",
         element:<AuthPage/>,
         handle:{
+            icon:"",
             alt:"autentication",
             name:"auth",
             label:"Autenticação",
@@ -30,6 +35,7 @@ const router = RouterDomFactory.create([
             <Navigate to={"/posts/all"}/>
         </Private>,
         handle:{
+            icon:"",
             alt:"home",
             name:"home",
             label:"Home",
@@ -62,6 +68,7 @@ const router = RouterDomFactory.create([
             </MainLayout>
         </Private>,
         handle:{
+            icon:posts_icon,
             alt:"list-post",
             name:"list-post",
             label:"Posts",
@@ -78,6 +85,7 @@ const router = RouterDomFactory.create([
             </MainLayout>
         </Private>,
         handle:{
+            icon:upload_icon,
             alt:"create-post",
             name:"create-post",
             label:"Criar",
@@ -94,6 +102,7 @@ const router = RouterDomFactory.create([
             </MainLayout>
         </Private>,
         handle:{
+            icon:"",
             alt:"view-post",
             name:"view-post",
             label:"Ver Post",
@@ -126,6 +135,7 @@ const router = RouterDomFactory.create([
             </MainLayout>
         </Private>,
         handle:{
+            icon:profile_icon,
             alt:"profile",
             name:"profile",
             label:"Conta    ",

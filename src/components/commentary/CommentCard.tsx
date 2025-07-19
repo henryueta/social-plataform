@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import type { CommentCardComponentProps } from "../../types/commentary-type"
 import LikeAction from "../like/LikeAction"
 import ProfileCard from "../profile/ProfileCard"
@@ -26,7 +26,7 @@ const CommentCard = ({commentaryData,isLiked,type}:
         <div className="commentaryInfoContainer">
             <div className="descriptionContainer">
                 <p>
-                    {commentaryData.description+"("+type+")"}
+                    {commentaryData.description}
                 </p>
             </div>
             <div className="actionsContainer">
@@ -52,7 +52,10 @@ const CommentCard = ({commentaryData,isLiked,type}:
             
         </div>
         {
-            !!expandResponseInput
+            (!!expandResponseInput
+            &&
+            !currentCommentary
+            )
             &&
             <CommentInputCard
             type="commentary"
@@ -71,7 +74,10 @@ const CommentCard = ({commentaryData,isLiked,type}:
             />
         }
         {
-            !!commentaryData.response_quantity
+            (!!commentaryData.response_quantity
+            &&
+            type !== 'response'
+            )
             &&
             <button 
             className="responseExpansionButton"
@@ -95,7 +101,14 @@ const CommentCard = ({commentaryData,isLiked,type}:
             </button>
         }
         {
-            (!!expandResponse || type === 'response')
+            (
+            (!!expandResponse && !!commentaryData.response_quantity)
+            ||
+            !commentaryData.response_quantity 
+            || 
+            type === 'response' 
+            || 
+            !!currentCommentary)
             &&
             <CommentList
             pushElement={currentCommentary}

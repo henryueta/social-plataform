@@ -35,6 +35,7 @@ class AxiosHttpClientAdapter implements HttpClientType{
                 withCredentials:!!data.withCredentials
             })
             console.log(axiosResponse)
+            
         }
         catch(error){
             console.error(error)

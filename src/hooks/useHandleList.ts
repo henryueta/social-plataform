@@ -119,6 +119,7 @@ const handleListState = (state:ListStateType<C>,action:ListActionType<C>)=>{
       !!(listState.data.remaining)
       &&
       (()=>{
+        console.log("QUERY")
         functions.query()
       })()
 
