@@ -45,6 +45,17 @@
     color: black;
 }
 
+.postListContainer .postCardArticle .descriptionContainer{
+    cursor: pointer;
+    max-height: 120px;
+}
+
+.postList .profileCardArticle .profileImageContainer img{
+    width: 32px;
+    height: 32px;
+    padding: 0.3rem;
+}
+
 .postCardArticle{
     margin-bottom: 2rem;
     width: 100%;
@@ -68,19 +79,29 @@
 }
 
 
-.postCardArticle>.profileCardArticle .headerSection{
+.postCardArticle .profileCardArticle .headerSection{
     display: flex;
     align-items: center;
     gap: 0.5rem;
 }
 
-.postCardArticle>.profileCardArticle .headerSection .titleContainer{
+.postCardArticle .profileCardArticle .headerSection .titleContainer{
     font-size: 1.2rem;
+    cursor: pointer;
 }
 
-.postCardArticle>.profileCardArticle .headerSection .subtitleContainer{
-    font-size: 0.8rem;
+.postCardArticle .profileCardArticle .headerSection .subtitleContainer{
+    /* font-size: 0.8rem; */
     opacity: 90%;
+}
+
+
+
+.postCardArticle .profileCardArticle img{
+    cursor: pointer;
+    width: 32px;
+    height: 32px;
+    padding: 0.3rem;
 }
 
 .postCardArticle .mediaContainer{
@@ -105,11 +126,21 @@
     cursor: pointer;
 }
 
+.postCardArticle .actionsContainer div:last-child>img{
+    padding: 0.1rem;
+}
+
 .postCardArticle .actionsContainer div:hover{
     opacity: 60%;
 }
 
-.postCardArticle .actionsContainer div>img{
+.postCardArticle .actionsContainer div button{
+    background:none;
+    border:none;
+    cursor: pointer;
+}
+
+.postCardArticle .actionsContainer div img{
     width: 24px;
 }
 
@@ -118,8 +149,63 @@
     margin-bottom: 0.3rem;
 } */
 
+
+
 .postCardArticle .descriptionContainer{
     margin-bottom: 2rem;
+    max-height: 500px;
+}
+
+.postCardArticle .headerPostContainer{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.postCardArticle .postActionContainer{
+    position: relative;
+}
+
+.postCardArticle .postActionContainer button{
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.postCardArticle  .postActionContainer button img{
+    width: 16px;
+    height: 16px;
+}
+
+.postCardArticle .postActionContainer button:hover{
+    opacity: 80%;
+}
+
+.postCardArticle  .postActionOptionsContainer{
+     display: flex;
+     flex-direction: column;
+     justify-content: center;
+     gap: 0.5rem;
+     align-items: start;
+      position: absolute;
+      top: 100%;
+      right: 0%;
+      background: white;
+      border: 1px solid #ccc;
+      border-radius: 0.3rem;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      z-index: 100;
+      width: 60px;
+}
+
+.postCardArticle  .postActionOptionsContainer button{
+    width: 100%;
+    text-align: start;
+    padding: 0.5rem;
+}
+
+.postCardArticle  .postActionOptionsContainer button:hover{
+    background-color: var(--color-white-hover);
 }
 
  .profileListContainer{
@@ -133,7 +219,8 @@
     display: flex;
     align-items: center;
     padding: 1rem;
-    gap: 0.5rem; 
+    gap: 0.5rem;
+    cursor: pointer;
 }
 
 
@@ -147,55 +234,20 @@
     font-size: 0.8rem;
     margin-top: 1rem;
     padding: 1rem;
+    
 }
 
  .profileListContainer .profileCardArticle .profileImageContainer>img{
     display: block;
+    height: 32px;
+    width: 32px;
+    padding: 0.3rem;
 }
 
 
 
 .profileCardArticle .headerSection .titleContainer>h1{
     font-weight: 200;
-}
-
-.publishContainer{
-    height: 100dvh;
-    padding: 3rem;
-    gap: 1rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    background-color: rgb(241, 241, 241);
-}
-
-.publishContainer .headerSection {
-    width: 80%;
-}
-
-.publishContainer .formSection{
-    width: 80%;
-    height: 40%;
-}
-
-.publishContainer .formSection form{
-    height: 100%;
-}
-
-.publishContainer .formSection form>*{
-    margin-top: 0.5rem;
-}
-
-.publishContainer .formSection form>.fieldFormContainer{
-    height: 90%;
-}
-
-.publishContainer .formSection textarea{
-    width: 100%;
-    height: 100%;
-    padding: 0.5rem;
-    font-size: 0.9rem;
 }
 
 .commentInputCardArticle{
@@ -221,9 +273,10 @@
     width: 10%;
 }
 
- .commentInputCardArticle .responseActionButtonContainer button{
+ .commentInputCardArticle .responseActionButtonContainer .unfilled_button.commentary{
     height: 100%;
-    width: 100%;
+    padding: 0.7rem;
+    font-size: 0.8rem;
 }
 
 .postInfoContainer{
@@ -244,6 +297,10 @@
 }
 @media (max-width:1024px) {
 
+.commentInputCardArticle .responseActionButtonContainer .unfilled_button.commentary{
+    height: 100%;
+    font-size: 0.7rem;
+    }
 
     .postListContainer {
         margin-bottom: 7rem;    
@@ -253,7 +310,7 @@
         padding: 1rem;
     }
 
-    .postCardArticle>.profileCardArticle .headerSection .titleContainer{
+    .postCardArticle .profileCardArticle .headerSection .titleContainer{
         font-size: 1.3rem;
     }
 

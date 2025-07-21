@@ -12,14 +12,43 @@
     margin-top: 2rem;
 }
 
+.socialInfoContainer .actionsContainer{
+    display: flex;
+    gap: 1rem;
+}
+
+.profileInfoContainer .countViewContainer{
+    cursor: pointer;
+    padding: 0.1rem;
+}
+
+.profileInfoContainer .countViewContainer:hover{
+    background-color: var(--color-white-hover);
+}
 
 .profileInfoContainer .countViewContainer>*{
     margin-bottom: 0.2rem;
 }
 
+.profileInfoContainer .subtitleContainer{
+    background-color: red;
+}
+
+.profileImageContainer{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.profileInfoContainer .profileImageContainer>img{
+    width: 150px;
+    height: 150px;
+    padding: 1rem;
+}
+
 .profileImageContainer>img{
     background-color: rgb(0, 0, 0);
-    border-radius: 100%;
+    border-radius: 100%;    
 }
 
 .profileInfoContainer .countViewContainer .valueContainer{
@@ -31,11 +60,55 @@
     gap: 2rem;
 }
 
- .profileInfoContainer .usernameContainer{
+ .profileInfoContainer .socialIndentifierContainer{
     display: flex;
-    gap: 2rem;
+    gap: 1rem;
 }
 
+.profileInfoContainer .socialIndentifierContainer .namertagContainer{
+    background-color: var(--color-primary);
+    border-radius: 0.3rem;
+    color: white;
+    font-size: 0.8rem;
+    padding: 0.3rem;
+    text-align: center;
+}
+
+
+.profileListContainer .profileCardArticle:active{
+    background-color: var(--color-white-active);
+}
+
+.profileListContainer .profileCardArticle:hover{
+    background-color: var(--color-white-hover);
+}
+
+.profileListPageSection .profileListContainer{
+    width: 100%;
+    height: 100dvh;
+    overflow-y: auto;
+}
+
+/* .profileListContainer .profileCardArticle>.headerSection{
+    display: flex;
+    gap: 0.2rem;
+} */
+
+.intervalDateContainer{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.7rem;
+}
+
+.profileCardArticle .subtitleContainer{
+    background-color: var(--color-primary);
+    border-radius: 0.3rem;
+    color: white;
+    font-size: 0.7rem;
+    padding: 0.3rem;
+    text-align: center;
+}
 
 @media (max-width:1024px) {
 

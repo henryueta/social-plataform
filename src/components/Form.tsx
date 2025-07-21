@@ -69,14 +69,19 @@ return (
                 const field_error_style = 
                 {
                     outline:
-                    errors[field.registerId]?.message
-                    ? "0.1rem solid red"
+                    errorView
+                    ?errors[field.registerId]?.message
+                        ? "0.1rem solid red"
+                        : "0.1rem solid gray"
                     : "0.1rem solid gray",
                     border:
-                    errors[field.registerId]?.message
-                    ? "0.1rem solid red"
-                    : "none"
+                    errorView
+                    ?errors[field.registerId]?.message
+                        ? "0.1rem solid red"
+                        : "none"
+                    : "0.1rem solid gray"
                 }
+
                 let field_tag = null;
                  switch (field.tag) {
                     case "input":

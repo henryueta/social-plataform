@@ -16,6 +16,8 @@ const PostList = ({user_username}:{user_username?:string}) => {
     const {onMatch,pathname} = useHandlePath();
     const postListDataRef = useRef<HTMLDivElement>(null);
 
+    
+
     const onQueryPostList = ()=>{
       onGetPost({
           mode:'group',
@@ -25,10 +27,12 @@ const PostList = ({user_username}:{user_username?:string}) => {
         },{
           onThen(result) {
         const current_response = result.response.data;
-        setListState({
+          setListState({
           type:"data",
           value:{
-            value:!!listState.data.value.length 
+            value:current_response.isStart
+            ? current_response.post_list
+            :!!listState.data.value.length 
             ? [...listState.data.value,...current_response.post_list]
             : current_response.post_list,
             remaining:current_response.post_list_count_remaining,
@@ -40,7 +44,7 @@ const PostList = ({user_username}:{user_username?:string}) => {
           },
           onCatch(error) {
             console.log(error)
-          },
+          }
         },
         {
           limit:listState.filter.limit,
@@ -49,7 +53,7 @@ const PostList = ({user_username}:{user_username?:string}) => {
         })
     }
 
-    const {listState,setListState} = useHandleList<PostCardComponentProps>({
+    const {listState,setListState,handleListView} = useHandleList<PostCardComponentProps>({
       config:{
         page:1,
         limit:5,
@@ -64,8 +68,11 @@ const PostList = ({user_username}:{user_username?:string}) => {
       }
     });
 
+
   return (
-    <div className="postListContainer" ref={postListDataRef}>
+    <div className="postListContainer" ref={postListDataRef} 
+    onScroll={()=>{handleListView()}}
+    >
             {
               !!user_username
               &&
@@ -106,7 +113,7 @@ const PostList = ({user_username}:{user_username?:string}) => {
                 isLoading={!!postQueryState.isLoading}
               >
                 {
-                !!listState.data.value
+                !!listState.data.value.length
                   &&
                   listState.data.value.map((post)=>
                   <PostCard

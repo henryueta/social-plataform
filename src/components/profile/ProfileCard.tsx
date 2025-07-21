@@ -2,11 +2,14 @@ import useHandlePath from "../../hooks/useHandlePath"
 import type { ProfileCardComponentProps } from "../../types/user-type"
 import TitleHeader from "../TitleHeader"
 
-const ProfileCard = ({userData,intervalDate}:{userData:ProfileCardComponentProps,intervalDate?:string}) => {
+const ProfileCard = ({userData,intervalDate,noRedirect}
+  :{userData:ProfileCardComponentProps,intervalDate?:string,noRedirect?:boolean}) => {
   const {onTransition} = useHandlePath()
   return (
     <article className="profileCardArticle" onClick={()=>{
-        onTransition('/profile/'+userData.username)
+      !noRedirect
+      &&
+      onTransition('/profile/'+userData.username)
     }}>
         <div className="profileImageContainer">
             <img src={userData.image} alt={userData.username+"s image"} />
@@ -17,10 +20,15 @@ const ProfileCard = ({userData,intervalDate}:{userData:ProfileCardComponentProps
             }
             subtitle={
               !!intervalDate
-              ? intervalDate
+              ? userData.namertag
               : ""
             }
             /> 
+            <div className="intervalDateContainer">
+              {  !!intervalDate
+              ? intervalDate
+              : ""}
+            </div>
     </article>
   )
 }

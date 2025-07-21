@@ -8,7 +8,7 @@ const PostListPage = () => {
 
   return (
       <SocialLayout>
-        <PostList/>
+        <PostList />
       </SocialLayout>
   )
 }

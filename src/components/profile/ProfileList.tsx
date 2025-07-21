@@ -1,8 +1,9 @@
-import { useEffect, useReducer } from "react"
+import { useEffect, useReducer, useRef } from "react"
 import TitleHeader from "../TitleHeader"
 import ProfileCard from "./ProfileCard"
-import type { ProfileCardActionType, ProfileCardStateType } from "../../types/user-type"
+import type { ProfileCardActionType, ProfileCardComponentProps, ProfileCardStateType } from "../../types/user-type"
 import useHandleProfile from "../../hooks/useHandleProfile"
+import useHandleList from "../../hooks/useHandleList"
 
   const initialProfileListState:ProfileCardStateType = {
       user:null,
@@ -20,11 +21,39 @@ import useHandleProfile from "../../hooks/useHandleProfile"
     }
   } 
 
-const ProfileList = () => {
+const ProfileList = ({type,username}:{type:'followers'|'following',username?:string}) => {
 
       const [profileListState,setProfileListState] = 
       useReducer(handleProfileListState,initialProfileListState);
       const {onGetUser} = useHandleProfile();
+
+      const getUserList = ()=>{
+        
+        onGetUser({
+          mode:'group',
+          type:type,
+          hasImage:true,
+        },{
+          limit:8,
+          page:1,
+          username:username
+        },
+          {
+          onThen(result) {
+            setListState({
+              type:'data',
+              value:{
+                value:result.response.data.user_list_data,
+                liked:[],
+                remaining:result.response.data.user_list_count_remaining
+              }
+            })
+          },
+          onCatch(error) {
+            console.log(error)
+          },
+        })
+      }
 
       useEffect(()=>{
         
@@ -32,6 +61,8 @@ const ProfileList = () => {
           mode:'single',
           type:'small',
           hasImage:true
+        },{
+          username:""
         },{
           onThen(result) {
             console.log(result)
@@ -44,54 +75,72 @@ const ProfileList = () => {
             console.log(error)
           },
         })
-        
-        onGetUser({
-          mode:'group',
-          type:'following',
-          hasImage:true,
-        },{
-          onThen(result) {
-            console.log(result)
-            setProfileListState({
-            type:"following",
-            value:result.response.data
-            })
-          },
-          onCatch(error) {
-            console.log(error)
-          },
-        })
+
 
       },[])
+      const profileListRef = useRef<HTMLDivElement>(null);
+
+      const {listState,setListState} = useHandleList<ProfileCardComponentProps>({
+        config:{
+          limit:8,
+          mode:"manual",
+          page:1
+        },
+        functions:{
+          query:getUserList
+        },
+        identifier:username,
+        references:{
+          
+        }
+      });
+
 
   return (
-    <div className="profileListContainer">
-      <TitleHeader
+    <div className="profileListContainer" ref={profileListRef}>
+      {
+        !username
+        &&
+        <TitleHeader
         title="Sua conta"
         />
+
+        }
         {
+          !username
+          &&
           !!profileListState.user
           &&
           <ProfileCard
           userData={{
             image:profileListState.user.image,
-          username:profileListState.user.username
+          username:profileListState.user.username,
+          namertag:profileListState.user.namertag
           }}
         />
         }
+        
         <div className="followingListContainer">
             <TitleHeader
-            title="Você está seguindo"
+            title={
+              !!username
+              ? !!(type === 'following')
+                ? "Seguidores de "+username
+                : username+ " está seguindo"
+              : "Seus seguidores"
+            }
             />
             <div className="followingList">
+                
                 {
-                  !!profileListState.following
+                  !!listState.data.value
                   &&
-                  profileListState.following.map((following)=>
+                  listState.data.value.map((following)=>
                     <ProfileCard
                     userData={{
                       image:following.image,
-                    username:following.username
+                    username:following.username,
+                    namertag:following.namertag
                     }}
                     />
                   )

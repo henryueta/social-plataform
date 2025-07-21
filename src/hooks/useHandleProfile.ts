@@ -30,10 +30,21 @@ const useHandleProfile = ()=>{
 
     }
 
-    const onGetUser = (query:UserQueryGetType,treatment?:QueryTreatmentType,username?:string)=>{
+    const onGetUser = (query:UserQueryGetType,params:{
+        limit?:number,
+        page?:number,
+        username?:string
+    },treatment?:QueryTreatmentType)=>{
 
         onQuery({
-            url:api_endpoints.user.get+`/${query.mode}?type=${query.type}&hasImage=${query.hasImage}${(!!username ? '&username='+username : '')}`,
+            url:api_endpoints.user.get
+            +"/"+query.mode
+            +"?type="+query.type
+            +"&hasImage="+query.hasImage
+            +'&username='+(params?.username ? params.username : "")
+            +"&limit="+params.limit
+            +"&page="+params.page
+            ,
             method:'get',
             cancelToken:AxiosHttpClientFactory.createCancelToken(),
             withCredentials:true

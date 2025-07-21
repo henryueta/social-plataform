@@ -87,29 +87,26 @@ const handleListState = (state:ListStateType<C>,action:ListActionType<C>)=>{
 
     const [listState,setListState] = useReducer(handleListState,initialListState);
 
-  const handleListScroll = ()=>{
-
-        if(!!references.listContainerRef && references.listContainerRef.current){
-          console.log("remain",!!listState.data.remaining)
-          references.listContainerRef.current.scrollTop + references.listContainerRef.current.clientHeight >= references.listContainerRef.current.scrollHeight - 1
-        ?
-        (()=>{
-            setListState({
-            type:"filter",
-            value:{
-              limit:listState.filter.limit,
-              page:listState.filter.page++,
-              dataType:"recent"
-            }
+    const handleListView = ()=>{
+      !!(listState.data.remaining)
+            &&
+            (()=>{
+              (config.mode === 'automatic'
+              ? ((!!references.listContainerRef?.current) && 
+              !!(references.listContainerRef.current.scrollTop + references.listContainerRef.current.clientHeight >= references.listContainerRef.current.scrollHeight - 1))
+              : true)
+              &&
+              setListState({
+              type:"filter",
+              value:{
+                limit:listState.filter.limit,
+                page:listState.filter.page+=1,
+                dataType:"recent"
+              }
             })
-        })()
-        :
-        (()=>{
-          console.error(listState.data)
-        })()
-        }
-      }
 
+            })()
+    }
   useEffect(()=>{
     console.log("page",listState.filter.page)
   },[listState.filter.page])
@@ -127,12 +124,12 @@ const handleListState = (state:ListStateType<C>,action:ListActionType<C>)=>{
 
     useEffect(()=>{
 
-      console.log("state",listState.data)
+      console.log("state",listState)
 
     },[listState])
 
-    useEffect(()=>{
 
+    useEffect(()=>{
       setListState({
         type:"reset",
         value:{
@@ -143,59 +140,17 @@ const handleListState = (state:ListStateType<C>,action:ListActionType<C>)=>{
           },
           filter:{
             dataType:"recent",
-            limit:!!config.limit ? config.limit : 5,
+            limit:5,
             page:!!config.page ? config.page : 1
           }
         }
       })
     },[identifier])
 
-    useEffect(()=>{
-
-    !!(config.mode === 'manual' && !!references.listExpansionContainerRef)
-    &&
-    (()=>{
-        if(!!references.listExpansionContainerRef && references.listExpansionContainerRef.current){
-          references.listExpansionContainerRef.current.addEventListener('click',()=>{
-            !!(listState.data.remaining)
-            &&
-            (()=>{
-                setListState({
-                type:"filter",
-                value:{
-                  limit:listState.filter.limit,
-                  page:listState.filter.page++,
-                  dataType:"recent"
-                }
-                })
-            })()
-          })
-        }
-    })()
-
-    
-
-    !!(config.mode === 'automatic' && !!references.listContainerRef)
-    &&
-    (()=>{
-      references.listContainerRef.current?.addEventListener('scrollend',
-        !!listState.data.remaining
-        ? handleListScroll
-        : ()=>console.log("NAO")
-      )
-    })()
-
-      return ()=>{
-        if(!!references.listContainerRef && references.listContainerRef.current){
-          references.listContainerRef.current.removeEventListener('scrollend',handleListScroll)
-        }
-      }
-
-    },[listState.data.remaining,references.listContainerRef])
-
     return {
         listState,
-        setListState
+        setListState,
+        handleListView
     }
 
 }

@@ -40,7 +40,6 @@
 }
 
 .commentCardArticle .headerSection .titleContainer{
-    color: var(--usernameCardFontColor);
     font-size: 1.2rem;
 }
 
@@ -69,6 +68,12 @@
 .commentCardArticle .commentaryInfoContainer .actionsContainer .respondCommentaryButton:hover{
     background-color: rgb(207, 207, 207);
     cursor: pointer;
+}
+
+.commentCardArticle .profileCardArticle .profileImageContainer img{
+    width: 32px;
+    height: 32px;
+    padding: 0.3rem;
 }
 
 .commentCardArticle .responseExpansionButton{

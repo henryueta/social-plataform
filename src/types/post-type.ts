@@ -77,7 +77,7 @@ Record<
 'description'|
 'user_small_photo'|
 'username'|
-// 'user_username'|
+'namertag'|
 'post_id',string>
 
 

@@ -12,6 +12,7 @@ import MainLayout from "../layout/MainLayout"
 import posts_icon from "../assets/icons/posts_icon.png"
 import profile_icon from "../assets/icons/profile_icon.png"
 import upload_icon from "../assets/icons/upload_icon.png"
+import ProfileListPage from "./main/ProfileListPage"
 
 
 const router = RouterDomFactory.create([
@@ -41,6 +42,23 @@ const router = RouterDomFactory.create([
             label:"Home",
             type:"security",
             params:[]
+        }
+    },
+    {
+        path:"/profiles/:username/:type",
+        element:
+        <Private>
+            <MainLayout>
+                <ProfileListPage/>
+            </MainLayout>
+        </Private>,
+        handle:{
+            icon:"",
+            alt:"user-list",
+            name:"user-list",
+            label:"Usuários",
+            type:"view",
+            params:["type"]
         }
     },
     // {

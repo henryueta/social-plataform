@@ -4,7 +4,10 @@
   box-sizing: border-box;
   font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
   transition: 0.2s ease-in-out;
-  --usernameCardFontColor:rgb(3, 128, 170)
+  --color-primary:rgb(3, 128, 170);
+  --color-white-hover:rgb(195, 193, 193);
+  --color-white-active:rgb(53, 53, 53);
+  --buttonFontSize:0.85rem;
 }
 
 body{
@@ -29,4 +32,61 @@ textarea{
 ::-webkit-scrollbar{
   width: 0.4rem;
   background-color: white;
+}
+
+.unfilled_button{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.3rem;
+  cursor: pointer;
+  background-color: var(--color-primary);
+  color: white;
+  border: none;
+  padding: 0.2rem 0.5rem 0.2rem 0.5rem;
+  border-radius: 0.3rem;
+  font-size: var(--buttonFontSize);
+}
+
+.unfilled_button .spinnerContainer{
+  width: 18px;
+  height: 18px;
+}
+
+.filled_button{
+   display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  background-color: white;
+  border:0.1rem solid var(--color-primary);
+  padding: 0.2rem 0.5rem 0.2rem 0.5rem;
+  border-radius: 0.3rem;
+  font-size: var(--buttonFontSize);
+}
+
+.filled_button .spinnerContainer{
+  width: 18px;
+  height: 18px;
+}
+
+.unfilled_button:hover{
+  opacity: 80%;
+}
+
+.filled_button:hover{
+  opacity: 80%;
+}
+
+
+.filled_button:active{
+  background-color: rgb(93, 93, 93);
+}
+
+@media (max-width:1024px) {
+
+  *{
+    --buttonFontSize:0.8rem;
+  }
+
 }

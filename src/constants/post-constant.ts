@@ -14,6 +14,18 @@ const post_list_filter:{
     }
 ]
 
+const post_action_list  = [
+    {
+        title:"Editar",
+        type:'put'
+    },
+    {
+        title:'Excluir',
+        type:'delete'
+    }
+]
+
 export {
-    post_list_filter
+    post_list_filter,
+    post_action_list
 }

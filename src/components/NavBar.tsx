@@ -19,6 +19,8 @@ const NavBar = () => {
             type:'small',
             hasImage:false
         },{
+            username:currentUserUsername as string
+        },{
             onThen(result) {
                 setCurrentUserUsername(result.response.data.user.username)
             },
@@ -71,17 +73,18 @@ const NavBar = () => {
                     <li key={route.handle['name']}>
                         <Link
                         style={{
-                            color:
+                            fontWeight:
                             onMatch(route.path as string,pathname)
-                            ? "deepskyblue"
-                            : "black"
+                            ? "bolder"
+                            : "lighter",
+                            color:"black"
                         }} 
                         to={formated_path as string}>
                           <img 
                           style={
                             isMobile
                             ? {padding:"0.2rem"}
-                            : {padding:"0.1rem"}
+                            : {padding:"0.2rem"}
                             }
                           src={route.handle['icon']} 
                           alt={route.handle['name']+"´s icon"} />

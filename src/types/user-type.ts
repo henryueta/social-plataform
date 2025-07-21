@@ -1,6 +1,7 @@
 
 interface ProfileCardComponentProps{
     username:string,
+    namertag:string,
     image:string
 }
 
@@ -13,6 +14,7 @@ type UserViewStatusType = 'post_qnt'|'followers_qnt'|'following_qnt'
 
 interface UserViewType {
     username:string,
+    namertag:string,
     image:string,
     social_status:{
         post_qnt:number,
@@ -42,7 +44,7 @@ type UserQueryGetType =
 {
     mode:'group',
     hasImage:boolean,
-    type:'following'
+    type:'following'|'followers'
 }
 
 interface ProfileViewState {

@@ -13,7 +13,7 @@ const SocialLayout = ({children}:{children:React.ReactNode}) => {
             {
               !isMobile
               &&
-              <ProfileList/>
+              <ProfileList type="following"/>
             }
         </section>
     </>

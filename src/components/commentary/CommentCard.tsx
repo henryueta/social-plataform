@@ -18,6 +18,7 @@ const CommentCard = ({commentaryData,isLiked,type}:
         
         <ProfileCard
         userData={{
+            namertag:commentaryData.namertag,
             username:commentaryData.username,
             image:commentaryData.user_small_photo
         }}
@@ -111,6 +112,7 @@ const CommentCard = ({commentaryData,isLiked,type}:
             !!currentCommentary)
             &&
             <CommentList
+            
             pushElement={currentCommentary}
             mode="manual"
             table_id={commentaryData.commentary_id}

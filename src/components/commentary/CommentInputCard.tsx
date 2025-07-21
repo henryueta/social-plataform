@@ -6,7 +6,6 @@ const CommentInputCard = (
   {type,data,isResponse,onComment}:
   {type:"post"|"commentary",data:Omit<CommentPostType,"description">,isResponse:boolean,onComment:(commentary:CommentCardComponentProps)=>void}) => {
 
-  const [isWriting,setIsWriting] = useState(false);
   const [descriptionValue,setDescriptionValue] = useState("");
   const {onPostCommentary} = useHandleComment();
   const onQueryPostCommentary = ()=>{
@@ -33,27 +32,21 @@ const CommentInputCard = (
             <input
             value={descriptionValue}
             onChange={(e)=>{
-              setIsWriting(!!e.target.value.trim().length)
               setDescriptionValue(e.target.value)
             }}
             placeholder="Adicione um comentário"
              type="text" />
         </div>
-        {
-          !!isWriting
-          &&
-          <div className="responseActionButtonContainer" id="cancelButtonContainer">
-            <button>Cancelar</button>
-          </div>
-        }
         <div className="responseActionButtonContainer" id="sendButtonContainer">
-            <button onClick={()=>{
+            <button 
+            className="unfilled_button commentary"
+            onClick={()=>{
               onQueryPostCommentary()
             }}>
               {
                 isResponse
-                ? "Responder"
-                : "Comentar"
+                ? "Enviar"
+                : "Enviar"
               }
             </button>
         </div>

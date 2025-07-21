@@ -21,7 +21,8 @@ const api_endpoints = {
     post:{
         post:api_base+"publish/post",
         get:api_base+"publish/get",
-        put:api_base+"publish/put"
+        put:api_base+"publish/put",
+        delete:api_base+"publish/delete"
     },
     commentary:{
         get:api_base+"commentary/get",

@@ -8,13 +8,16 @@ import Load from "../Load";
 import "../../styles/commentary.css"
 
 const CommentList = (
-  {table_id,type,listDataContainerRef,mode,pushElement}
+  {table_id,type,externalReference,mode,pushElement}
   :{table_id:string,
     type:'post'|'commentary'|'response',
-    listDataContainerRef?:React.RefObject<HTMLDivElement | null>,
+    externalReference?:{
+      ref:React.RefObject<HTMLDivElement | null>,
+      functionRef:(action:()=>void)=>void
+    }
     mode:'automatic'|'manual',
     pushElement:CommentCardComponentProps | null,
-}
+  }
 ) => {
 
   const commentaryListDataRef = useRef<HTMLDivElement>(null);
@@ -52,7 +55,7 @@ const CommentList = (
   
 
   const {onGetCommentaryList,commentQueryState} = useHandleComment();
-  const {setListState,listState} = useHandleList<CommentCardComponentProps>({
+  const {setListState,listState,handleListView} = useHandleList<CommentCardComponentProps>({
     config:{
       limit:2,
       page:1,
@@ -63,14 +66,23 @@ const CommentList = (
       query:onQueryCommentaryList
     },
     references:{
-      listContainerRef:!listDataContainerRef
+      listContainerRef:externalReference && !externalReference.ref
       ?
       commentaryListDataRef
-      : listDataContainerRef,
-      listExpansionContainerRef:commentaryListExpansionRef
+      : externalReference && externalReference.ref,
     }
   });
   
+    useEffect(()=>{
+      externalReference
+      &&
+    externalReference.functionRef(()=>{
+      handleListView()
+    })
+
+
+
+  },[])
 
   useEffect(()=>{
     
@@ -91,7 +103,9 @@ const CommentList = (
   return (
     <div className="commentaryListContainer"
     ref={
-      !listDataContainerRef
+      externalReference
+      &&
+      !externalReference.ref
       ?
       commentaryListDataRef
       : null

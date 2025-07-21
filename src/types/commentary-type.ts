@@ -8,7 +8,8 @@ Record<
 'creation_date_interval'|
 'description'|
 'user_small_photo'|
-'username',
+'username'|
+'namertag',
 string
 >
 &

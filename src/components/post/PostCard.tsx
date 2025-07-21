@@ -1,3 +1,4 @@
+import useHandlePath from "../../hooks/useHandlePath"
 import "../../styles/post.css"
 import type { PostCardComponentProps } from "../../types/post-type"
 import CommentAction from "../commentary/CommentAction"
@@ -5,18 +6,47 @@ import CommentInputCard from "../commentary/CommentInputCard"
 import LikeAction from "../like/LikeAction"
 import LikeUserList from "../like/LikeUserList"
 import ProfileCard from "../profile/ProfileCard"
+import CopyUrlAction from "../copyUrl/CopyUrlAction"
+import PostAction from "./PostAction"
 
-const PostCard = ({postData,liked,detailedView}:{postData:PostCardComponentProps,liked:boolean,detailedView:boolean}) => {
+const PostCard = ({postData,liked,detailedView,isSameUser}:
+  {
+    postData:PostCardComponentProps,
+    liked:boolean,
+    detailedView:boolean,
+    isSameUser:boolean
+  }) => {
+
+  const {onTransition} = useHandlePath();
+
   return (
-    <article className="postCardArticle" key={postData.post_id}>
-        <ProfileCard
-        userData={{
-          username:postData.username,
-          image:postData.user_small_photo
+    <article 
+    className="postCardArticle"
+    key={postData.post_id}
+    >
+        <div className="headerPostContainer">
+          <ProfileCard
+            userData={{
+              namertag:postData.namertag,
+              username:postData.username,
+              image:postData.user_small_photo
+            }}
+            intervalDate={postData.creation_date_interval}
+          />
+          {
+            detailedView 
+            &&
+            <PostAction
+            isSameUser={isSameUser}
+            id={postData.post_id}
+            />
+          }
+        </div>
+        <div className="descriptionContainer"
+        onClick={()=>{
+          onTransition("/post/view/"+postData.post_id)
         }}
-        intervalDate={postData.creation_date_interval}
-        />
-        <div className="descriptionContainer">
+        >
             <p>
               {
               postData.description
@@ -45,11 +75,18 @@ const PostCard = ({postData,liked,detailedView}:{postData:PostCardComponentProps
           quantity={postData.commentary_qnt}
           />
           }
+          {!detailedView
+          &&
+          <CopyUrlAction
+          hasIcon
+          url={"/post/view/"+postData.post_id}
+          />}
         </div>
         <LikeUserList
         hasImage={false}
         post_id={postData.post_id}        
         />
+        
         {/* {
           !detailedView
           &&

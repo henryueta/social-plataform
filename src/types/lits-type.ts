@@ -25,7 +25,6 @@ Omit<ListDataComponentProps,"data"|"isLoading">
     identifier:string | undefined,
     references:{
         listContainerRef?:React.RefObject<HTMLDivElement | null>,
-        listExpansionContainerRef?:React.RefObject<HTMLButtonElement | null>
     }
 
 }

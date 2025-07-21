@@ -1,0 +1,79 @@
+.publishContainer{
+    height: 100dvh;
+    padding: 3rem;
+    gap: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(247, 247, 247);
+}
+
+.publishContainer .profileCardArticle{
+    display: flex;
+    align-items: center;
+    padding: 0.5rem;
+    gap: 0.5rem;
+    font-size: 1.2rem;
+}
+
+.publishContainer>.headerSection {
+    width: 80%;
+    padding: 0rem 1rem 0rem 1rem;
+}
+
+.publishContainer .formSection{
+    width: 80%;
+    height: 90%;
+    display: flex;
+    flex-direction: column;
+    padding: 0.5rem;
+}
+
+.publishContainer .formSection form{
+    height: 100%;
+    padding: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: START;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+
+.publishContainer .formSection form>.fieldFormContainer{
+    height: 90%;
+    width: 100%;
+}
+
+.publishContainer .formSection textarea{
+    width: 100%;
+    height: 100%;
+    padding: 0.5rem;
+    font-size: 0.9rem;
+}
+
+@media (max-width:1024px) {
+
+    .publishContainer{
+        overflow-y: auto;
+        height: auto;
+        padding: 1.5rem 1rem 1.5rem 1rem;
+    }
+
+    .publishContainer>.headerSection {
+        width: 100%;
+    }
+
+    .publishContainer .formSection{
+        width: 100%;
+        height: 100%;
+        margin-bottom: 6rem;
+    }
+
+    .publishContainer .formSection form{
+        height: 100%;
+    }
+
+
+}

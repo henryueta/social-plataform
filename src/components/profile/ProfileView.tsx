@@ -6,6 +6,7 @@ import TitleHeader from "../TitleHeader"
 import type { ProfileViewState } from "../../types/user-type";
 import DataFetcher from "../data/DataFetcher";
 import useHandlePath from "../../hooks/useHandlePath";
+import Load from "../Load";
 
 
 const ProfileView = ({username}:{username:string}) => {
@@ -68,12 +69,15 @@ const ProfileView = ({username}:{username:string}) => {
             type:'social',
             hasImage:true
         },{
+            username:username
+        },{
             onThen(result) {
                 console.log(result)
                 setProfileViewState({
                     data:{
                         image:result.response.data.user.image,
                         username:result.response.data.user.username,
+                        namertag:result.response.data.user.namertag,
                         social_status:{
                             post_qnt:result.response.data.user.post_qnt,
                             followers_qnt:result.response.data.user.followers_qnt,
@@ -87,9 +91,12 @@ const ProfileView = ({username}:{username:string}) => {
             onCatch(error) {
                 console.log(error)
             },
-        },username)
+        })
 
     },[username])
+
+    const {onTransition} = useHandlePath()
+
 
   return (
     <div className="profileInfoContainer">
@@ -115,28 +122,12 @@ const ProfileView = ({username}:{username:string}) => {
             {
             
             <>
-            <div className="usernameContainer">
+            <div className="socialIndentifierContainer">
                 <TitleHeader
                 title={profileViewState.data.username}
                 />
-                <div className="actionsContainer">
-                    <button 
-                    className="profileActionButton"
-                    onClick={()=>{
-                        return !profileViewState.isSameUser
-                        ? onFollow()
-                        : ()=>{}
-                    }}
-                    >
-                        {
-                            profileViewState.isSameUser
-                            ? "Editar Perfil"
-                            : 
-                            profileViewState.isFollowing
-                            ? "Seguindo"
-                            : "Seguir"
-                        }
-                    </button>
+                <div className="namertagContainer">
+                    {profileViewState.data.namertag}
                 </div>
             </div>
             <div className="activityContainer">
@@ -145,6 +136,19 @@ const ProfileView = ({username}:{username:string}) => {
                     &&
                     profile_social_status.map((social_info)=>
                         <CountView
+                        onClick={()=>{
+                            social_info.type !== 'post_qnt'
+                            &&
+                            onTransition(
+                                '/profiles/'
+                                +username+"/"
+                                +(
+                                    social_info.type === 'followers_qnt'
+                                    ? 'followers'
+                                    : 'following'
+                                )
+                            )
+                        }}
                         label={{
                             type:'text',
                             source:social_info.title
@@ -167,6 +171,41 @@ const ProfileView = ({username}:{username:string}) => {
                     )
                 }
             </div>
+            <div className="actionsContainer">
+                    <button 
+                    className={
+                        profileViewState.isSameUser
+                        ? "filled_button"
+                        : profileViewState.isFollowing
+                            ? "filled_button"
+                            : "unfilled_button"
+                    }
+                    onClick={()=>{
+                        return !profileViewState.isSameUser
+                        ? onFollow()
+                        : ()=>{}
+                    }}
+                    >
+                    <Load
+                    isLoading={!!profileQueryState.isLoading}
+                    />
+                        {
+                            profileViewState.isSameUser
+                            ? "Editar Perfil"
+                            : 
+                            profileViewState.isFollowing
+                            ? "Seguindo"
+                            : "Seguir"
+                        }
+                    </button>
+                    {
+                        profileViewState.isSameUser
+                        &&
+                        <button className="filled_button">
+                            Logout
+                        </button>
+                    }
+                </div>
             </>
             } 
         </DataFetcher>
