@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom"
+import { Link, useParams } from "react-router-dom"
 import useHandlePath from "../../hooks/useHandlePath"
 import PostCard from "./PostCard"
 import { useRef } from "react";
@@ -15,15 +15,14 @@ const PostList = ({user_username}:{user_username?:string}) => {
     const {onGetPost,postQueryState} = useHandlePost();
     const {onMatch,pathname} = useHandlePath();
     const postListDataRef = useRef<HTMLDivElement>(null);
-
-    
+    const {type} = useParams();
 
     const onQueryPostList = ()=>{
       onGetPost({
           mode:'group',
           type:(!!user_username
           ? "especific"
-          : "all")
+          : type as 'following'|'all')
         },{
           onThen(result) {
         const current_response = result.response.data;
@@ -62,7 +61,9 @@ const PostList = ({user_username}:{user_username?:string}) => {
       functions:{
         query:onQueryPostList
       },
-      identifier:user_username,
+      identifier:!!user_username
+      ? user_username
+      : type,
       references:{
         listContainerRef:postListDataRef
       }
@@ -117,6 +118,7 @@ const PostList = ({user_username}:{user_username?:string}) => {
                   &&
                   listState.data.value.map((post)=>
                   <PostCard
+                  isSameUser={false}
                   detailedView={false}
                   key={post.post_id}
                   postData={post}

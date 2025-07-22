@@ -156,6 +156,23 @@
     max-height: 500px;
 }
 
+.postCardArticle .postEditFormSection{
+        width: 50%;
+    }
+
+.postCardArticle .postEditFormSection form .formActionsContainer{
+    display: flex;
+    gap: 1rem;
+}
+
+.postCardArticle .postEditFormSection form textarea{
+    padding: 0.5rem;
+    width: 100%;
+    margin-bottom: 2rem;
+    min-height: 500px;
+    font-size: 1rem;
+}
+
 .postCardArticle .headerPostContainer{
     display: flex;
     align-items: center;
@@ -194,7 +211,7 @@
       border: 1px solid #ccc;
       border-radius: 0.3rem;
       box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-      z-index: 100;
+      z-index: 50;
       width: 60px;
 }
 
@@ -312,6 +329,10 @@
 
     .postCardArticle .profileCardArticle .headerSection .titleContainer{
         font-size: 1.3rem;
+    }
+
+    .postCardArticle .postEditFormSection{
+        width: 85%;
     }
 
 }

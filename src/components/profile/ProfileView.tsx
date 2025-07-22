@@ -7,6 +7,8 @@ import type { ProfileViewState } from "../../types/user-type";
 import DataFetcher from "../data/DataFetcher";
 import useHandlePath from "../../hooks/useHandlePath";
 import Load from "../Load";
+import useHandleAuth from "../../hooks/useHandleAuth";
+import useHandleDialog from "../../hooks/useHandleDialog";
 
 
 const ProfileView = ({username}:{username:string}) => {
@@ -96,7 +98,8 @@ const ProfileView = ({username}:{username:string}) => {
     },[username])
 
     const {onTransition} = useHandlePath()
-
+    const {onLogout} = useHandleAuth();
+    const {showDialog} = useHandleDialog();
 
   return (
     <div className="profileInfoContainer">
@@ -126,9 +129,29 @@ const ProfileView = ({username}:{username:string}) => {
                 <TitleHeader
                 title={profileViewState.data.username}
                 />
-                <div className="namertagContainer">
-                    {profileViewState.data.namertag}
-                </div>
+                <div 
+                className="namertagContainer"
+                style={{
+                    color:
+                    profileViewState.data.namertag === 'cube'
+                    ? "deepskyblue"
+                    : 
+                    profileViewState.data.namertag === 'pyramid'
+                    ? "orangered"
+                    : 
+                    profileViewState.data.namertag === 'star'
+                    ? 'greenyellow'
+                    :
+                    profileViewState.data.namertag === 'dodecahedron'
+                    ? 'red'
+                    :
+                    profileViewState.data.namertag === 'octahedron'
+                    ? 'gray'
+                    : 'black'
+                }}
+                >
+                    {"( "+profileViewState.data.namertag+" )"}
+                </div>  
             </div>
             <div className="activityContainer">
                 {
@@ -201,7 +224,19 @@ const ProfileView = ({username}:{username:string}) => {
                     {
                         profileViewState.isSameUser
                         &&
-                        <button className="filled_button">
+                        <button 
+                        className="filled_button"
+                        onClick={()=>{
+                            showDialog({
+                                message:"Deseja fazer logout?",
+                                onConfirm() {
+                                    onLogout()
+                                },
+                                onCancel:null,
+                                onFinally:null,
+                            })
+                        }}
+                        >
                             Logout
                         </button>
                     }

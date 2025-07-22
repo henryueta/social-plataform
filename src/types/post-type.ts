@@ -66,7 +66,7 @@ type PostQueryGetType =
 |
 {
     mode:'group',
-    type:'all'|'especific'
+    type:'all'|'especific'|'following'
 }
 
 type PostCardComponentProps = 

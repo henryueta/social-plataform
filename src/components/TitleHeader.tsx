@@ -2,27 +2,35 @@
 interface TitleHeaderProps {
 
     title:string,
-    subtitle?:string
+    subtitle?:string,
+    style?:{
+        title?:React.CSSProperties,
+        subtitle?:React.CSSProperties
+    }
 
 }
 
-const TitleHeader = ({title,subtitle}:TitleHeaderProps) => {
+const TitleHeader = ({title,subtitle,style}:TitleHeaderProps) => {
   return (
     <section className="headerSection">
-        <div className="titleContainer">
+        <div className="titleContainer" style={style?.title || {}}>
             <h1>
                 {
                     title
                 }
             </h1>
         </div>
-        <div className="subtitleContainer">
+        {
+        !!subtitle?.length
+        &&
+        <div className="subtitleContainer" style={style?.subtitle || {}}>
             <p>
                 {
                     subtitle
                 }
             </p>
         </div>
+        }
     </section>
   )
 }

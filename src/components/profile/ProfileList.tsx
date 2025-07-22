@@ -127,7 +127,7 @@ const ProfileList = ({type,username}:{type:'followers'|'following',username?:str
               ? !!(type === 'following')
                 ? "Seguidores de "+username
                 : username+ " está seguindo"
-              : "Seus seguidores"
+              : "Você está seguindo"
             }
             />
             <div className="followingList">

@@ -22,8 +22,6 @@ const useHandlePost = ()=>{
     page?:number
   })=>{
 
-    console.log(query.mode)
-    console.log(query.type)
 
     const postGetUrlParams = {
       username:!!params?.username 
@@ -55,16 +53,16 @@ const useHandlePost = ()=>{
   const onDeletePost = (id:string,treatment?:QueryTreatmentType)=>{
 
     onQuery({
-      url:api_endpoints.post.delete+"?id="+id,
-      method:'delete',
+      url:api_endpoints.post.delete+"?post_id="+id,
+      method:'put',
       cancelToken:AxiosHttpClientFactory.createCancelToken(),
       withCredentials:true
     },treatmentProvider(treatment))
 
   }
 
-  const onPutPost = (query:PostQueryPutType,post_id:string,treatment?:QueryTreatmentType,params?:{
-    commentary:string
+  const onPutPost = (query:PostQueryPutType,post_id:string,treatment?:QueryTreatmentType,body?:{
+    description:string
   })=>{
 
     onQuery({
@@ -72,8 +70,8 @@ const useHandlePost = ()=>{
       method:'put',
       cancelToken:AxiosHttpClientFactory.createCancelToken(),
       withCredentials:true,
-      body:!!params?.commentary
-      ? {commentary:params.commentary}
+      body:!!body?.description
+      ? {description:body.description}
       : {}
     },
     treatmentProvider(treatment))

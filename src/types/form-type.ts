@@ -3,13 +3,22 @@ import type { QueryTreatmentType } from "./query-type"
 
 interface FormComponentProps {
     model:ModelType,
+    method:'post'|'put',
     submit:{
         url:string,
         onAction?:(data:any)=>void
     },
     submitButtonTitle:string,
     errorView?:boolean,
-    treatment?:QueryTreatmentType
+    treatment?:QueryTreatmentType,
+    defaultValues?:{
+        id:string,
+        value:string
+    }[],
+    setPlacehorders?:boolean,
+    cancelButton?:{
+        onCancel:()=>void
+    }
 }
 
 interface FormItemType {

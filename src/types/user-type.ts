@@ -1,7 +1,7 @@
 
 interface ProfileCardComponentProps{
     username:string,
-    namertag:string,
+    namertag:UserNamertagType,
     image:string
 }
 
@@ -9,6 +9,17 @@ interface ProfileCardStateType {
     user:ProfileCardComponentProps | null,
     following:ProfileCardComponentProps[] | null
 }
+
+type UserNamertagType = 
+"cube"
+|
+"pyramid"
+|
+"dodecahedron"
+|
+"octahedron"
+|
+"star"
 
 type UserViewStatusType = 'post_qnt'|'followers_qnt'|'following_qnt'
 
@@ -60,5 +71,6 @@ export type {
     UserQueryGetType,
     ProfileViewState,
     UserViewType,
-    UserViewStatusType
+    UserViewStatusType,
+    UserNamertagType
 }

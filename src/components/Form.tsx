@@ -7,7 +7,17 @@ import useHandleQuery from "../hooks/useHandleQuery";
 import Load from "./Load";
 import { AxiosHttpClientFactory } from "../adapters/axios-adapter";
 
-const Form = ({model,submit,submitButtonTitle,errorView,treatment}:FormComponentProps) => {
+const Form = (
+    {model,
+    submit,
+    method,
+    submitButtonTitle,
+    errorView,
+    treatment,
+    defaultValues,
+    setPlacehorders,
+    cancelButton
+    }:FormComponentProps) => {
     
     const {register,formState,handleSubmit,reset} = useForm({
         mode:"all",
@@ -32,7 +42,7 @@ return (
         submit.onAction(data);
         
         onQuery({
-                method:"post",
+                method:method,
                 url:submit.url,
                 body:data,
                 cancelToken:AxiosHttpClientFactory.createCancelToken(),
@@ -88,17 +98,39 @@ return (
                         field_tag = 
                         <input 
                         id={field.id}
+                        defaultValue={
+                            !!defaultValues
+                            ? defaultValues.find((val)=>
+                                val.id === field.registerId
+                            )?.value
+                            : ""
+                        }
                         style = {field_error_style}
-                        placeholder={field.title}
+                        placeholder={
+                            setPlacehorders
+                            ? field.title
+                            : ""
+                        }
                         type={field.type} 
                         {...register(field.registerId)}/>
                     break;
                     case "textarea":
                         field_tag = 
                         <textarea 
+                        defaultValue={
+                            !!defaultValues
+                            ? defaultValues.find((val)=>
+                                val.id === field.registerId
+                            )?.value
+                            : ""
+                        }
                         id={field.id}
                         style={field_error_style}
-                        placeholder={field.title}
+                        placeholder={
+                            setPlacehorders
+                            ? field.title
+                            : ""
+                        }
                         {...register(field.registerId)}
                         />
                     break;
@@ -133,7 +165,19 @@ return (
                 
             }
         </div>
-        <button>
+        <div className="formActionsContainer">
+        {
+        !!cancelButton
+        &&
+            <button
+                className="filled_button"
+                onClick={()=>{
+                cancelButton.onCancel()
+                }}
+                >Cancelar
+            </button>
+        }
+            <button className="unfilled_button">
             {
                 queryState.isLoading !== null
                 &&
@@ -142,7 +186,8 @@ return (
             {
                 submitButtonTitle
             }
-        </button>
+            </button>
+        </div>
     </form>
   )
 }

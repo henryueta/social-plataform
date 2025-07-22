@@ -1,16 +1,49 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import more_options_icon from "../../assets/icons/more_options_icon.png"
 import useHandlePost from "../../hooks/useHandlePost";
 import { post_action_list } from "../../constants/post-constant";
 import CopyUrlAction from "../copyUrl/CopyUrlAction";
+import useHandleDialog from "../../hooks/useHandleDialog";
+import useHandlePath from "../../hooks/useHandlePath";
 
-const PostAction = ({isSameUser,id}:{isSameUser:boolean,id?:string}) => {
+const PostAction = ({isSameUser,id,onSelectEdit}:{isSameUser:boolean,id?:string,onSelectEdit:()=>void}) => {
 
     const [optionsIsOpen,setOptionsIsOpen] = useState(false);
     const [actionType,setActionType] = useState<'put'|'delete' | null>(null);
     const {onDeletePost} = useHandlePost();
+    const {showDialog} = useHandleDialog();
+    const {onTransition} = useHandlePath();
 
+    useEffect(()=>{
 
+        actionType === 'delete'
+        ? showDialog({
+            message:"Deseja excluir a postagem?",
+            onCancel() {
+            },
+            onConfirm() {
+                !!id
+                &&
+                onDeletePost(id,{
+                    onThen() {
+                        onTransition("/posts/all")
+                    },  
+                    onCatch(error) {
+                        console.log(error)
+                    },
+                })
+            },
+            onFinally(){
+                setActionType(null)
+            }
+        })
+        : actionType === 'put'
+        && (()=>{
+            onSelectEdit()
+            setActionType(null)
+        })()
+
+    },[actionType])
 
   return (
     <>
@@ -29,6 +62,7 @@ const PostAction = ({isSameUser,id}:{isSameUser:boolean,id?:string}) => {
                 && post_action_list.map((action)=>
                         <button onClick={()=>{
                             setActionType(action.type as 'put'|'delete')
+                            setOptionsIsOpen(false)
                         }}>
                             {action.title}
                         </button>

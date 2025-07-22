@@ -20,9 +20,29 @@ const ProfileCard = ({userData,intervalDate,noRedirect}
             }
             subtitle={
               !!intervalDate
-              ? userData.namertag
+              ? "( "+userData.namertag+" )"
               : ""
             }
+            style={{
+              subtitle:{
+                color:
+                userData.namertag === 'cube'
+                ? "deepskyblue"
+                : 
+                userData.namertag === 'pyramid'
+                ? "orangered"
+                : 
+                userData.namertag === 'star'
+                ? 'greenyellow'
+                :
+                userData.namertag === 'dodecahedron'
+                ? 'red'
+                :
+                userData.namertag === 'octahedron'
+                ? 'gray'
+                : 'black'
+              }
+            }}
             /> 
             <div className="intervalDateContainer">
               {  !!intervalDate

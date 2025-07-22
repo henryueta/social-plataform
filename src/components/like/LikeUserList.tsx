@@ -39,7 +39,7 @@ const LikeUserList = ({post_id,hasImage}:{post_id:string,hasImage:boolean}) => {
       limit:
       !!(hasImage)
       ? 10
-      : 1,
+      : 2,
       page:
       !!(hasImage)
       ? 1
@@ -54,12 +54,6 @@ const LikeUserList = ({post_id,hasImage}:{post_id:string,hasImage:boolean}) => {
       listContainerRef:likeUserListDataRef
     }
   });
-
-  useEffect(()=>{
-
-
-
-  },[post_id])
 
   return (
     <div className="likeUserListContainer" ref={likeUserListDataRef}>

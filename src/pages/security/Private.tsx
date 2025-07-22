@@ -1,6 +1,7 @@
 import useHandlePath from "../../hooks/useHandlePath";
 import { useEffect, useState } from "react";
 import useHandleAuth from "../../hooks/useHandleAuth";
+import Load from "../../components/Load";
 
 const Private = ({children}:{children:React.ReactElement}) => {
 
@@ -28,12 +29,25 @@ const Private = ({children}:{children:React.ReactElement}) => {
       !isAllow
     &&
     onTransition("/auth/login",true)
+      null
     })()
 
   },[isAllow])
 
 
-  return children
+  return <>
+    {
+      !!authQueryState.isLoading
+      ?
+      <section className="loadAuthorizationSection">
+        <Load
+      isLoading={!!authQueryState.isLoading}
+      />
+      </section>
+      : children
+    }
+    
+  </>
 }
 
 export default Private

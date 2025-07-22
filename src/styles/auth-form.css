@@ -71,6 +71,13 @@
     border-radius: 0.2rem;
 }
 
+.authFormSection form .formActionsContainer{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 .authFormSection form button{
     display: flex;
     justify-content: center;
@@ -86,6 +93,7 @@
     border: 0.1rem solid darkcyan;
     font-weight: bolder;
     height: 3.5rem;
+    width: 100%;
 }
 
 .authFormSection form button:hover{

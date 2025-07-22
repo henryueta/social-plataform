@@ -34,6 +34,20 @@ textarea{
   background-color: white;
 }
 
+.loadAuthorizationSection{
+  position: fixed;
+  width: 100dvw;
+  height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.loadAuthorizationSection .spinnerContainer{
+    height: 30px;
+    width: 30px;
+}
+
 .unfilled_button{
   display: flex;
   align-items: center;
@@ -43,7 +57,7 @@ textarea{
   background-color: var(--color-primary);
   color: white;
   border: none;
-  padding: 0.2rem 0.5rem 0.2rem 0.5rem;
+  padding: 0.3rem 0.6rem 0.3rem 0.6rem;
   border-radius: 0.3rem;
   font-size: var(--buttonFontSize);
 }
@@ -59,8 +73,9 @@ textarea{
   justify-content: center;
   cursor: pointer;
   background-color: white;
+  color:var(--color-primary);
   border:0.1rem solid var(--color-primary);
-  padding: 0.2rem 0.5rem 0.2rem 0.5rem;
+  padding: 0.3rem 0.6rem 0.3rem 0.6rem;
   border-radius: 0.3rem;
   font-size: var(--buttonFontSize);
 }

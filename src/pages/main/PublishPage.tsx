@@ -53,6 +53,8 @@ const PublishPage = () => {
               />
             
             <Form
+            method="post"
+            setPlacehorders
             errorView={false}
             model={post_model}
             submit={{

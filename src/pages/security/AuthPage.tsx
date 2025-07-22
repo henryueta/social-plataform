@@ -48,6 +48,8 @@ const AuthPage = () => {
         subtitle={authStructure.header.subtitle}
         />
         <Form
+        method="post"
+        setPlacehorders
         submitButtonTitle={authStructure.form.submitTitle}
         model={authStructure.form.model}
         submit={{

@@ -1,0 +1,20 @@
+
+.dialogMessage{
+    display: block;
+    border: 1px solid red;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    z-index: 100;
+}
+
+.lockWallContainer{
+    display: block;
+    width: 100dvw;
+    height: 100dvh;
+    
+    position: fixed;
+    z-index: 90;
+    backdrop-filter: blur(0.3rem);
+}
