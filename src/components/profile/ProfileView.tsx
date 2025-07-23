@@ -228,7 +228,8 @@ const ProfileView = ({username}:{username:string}) => {
                         className="filled_button"
                         onClick={()=>{
                             showDialog({
-                                message:"Deseja fazer logout?",
+                                title:"Logout da conta?",
+                                message:"Tem certeza de que deseja sair da conta?",
                                 onConfirm() {
                                     onLogout()
                                 },

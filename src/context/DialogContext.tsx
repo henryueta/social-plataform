@@ -13,6 +13,7 @@ const DialogProvider = ({children}:{children:React.ReactNode})=>{
 
         const initialDialogStructureValue = {
             isOpen:false,
+            title:"",
             message:"",
             onConfirm:null,
             onCancel:null,

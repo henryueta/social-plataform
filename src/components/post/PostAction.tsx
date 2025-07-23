@@ -18,7 +18,8 @@ const PostAction = ({isSameUser,id,onSelectEdit}:{isSameUser:boolean,id?:string,
 
         actionType === 'delete'
         ? showDialog({
-            message:"Deseja excluir a postagem?",
+            title:"Excluir postagem?",
+            message:"Tem certeza de que deseja excluir a postagem?",
             onCancel() {
             },
             onConfirm() {

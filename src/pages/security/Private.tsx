@@ -2,12 +2,19 @@ import useHandlePath from "../../hooks/useHandlePath";
 import { useEffect, useState } from "react";
 import useHandleAuth from "../../hooks/useHandleAuth";
 import Load from "../../components/Load";
+import { Navigate } from "react-router-dom";
 
 const Private = ({children}:{children:React.ReactElement}) => {
 
-  const {currentAuthContext,authQueryState} = useHandleAuth();
+  const {currentAuthContext,authQueryState,onCheckout,isChecked} = useHandleAuth();
  const {onTransition} = useHandlePath();
  const [isAllow,setIsAllow] = useState<boolean  | null>(null);
+
+  useEffect(()=>{
+
+        onCheckout("get")
+
+    },[])
 
   useEffect(()=>{
     
@@ -34,6 +41,9 @@ const Private = ({children}:{children:React.ReactElement}) => {
 
   },[isAllow])
 
+  console.log((currentAuthContext.isAuth)
+      && 
+      (isChecked))
 
   return <>
     {
@@ -44,7 +54,12 @@ const Private = ({children}:{children:React.ReactElement}) => {
       isLoading={!!authQueryState.isLoading}
       />
       </section>
-      : children
+      : 
+      !!((currentAuthContext.isAuth)
+      && 
+      (isChecked))
+      ? children
+      : <Navigate to={"/checkout"}/>
     }
     
   </>

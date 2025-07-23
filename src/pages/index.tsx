@@ -13,11 +13,11 @@ import posts_icon from "../assets/icons/posts_icon.png"
 import profile_icon from "../assets/icons/profile_icon.png"
 import upload_icon from "../assets/icons/upload_icon.png"
 import ProfileListPage from "./main/ProfileListPage"
+import AuthCheckout from "./security/AuthCheckout"
 
 
 const router = RouterDomFactory.create([
     {
-        id:"",
         path:"/auth/:type",
         element:<AuthPage/>,
         handle:{
@@ -28,6 +28,18 @@ const router = RouterDomFactory.create([
             type:"security",
             params:["type"]
         }
+    },
+    {
+        path:"/checkout",
+        element:<AuthCheckout/>,
+        handle:{
+            icon:"",
+            alt:"auth_checkout",
+            name:"checkout",
+            label:"Checkout",
+            type:"security",
+            params:[]
+        }        
     },
     {
         path:"/",

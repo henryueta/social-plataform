@@ -1,5 +1,6 @@
 import useHandleDialog from "../hooks/useHandleDialog"
 import "../styles/dialog-message.css"
+import TitleHeader from "./TitleHeader";
 
 const DialogMessage = () => {
 
@@ -12,9 +13,13 @@ const DialogMessage = () => {
             dialogStructure.isOpen
             &&
             <dialog className="dialogMessage">
-                {dialogStructure.message}
+                <TitleHeader
+                title={dialogStructure.title}
+                subtitle={dialogStructure.message}
+                />
                 <div className="dialogMessageActionsContainer">
                     <button
+                    className="filled_button"
                     onClick={()=>{
                         !!dialogStructure.onCancel
                         &&
@@ -28,6 +33,7 @@ const DialogMessage = () => {
                         Cancelar
                     </button>
                     <button
+                    className="unfilled_button"
                     onClick={()=>{
                         !!dialogStructure.onConfirm
                         &&

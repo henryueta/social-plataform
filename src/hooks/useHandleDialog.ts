@@ -14,6 +14,7 @@ const useHandleDialog = ()=>{
     const showDialog = (structure:Omit<DialogStructureProps,"isOpen">)=>{
         setDialogStructure({
             isOpen:true,
+            title:structure.title,
             message:structure.message,
             onConfirm:()=>{
                 !!structure.onConfirm

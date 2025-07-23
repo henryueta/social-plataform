@@ -12,6 +12,7 @@ const useHandleAuth = ()=>{
     const {onQuery,queryState} = useHandleQuery();
     const [authQueryState,setAuthQueryState] = useState<QueryStateType>(queryState);
     const {onTransition} = useHandlePath();
+    const [isChecked,setIsChecked] = useState<null | boolean>(null);
 
     useEffect(()=>{
 
@@ -26,11 +27,9 @@ const useHandleAuth = ()=>{
     },[currentAuthContext.isAuth])
 
     useEffect(()=>{
+        console.log(isChecked)
+    },[isChecked])
 
-        onCheckout()
-
-    },[])
-    
     const onLogout = ()=>{
 
         onQuery({
@@ -51,21 +50,37 @@ const useHandleAuth = ()=>{
 
     }
 
-      const onCheckout = ()=>{
-
+      const onCheckout = (method:'get'|'post',code?:string)=>{
+            
              onQuery({
-            method:"get",
+            method:method,
             url:api_endpoints.auth.checkout,
             cancelToken:AxiosHttpClientFactory.createCancelToken(),
-            withCredentials:true
+            withCredentials:true,
+            body:
+                method === 'post'
+                ? {code:code}
+                : {}
             },
             {
-             onThen() {
-                currentAuthContext.setIsAuth(true)
+             onThen(result) {
+                const currentResult = result.response.data
+                console.log(result)
+                method === 'get'
+                &&
+                (()=>{
+                    setIsChecked(currentResult.is_checked)
+                    currentAuthContext.setIsAuth(true)
+                    alert("AAA")
+                })()
              },
              onCatch(error) {
-                 currentAuthContext.setIsAuth(false)
                  console.log("checkout_error",error)
+                method === 'post'
+                &&
+                (()=>{
+                    currentAuthContext.setIsAuth(false)
+                })()
              },
             })
         }
@@ -74,7 +89,8 @@ const useHandleAuth = ()=>{
         currentAuthContext,
         onCheckout,
         onLogout,
-        authQueryState
+        authQueryState,
+        isChecked
     }
 
 }
