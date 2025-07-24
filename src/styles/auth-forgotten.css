@@ -1,0 +1,68 @@
+.authForgottenPageSection{
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100dvw;
+    height: 100dvh;
+}
+
+.authForgottenContainer{
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap:4rem;
+    width: 45%;
+    height: 70%;
+}
+
+.authForgottenContainer .headerSection{
+    text-align: center;
+}
+
+.authForgottenContainer .headerSection>*{
+    margin-bottom: 1rem;
+}
+
+.authForgottenContainer .headerSection .titleContainer{
+    font-size: 1.2rem;
+}
+
+.authForgottenContainer .emailForSendContainer{
+    width: 100%;
+}
+
+.authForgottenContainer .emailForSendContainer input{
+    width: 100%;
+    padding: 0.5rem;
+    font-size: 1rem;
+    border-radius: 0.2rem;
+    border: 0.1rem solid gray;
+}
+
+.authForgottenContainer .forgottenActionsContainer{
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    width: 100%;
+    height: 50px;
+}
+
+.authForgottenContainer .forgottenActionsContainer>button{
+    flex: 1;
+    font-weight: bolder;
+}
+
+
+@media (max-width:1024px){
+
+.authForgottenContainer{
+    width: 80%;
+    height: 65%;
+}
+
+}

@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../context/AuthContext"
 import api_endpoints from "../config/api";
 import useHandleQuery from "./useHandleQuery";
-import type { QueryStateType } from "../types/query-type";
+import type { QueryStateType, QueryTreatmentType } from "../types/query-type";
 import { AxiosHttpClientFactory } from "../adapters/axios-adapter";
 import useHandlePath from "./useHandlePath";
 
@@ -12,7 +12,8 @@ const useHandleAuth = ()=>{
     const {onQuery,queryState} = useHandleQuery();
     const [authQueryState,setAuthQueryState] = useState<QueryStateType>(queryState);
     const {onTransition} = useHandlePath();
-    const [isChecked,setIsChecked] = useState<null | boolean>(null);
+    const [emailForCheckout,setEmailForCheckout] = useState("");
+    const {treatmentProvider} = useHandleQuery();
 
     useEffect(()=>{
 
@@ -27,8 +28,8 @@ const useHandleAuth = ()=>{
     },[currentAuthContext.isAuth])
 
     useEffect(()=>{
-        console.log(isChecked)
-    },[isChecked])
+        console.log(currentAuthContext.isChecked)
+    },[currentAuthContext.isChecked])
 
     const onLogout = ()=>{
 
@@ -48,7 +49,8 @@ const useHandleAuth = ()=>{
              },
         })
 
-    }
+    }   
+
 
       const onCheckout = (method:'get'|'post',code?:string)=>{
             
@@ -65,18 +67,16 @@ const useHandleAuth = ()=>{
             {
              onThen(result) {
                 const currentResult = result.response.data
-                console.log(result)
                 method === 'get'
-                &&
-                (()=>{
-                    setIsChecked(currentResult.is_checked)
+                && (()=>{
                     currentAuthContext.setIsAuth(true)
-                    alert("AAA")
                 })()
+                    setEmailForCheckout(currentResult.email)
+                    currentAuthContext.setIsChecked(currentResult.is_checked)
              },
              onCatch(error) {
                  console.log("checkout_error",error)
-                method === 'post'
+                method === 'get'
                 &&
                 (()=>{
                     currentAuthContext.setIsAuth(false)
@@ -85,12 +85,29 @@ const useHandleAuth = ()=>{
             })
         }
 
+        const onForgot = (email:string,treatment?:QueryTreatmentType)=>{
+
+            !!(email.trim().length)
+            &&
+            onQuery({
+                method:"post",
+                url:api_endpoints.auth.forgot,
+                cancelToken:AxiosHttpClientFactory.createCancelToken(),
+                withCredentials:true,
+                body:{
+                    email:email
+                }
+            },treatmentProvider(treatment))
+
+        }
+
     return {
         currentAuthContext,
         onCheckout,
         onLogout,
+        onForgot,
         authQueryState,
-        isChecked
+        emailForCheckout
     }
 
 }

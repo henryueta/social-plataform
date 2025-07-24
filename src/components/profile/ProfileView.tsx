@@ -9,6 +9,7 @@ import useHandlePath from "../../hooks/useHandlePath";
 import Load from "../Load";
 import useHandleAuth from "../../hooks/useHandleAuth";
 import useHandleDialog from "../../hooks/useHandleDialog";
+import ProfileSocialEdit from "./ProfileSocialEdit";
 
 
 const ProfileView = ({username}:{username:string}) => {
@@ -16,7 +17,8 @@ const ProfileView = ({username}:{username:string}) => {
     const {pathname} = useHandlePath();
     const {onGetUser,profileQueryState,onPostFollow} = useHandleProfile();
     const [profileViewState,setProfileViewState] = useState<ProfileViewState|null>(null);
-    
+    const [editData,setEditData] = useState(false);
+
     const onFollow = ()=>{
 
         !!profileViewState?.data
@@ -102,6 +104,30 @@ const ProfileView = ({username}:{username:string}) => {
     const {showDialog} = useHandleDialog();
 
   return (
+    <>
+    {
+        !!editData
+        &&
+        <ProfileSocialEdit
+            editTreatment={{
+            onEdit(data) {
+                setEditData(false)
+                setProfileViewState((prev)=>{
+                return {...prev,data:{
+                        social_status:prev?.data?.social_status,
+                        namertag:prev?.data?.namertag,
+                        image:data?.image,
+                        username:data?.username
+                    }} as ProfileViewState
+                })
+            },
+            onCancel() {
+                setEditData(false)
+            },
+            }}
+            username={username}
+        />
+    }
     <div className="profileInfoContainer">
         {!!profileViewState
         &&
@@ -109,7 +135,7 @@ const ProfileView = ({username}:{username:string}) => {
         &&
         <>
       <div className="profileImageContainer">
-                <img src={profileViewState.data.image} alt={profileViewState.data.username+"s image"} />
+            <img src={profileViewState.data.image} alt={profileViewState.data.username+"s image"} />
       </div>
       <div className="socialInfoContainer">
             <DataFetcher 
@@ -131,24 +157,6 @@ const ProfileView = ({username}:{username:string}) => {
                 />
                 <div 
                 className="namertagContainer"
-                style={{
-                    color:
-                    profileViewState.data.namertag === 'cube'
-                    ? "deepskyblue"
-                    : 
-                    profileViewState.data.namertag === 'pyramid'
-                    ? "orangered"
-                    : 
-                    profileViewState.data.namertag === 'star'
-                    ? 'greenyellow'
-                    :
-                    profileViewState.data.namertag === 'dodecahedron'
-                    ? 'red'
-                    :
-                    profileViewState.data.namertag === 'octahedron'
-                    ? 'gray'
-                    : 'black'
-                }}
                 >
                     {"( "+profileViewState.data.namertag+" )"}
                 </div>  
@@ -206,7 +214,9 @@ const ProfileView = ({username}:{username:string}) => {
                     onClick={()=>{
                         return !profileViewState.isSameUser
                         ? onFollow()
-                        : ()=>{}
+                        : (()=>{
+                            setEditData(true)
+                        })()
                     }}
                     >
                     <Load
@@ -230,6 +240,7 @@ const ProfileView = ({username}:{username:string}) => {
                             showDialog({
                                 title:"Logout da conta?",
                                 message:"Tem certeza de que deseja sair da conta?",
+                                type:'confirmation',
                                 onConfirm() {
                                     onLogout()
                                 },
@@ -249,6 +260,7 @@ const ProfileView = ({username}:{username:string}) => {
         </>
         }
     </div>
+    </>
   )
 }
 

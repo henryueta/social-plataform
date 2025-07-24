@@ -20,6 +20,7 @@ const PostAction = ({isSameUser,id,onSelectEdit}:{isSameUser:boolean,id?:string,
         ? showDialog({
             title:"Excluir postagem?",
             message:"Tem certeza de que deseja excluir a postagem?",
+            type:'confirmation',
             onCancel() {
             },
             onConfirm() {

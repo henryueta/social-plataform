@@ -6,7 +6,8 @@ const api_endpoints = {
         login:api_base+"auth/login",
         register:api_base+"auth/register",
         checkout:api_base+"auth/checkout",
-        logout:api_base+"auth/logout"
+        logout:api_base+"auth/logout",
+        forgot:api_base+"auth/forgot"
     },
     notification:{
         post:api_base+"notification/post",
@@ -17,6 +18,7 @@ const api_endpoints = {
     },
     user:{
         get:api_base+"user/get",
+        put:api_base+"user/put"
     },
     post:{
         post:api_base+"publish/post",

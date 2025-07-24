@@ -53,7 +53,7 @@
 .postList .profileCardArticle .profileImageContainer img{
     width: 32px;
     height: 32px;
-    padding: 0.3rem;
+    padding: 0.5rem;
 }
 
 .postCardArticle{
@@ -62,6 +62,7 @@
     /* height: 280px; */
     /*700*/
     border: 0.1rem solid rgb(228, 228, 228);
+    border-radius: 0.5rem;
     padding: 2rem;
     background-color: white;
 }
@@ -97,17 +98,22 @@
 
 
 
-.postCardArticle .profileCardArticle img{
+.postCardArticle .profileCardArticle .profileImageContainer img{
     cursor: pointer;
     width: 32px;
     height: 32px;
-    padding: 0.3rem;
+    padding: 0.5rem;
 }
 
 .postCardArticle .mediaContainer{
-    height: 400px;
+    height: auto;
     background-size: cover;
     /* border-radius: 1rem; */
+}
+
+.postCardArticle .mediaContainer>img{
+    /* height: 400px; */
+    width: 100%;
 }
 
 .postCardArticle .actionsContainer{
@@ -258,7 +264,7 @@
     display: block;
     height: 32px;
     width: 32px;
-    padding: 0.3rem;
+    padding: 0.5rem;
 }
 
 
@@ -314,6 +320,10 @@
 }
 @media (max-width:1024px) {
 
+.postCardArticle{
+    padding: 1rem;
+}
+
 .commentInputCardArticle .responseActionButtonContainer .unfilled_button.commentary{
     height: 100%;
     font-size: 0.7rem;
@@ -324,7 +334,7 @@
     }
 
     .postListContainer .postList{
-        padding: 1rem;
+        padding: 0.5rem;
     }
 
     .postCardArticle .profileCardArticle .headerSection .titleContainer{

@@ -30,6 +30,21 @@ const useHandleProfile = ()=>{
 
     }
 
+    const onEditUser = (body:{
+        username?:string,
+        image?:string
+    },treatment?:QueryTreatmentType)=>{
+
+        onQuery({
+            method:'put',
+            url:api_endpoints.user.put,
+            cancelToken:AxiosHttpClientFactory.createCancelToken(),
+            withCredentials:true,
+            body:body
+        },treatmentProvider(treatment))
+
+    }
+
     const onGetUser = (query:UserQueryGetType,params:{
         limit?:number,
         page?:number,
@@ -56,6 +71,7 @@ const useHandleProfile = ()=>{
     return {
         onGetUser,
         onPostFollow,
+        onEditUser,
         profileQueryState
     }
 

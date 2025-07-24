@@ -49,7 +49,7 @@ type UserQueryGetType =
 {
     mode:'single',
     hasImage:boolean,
-    type:'small'|'social'|'important'
+    type:'small'|'social'|'important'|'small_large'
 }
 |
 {

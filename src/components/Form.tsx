@@ -1,5 +1,5 @@
 import { useForm } from "react-hook-form";
-import {useEffect} from "react";
+import {useEffect, useState} from "react";
 import type { FormComponentProps } from "../types/form-type"
 import { zodResolver } from "@hookform/resolvers/zod";
 import Warning from "./Warning";
@@ -26,7 +26,8 @@ const Form = (
     });
     const {errors} = formState
     const {onQuery,queryState} = useHandleQuery()
-    
+    const [queryResponseMessage,setQueryResponseMessage] = useState("");
+
     console.log(errors)
 
     useEffect(()=>{
@@ -57,6 +58,8 @@ return (
                   treatment.onThen(result)
               },  
               onCatch(error) {
+                const currentError = error as {message:string}
+                setQueryResponseMessage(currentError.message as string)
                 !!treatment
                 &&
                   !!treatment.onCatch
@@ -160,11 +163,6 @@ return (
 
             )
         }
-        <div className="responseContainer">
-            {
-                
-            }
-        </div>
         <div className="formActionsContainer">
         {
         !!cancelButton

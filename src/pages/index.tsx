@@ -14,12 +14,18 @@ import profile_icon from "../assets/icons/profile_icon.png"
 import upload_icon from "../assets/icons/upload_icon.png"
 import ProfileListPage from "./main/ProfileListPage"
 import AuthCheckout from "./security/AuthCheckout"
+import NavigationLayout from "../layout/NavigationLayout"
+import AuthForgotten from "./security/AuthForgotten"
 
 
 const router = RouterDomFactory.create([
     {
         path:"/auth/:type",
-        element:<AuthPage/>,
+        element:
+            <NavigationLayout>
+                    <AuthPage/>
+            </NavigationLayout>
+        ,
         handle:{
             icon:"",
             alt:"autentication",
@@ -30,8 +36,26 @@ const router = RouterDomFactory.create([
         }
     },
     {
+        path:"/forgot/password",
+        element:
+            <NavigationLayout>
+                <AuthForgotten/>
+            </NavigationLayout>,
+        handle:{
+            icon:"",
+            alt:"forgot",
+            name:"forgot",
+            label:"Recuperação",
+            type:"security",
+            params:[]
+        }
+    },
+    {
         path:"/checkout",
-        element:<AuthCheckout/>,
+        element:
+            <NavigationLayout>
+                <AuthCheckout/>
+            </NavigationLayout>,
         handle:{
             icon:"",
             alt:"auth_checkout",
@@ -60,9 +84,11 @@ const router = RouterDomFactory.create([
         path:"/profiles/:username/:type",
         element:
         <Private>
-            <MainLayout>
-                <ProfileListPage/>
-            </MainLayout>
+            <NavigationLayout>
+                <MainLayout>
+                    <ProfileListPage/>
+                </MainLayout>
+            </NavigationLayout>
         </Private>,
         handle:{
             icon:"",
@@ -93,9 +119,11 @@ const router = RouterDomFactory.create([
         path:"/posts/:type",
         element:
         <Private>
-            <MainLayout>
-                <PostListPage/>
-            </MainLayout>
+            <NavigationLayout>
+                <MainLayout>
+                    <PostListPage/>
+                </MainLayout>
+            </NavigationLayout>
         </Private>,
         handle:{
             icon:posts_icon,
@@ -110,9 +138,11 @@ const router = RouterDomFactory.create([
         path:"/post/create",
         element:
         <Private>
-            <MainLayout>
-                <PublishPage/>
-            </MainLayout>
+            <NavigationLayout>
+                <MainLayout>
+                    <PublishPage/>
+                </MainLayout>
+            </NavigationLayout>
         </Private>,
         handle:{
             icon:upload_icon,
@@ -127,9 +157,11 @@ const router = RouterDomFactory.create([
         path:"/post/view/:id",
         element:
         <Private>
-            <MainLayout>
-                <PostPage/>
-            </MainLayout>
+            <NavigationLayout>
+                <MainLayout>
+                    <PostPage/>
+                </MainLayout>
+            </NavigationLayout>
         </Private>,
         handle:{
             icon:"",
@@ -160,9 +192,11 @@ const router = RouterDomFactory.create([
         path:"/profile/:username",
         element:
         <Private>
-            <MainLayout>
-                <ProfilePage/>
-            </MainLayout>
+            <NavigationLayout>
+                <MainLayout>
+                    <ProfilePage/>
+                </MainLayout>
+            </NavigationLayout>
         </Private>,
         handle:{
             icon:profile_icon,

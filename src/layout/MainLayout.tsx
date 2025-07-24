@@ -7,8 +7,6 @@ const MainLayout = ({children}:{children:React.ReactElement}) => {
   return (
     <>
         <NavBar/>
-        <DialogMessage/>
-        <LockWall/>
         <main className="mainLayout">
             {children}
         </main>

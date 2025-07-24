@@ -18,6 +18,10 @@ const DialogMessage = () => {
                 subtitle={dialogStructure.message}
                 />
                 <div className="dialogMessageActionsContainer">
+                {
+                    dialogStructure.type === 'confirmation'
+                    ?
+                    <>
                     <button
                     className="filled_button"
                     onClick={()=>{
@@ -46,8 +50,23 @@ const DialogMessage = () => {
                     >
                         Confirmar
                     </button>
-                </div>
-            </dialog>
+                </>
+                :
+                <>
+                    <button 
+                    className="unfilled_button"
+                    onClick={()=>{
+                        !!dialogStructure.onFinally
+                        &&
+                        dialogStructure.onFinally()
+                    }}
+                    >
+                        Fechar
+                    </button>
+                </>
+                }
+            </div>
+        </dialog>
         }
     </>
   )

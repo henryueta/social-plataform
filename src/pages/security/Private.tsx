@@ -6,7 +6,7 @@ import { Navigate } from "react-router-dom";
 
 const Private = ({children}:{children:React.ReactElement}) => {
 
-  const {currentAuthContext,authQueryState,onCheckout,isChecked} = useHandleAuth();
+  const {currentAuthContext,authQueryState,onCheckout} = useHandleAuth();
  const {onTransition} = useHandlePath();
  const [isAllow,setIsAllow] = useState<boolean  | null>(null);
 
@@ -41,9 +41,7 @@ const Private = ({children}:{children:React.ReactElement}) => {
 
   },[isAllow])
 
-  console.log((currentAuthContext.isAuth)
-      && 
-      (isChecked))
+
 
   return <>
     {
@@ -55,11 +53,11 @@ const Private = ({children}:{children:React.ReactElement}) => {
       />
       </section>
       : 
-      !!((currentAuthContext.isAuth)
+      !!(currentAuthContext.isAuth)
       && 
-      (isChecked))
+      ((currentAuthContext.isChecked)
       ? children
-      : <Navigate to={"/checkout"}/>
+      : <Navigate to={"/checkout"}/>)
     }
     
   </>

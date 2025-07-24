@@ -7,6 +7,7 @@ import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
 import useHandlePath from "../../hooks/useHandlePath"
 import { auth_type } from "../../constants/auth-constant"
+import useHandleDialog from "../../hooks/useHandleDialog"
 
 const AuthPage = () => {
 
@@ -14,6 +15,7 @@ const AuthPage = () => {
 
   const [authStructure,setAuthStructure] = useState<AuthStructureType| null>(null)
   const {onTransition} = useHandlePath();
+  const {showDialog} = useHandleDialog();
 
   useEffect(()=>{
 
@@ -21,8 +23,6 @@ const AuthPage = () => {
     !!currentStructure
     &&
     setAuthStructure(currentStructure)
-
-    
 
   },[type])
 
@@ -60,8 +60,16 @@ const AuthPage = () => {
           onThen() {
             onTransition("/",true)
           },
-          onCatch() {
-            
+          onCatch(error) {
+            const currentError = error as {message:string}
+            showDialog({
+              title:"Revise seus dados",
+              message:currentError.message,
+              type:"warn",
+              onConfirm:null,
+              onCancel:null,
+              onFinally:null
+            })
           },
         }}
         />
@@ -80,7 +88,17 @@ const AuthPage = () => {
               }
           </Link>
         </span>
-
+            {
+              type == 'login'
+              &&
+              <Link 
+                className="forgotPasswordRedirect"
+                to={"/forgot/password"}
+                >
+                Esqueceu sua senha?
+              </Link>
+            }
+              
       </section>
       }
      

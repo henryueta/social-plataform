@@ -16,6 +16,7 @@ const useHandleDialog = ()=>{
             isOpen:true,
             title:structure.title,
             message:structure.message,
+            type:structure.type,
             onConfirm:()=>{
                 !!structure.onConfirm
                 &&

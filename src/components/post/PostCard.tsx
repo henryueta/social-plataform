@@ -124,12 +124,10 @@ const PostCard = ({postData,liked,detailedView,isSameUser}:
           </section>
         }
         
-        {/* <div className="mediaContainer"
-        style={{
-          backgroundImage:"url(https://img.freepik.com/fotos-gratis/cidade-da-noite-brilhante_1127-8.jpg)"
-        }}
+        <div className="mediaContainer"
         >
-        </div> */}
+          <img src="https://img.freepik.com/fotos-gratis/cidade-da-noite-brilhante_1127-8.jpg" alt="" />
+        </div>
 
         <div className="actionsContainer">
           <LikeAction
