@@ -66,7 +66,7 @@ type PostQueryGetType =
 |
 {
     mode:'group',
-    type:'all'|'especific'|'following'
+    type:'all'|'especific'|'following'|'search'
 }
 
 type PostCardComponentProps = 
@@ -78,6 +78,7 @@ Record<
 'user_small_photo'|
 'username'|
 'namertag'|
+'image'|
 'post_id',string>
 
 

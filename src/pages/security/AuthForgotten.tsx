@@ -16,7 +16,7 @@ const AuthForgotten = () => {
     <section className="authForgottenPageSection">
         <div className="authForgottenContainer">
             <TitleHeader
-            title="Recuperação de senha"
+            title="Esqueceu sua senha?"
             subtitle="Escreva seu email para alterar a senha"
             />
             <div className="emailForSendContainer">
@@ -40,9 +40,13 @@ const AuthForgotten = () => {
                 onClick={()=>{
                     !!(emailForSend.trim().length)
                     &&
-                    onForgot(emailForSend,{
-                        onThen(result) {
-                            console.log("result",result)
+                    onForgot("post",{
+                        email:emailForSend
+                    },{
+                        onThen() {
+                            
+                            onTransition("/message/recovery")
+
                         },
                         onCatch(error){
                             const currentError = error as {message:string}

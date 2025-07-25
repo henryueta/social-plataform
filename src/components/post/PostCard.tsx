@@ -76,7 +76,12 @@ const PostCard = ({postData,liked,detailedView,isSameUser}:
         >
               <p>
                 {
-                currentDescription
+                detailedView 
+                ? currentDescription 
+                : 
+                currentDescription.length >= 300 
+                  ? currentDescription.slice(0,300).concat("...")
+                  : currentDescription
                 } 
               </p>
           </div>
@@ -126,7 +131,7 @@ const PostCard = ({postData,liked,detailedView,isSameUser}:
         
         <div className="mediaContainer"
         >
-          <img src="https://img.freepik.com/fotos-gratis/cidade-da-noite-brilhante_1127-8.jpg" alt="" />
+          <img src={postData.image} alt="" />
         </div>
 
         <div className="actionsContainer">

@@ -85,18 +85,26 @@ const useHandleAuth = ()=>{
             })
         }
 
-        const onForgot = (email:string,treatment?:QueryTreatmentType)=>{
+        const onForgot = (method:'post'|'get',params:{
+            email?:string,
+            token?:string
+        },treatment?:QueryTreatmentType)=>{
 
-            !!(email.trim().length)
-            &&
             onQuery({
-                method:"post",
-                url:api_endpoints.auth.forgot,
+                method:method,
+                url:api_endpoints.auth.forgot+(
+                    method ===  'get'
+                    ? "?token="+params.token
+                    : ""
+                ),
                 cancelToken:AxiosHttpClientFactory.createCancelToken(),
                 withCredentials:true,
-                body:{
-                    email:email
-                }
+                body:
+                    method === 'post'
+                    ? {
+                    email:params.email
+                    }
+                    : {}
             },treatmentProvider(treatment))
 
         }

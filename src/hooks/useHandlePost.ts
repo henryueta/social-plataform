@@ -17,7 +17,8 @@ const useHandlePost = ()=>{
 
   const onGetPost = (query:PostQueryGetType,treatment?:QueryTreatmentType,params?:{
     id?:string,
-    username?:string
+    username?:string,
+    search?:string
     limit?:number,
     page?:number
   })=>{
@@ -32,6 +33,9 @@ const useHandlePost = ()=>{
     : "",
       limit:!!params?.limit
     ? "&limit="+params.limit+"&page="+params.page
+    : "",
+      search:!!params?.search
+    ? "&search="+params.search
     : ""
     }
 
@@ -42,6 +46,7 @@ const useHandlePost = ()=>{
       +"?type="+query.type
       +postGetUrlParams.limit
       +postGetUrlParams.username
+      +postGetUrlParams.search
       +postGetUrlParams.id,
       method:"get",
       cancelToken:AxiosHttpClientFactory.createCancelToken(),

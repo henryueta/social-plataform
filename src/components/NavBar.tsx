@@ -61,6 +61,9 @@ const NavBar = () => {
                         : 
                         route.handle['name'] === 'profile'
                         ? currentUserUsername
+                        : 
+                        route.handle['name'] === 'search'
+                        ? "post"
                         : ""
                         )
                     }
@@ -70,7 +73,19 @@ const NavBar = () => {
                 : route.path
 
                 return (
-                    <li key={route.handle['name']}>
+                    <li key={route.handle['name']} 
+                    style={
+                        {
+                            
+                            background:
+                            isMobile
+                            ? onMatch(route.path as string,pathname)
+                                ? "var(--color-white-hover)"
+                                : "none"
+                            : "none"
+                        }
+                    }
+                    >
                         <Link
                         style={{
                             fontWeight:
@@ -83,8 +98,8 @@ const NavBar = () => {
                           <img 
                           style={
                             isMobile
-                            ? {padding:"0.2rem"}
-                            : {padding:"0.2rem"}
+                            ? {padding:"0.3rem"}
+                            : {padding:"0.3rem"}
                             }
                           src={route.handle['icon']} 
                           alt={route.handle['name']+"´s icon"} />

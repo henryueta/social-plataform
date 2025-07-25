@@ -4,6 +4,7 @@ import ProfileCard from "./ProfileCard"
 import type { ProfileCardActionType, ProfileCardComponentProps, ProfileCardStateType } from "../../types/user-type"
 import useHandleProfile from "../../hooks/useHandleProfile"
 import useHandleList from "../../hooks/useHandleList"
+import DataFetcher from "../data/DataFetcher"
 
   const initialProfileListState:ProfileCardStateType = {
       user:null,
@@ -21,11 +22,11 @@ import useHandleList from "../../hooks/useHandleList"
     }
   } 
 
-const ProfileList = ({type,username}:{type:'followers'|'following',username?:string}) => {
+const ProfileList = ({type,username,search}:{type:'followers'|'following'|'search',username?:string,search?:string}) => {
 
       const [profileListState,setProfileListState] = 
       useReducer(handleProfileListState,initialProfileListState);
-      const {onGetUser} = useHandleProfile();
+      const {onGetUser,profileQueryState} = useHandleProfile();
 
       const getUserList = ()=>{
         
@@ -36,7 +37,8 @@ const ProfileList = ({type,username}:{type:'followers'|'following',username?:str
         },{
           limit:8,
           page:1,
-          username:username
+          username:username,
+          search:search
         },
           {
           onThen(result) {
@@ -89,9 +91,12 @@ const ProfileList = ({type,username}:{type:'followers'|'following',username?:str
         functions:{
           query:getUserList
         },
-        identifier:username,
+        identifier:
+        !!username
+        ? username
+        : search
+        ,
         references:{
-          
         }
       });
 
@@ -101,6 +106,8 @@ const ProfileList = ({type,username}:{type:'followers'|'following',username?:str
       {
         !username
         &&
+        type !== "search"
+        &&
         <TitleHeader
         title="Sua conta"
         />
@@ -108,6 +115,8 @@ const ProfileList = ({type,username}:{type:'followers'|'following',username?:str
         }
         {
           !username
+          &&
+          type !== 'search'
           &&
           !!profileListState.user
           &&
@@ -120,9 +129,12 @@ const ProfileList = ({type,username}:{type:'followers'|'following',username?:str
         />
         }
         
-        <div className="followingListContainer">
-            <TitleHeader
-            title={
+        <div className="profileSocialListContainer">
+            {
+              type !== 'search'
+              &&
+              <TitleHeader
+              title={
               !!username
               ? !!(type === 'following')
                 ? "Seguidores de "+username
@@ -130,10 +142,21 @@ const ProfileList = ({type,username}:{type:'followers'|'following',username?:str
               : "Você está seguindo"
             }
             />
-            <div className="followingList">
-                
+            }
+            <div className="profileSocialList">
+
+              <DataFetcher 
+              data={{
+                type:"array",
+                title:"Usuário",
+                value:listState.data.value,
+                word_gender:"m"
+              }}
+              isLoading={!!profileQueryState.isLoading}
+              noDataMessage={false}
+              >
                 {
-                  !!listState.data.value
+                  !!listState.data.value.length
                   &&
                   listState.data.value.map((following)=>
                     <ProfileCard
@@ -145,6 +168,9 @@ const ProfileList = ({type,username}:{type:'followers'|'following',username?:str
                     />
                   )
                 }
+              </DataFetcher>
+
+
             </div>
         </div>
     </div>

@@ -113,7 +113,7 @@ const CommentList = (
 
           <DataFetcher
           noDataMessage={
-            !!(type !== 'response')
+            !(type !== 'response')
           }
             data={{
             type:'array',

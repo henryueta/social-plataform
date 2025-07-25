@@ -12,6 +12,7 @@
     /* display: inline; */
     margin: 1.5rem;
     list-style: none;
+    border-radius: 0.3rem;
 }
 
 .navBar li>a{

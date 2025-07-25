@@ -12,10 +12,13 @@ import MainLayout from "../layout/MainLayout"
 import posts_icon from "../assets/icons/posts_icon.png"
 import profile_icon from "../assets/icons/profile_icon.png"
 import upload_icon from "../assets/icons/upload_icon.png"
+import search_icon from "../assets/icons/search_icon.png"
 import ProfileListPage from "./main/ProfileListPage"
 import AuthCheckout from "./security/AuthCheckout"
 import NavigationLayout from "../layout/NavigationLayout"
 import AuthForgotten from "./security/AuthForgotten"
+import AuthRecovery from "./security/AuthRecovery"
+import MessagePage from "./main/MessagePage"
 
 
 const router = RouterDomFactory.create([
@@ -51,6 +54,21 @@ const router = RouterDomFactory.create([
         }
     },
     {
+        path:"/recovery/password/:token",
+        element:
+            <NavigationLayout>
+                <AuthRecovery/>
+            </NavigationLayout>,
+        handle:{
+            icon:"",
+            alt:"recovery",
+            name:"recovery",
+            label:"Recuperação",
+            type:"security",
+            params:["token"]
+        }
+    },
+    {
         path:"/checkout",
         element:
             <NavigationLayout>
@@ -81,6 +99,21 @@ const router = RouterDomFactory.create([
         }
     },
     {
+       path:"/message/:type",
+        element:
+            <NavigationLayout>
+                <MessagePage/>
+            </NavigationLayout>,
+        handle:{
+            icon:"",
+            alt:"message",
+            name:"message",
+            label:"Mensagem",
+            type:"view",
+            params:["type"]
+        } 
+    },
+    {
         path:"/profiles/:username/:type",
         element:
         <Private>
@@ -99,22 +132,6 @@ const router = RouterDomFactory.create([
             params:["type"]
         }
     },
-    // {
-    //     path:"/search",
-    //     element:
-    //     <Private>
-    //         <MainLayout>
-    //             <SearchPage/>
-    //         </MainLayout>
-    //     </Private>,
-    //     handle:{
-    //         alt:"search",
-    //         name:"search",
-    //         label:"Pesquisar",
-    //         type:"home_navigation",
-    //         params:[]
-    //     }
-    // },
     {
         path:"/posts/:type",
         element:
@@ -188,6 +205,23 @@ const router = RouterDomFactory.create([
     //         params:[]
     //     }
     // },
+    {
+        path:"/search/:type",
+        element:
+        <Private>
+            <MainLayout>
+                <SearchPage/>
+            </MainLayout>
+        </Private>,
+        handle:{
+            icon:search_icon,
+            alt:"search",
+            name:"search",
+            label:"Pesquisar",
+            type:"home_navigation",
+            params:["type"]
+        }
+    },
     {
         path:"/profile/:username",
         element:

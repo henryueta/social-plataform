@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import useHandlePost from "../../hooks/useHandlePost"
 import "../../styles/post.css"
 import type { PostCardComponentProps } from "../../types/post-type";

@@ -31,7 +31,7 @@ const DataFetcher = ({
     ?
     children
     :
-    !!(!checkDataValue && noDataMessage)
+    !!(!checkDataValue && !noDataMessage)
     &&
     <NoData 
     data_title={data.title} 

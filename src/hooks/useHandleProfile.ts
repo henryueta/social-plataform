@@ -48,7 +48,8 @@ const useHandleProfile = ()=>{
     const onGetUser = (query:UserQueryGetType,params:{
         limit?:number,
         page?:number,
-        username?:string
+        username?:string,
+        search?:string
     },treatment?:QueryTreatmentType)=>{
 
         onQuery({
@@ -57,6 +58,7 @@ const useHandleProfile = ()=>{
             +"?type="+query.type
             +"&hasImage="+query.hasImage
             +'&username='+(params?.username ? params.username : "")
+            +"&search="+(params?.search ? params.search : "")
             +"&limit="+params.limit
             +"&page="+params.page
             ,

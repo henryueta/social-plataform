@@ -7,7 +7,8 @@ const api_endpoints = {
         register:api_base+"auth/register",
         checkout:api_base+"auth/checkout",
         logout:api_base+"auth/logout",
-        forgot:api_base+"auth/forgot"
+        forgot:api_base+"auth/forgot",
+        recovery:api_base+"auth/recovery"
     },
     notification:{
         post:api_base+"notification/post",

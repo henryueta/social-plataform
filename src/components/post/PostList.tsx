@@ -10,7 +10,7 @@ import DataFetcher from "../data/DataFetcher";
 import useHandlePost from "../../hooks/useHandlePost";
 import useHandleList from "../../hooks/useHandleList";
 
-const PostList = ({user_username}:{user_username?:string}) => {
+const PostList = ({user_username,search}:{user_username?:string,search?:string}) => {
 
     const {onGetPost,postQueryState} = useHandlePost();
     const {onMatch,pathname} = useHandlePath();
@@ -22,7 +22,10 @@ const PostList = ({user_username}:{user_username?:string}) => {
           mode:'group',
           type:(!!user_username
           ? "especific"
-          : type as 'following'|'all')
+          : 
+            !!search
+            ? "search"
+            : type as 'following'|'all')
         },{
           onThen(result) {
         const current_response = result.response.data;
@@ -49,6 +52,7 @@ const PostList = ({user_username}:{user_username?:string}) => {
           limit:listState.filter.limit,
           page:listState.filter.page,
           username:user_username,
+          search:search
         })
     }
 
@@ -63,7 +67,10 @@ const PostList = ({user_username}:{user_username?:string}) => {
       },
       identifier:!!user_username
       ? user_username
-      : type,
+      : 
+        !!search
+        ? search
+        : type,
       references:{
         listContainerRef:postListDataRef
       }
@@ -79,10 +86,12 @@ const PostList = ({user_username}:{user_username?:string}) => {
               &&
               <ProfileView username={user_username}/>
             }
-            <div className="postListFilter">
+            {
+              !user_username || !search
+              &&
+              <div className="postListFilter">
               {
-                !user_username
-                &&
+          
                 post_list_filter.map((post_filter)=>
                 
                   <Link 
@@ -101,10 +110,13 @@ const PostList = ({user_username}:{user_username?:string}) => {
                 )
               }
             </div>
+              
+            }
+            
             <div className="postList">
               {
                 <DataFetcher
-                noDataMessage
+                noDataMessage={false}
                 data={{
                 type:'array',
                 value:listState.data.value as object[],
