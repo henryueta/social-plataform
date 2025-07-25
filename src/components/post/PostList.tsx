@@ -76,9 +76,8 @@ const PostList = ({user_username,search}:{user_username?:string,search?:string})
       }
     });
 
-
   return (
-    <div className="postListContainer" ref={postListDataRef} 
+    <div className={"postListContainer "+(!!search && "search")} ref={postListDataRef} 
     onScroll={()=>{handleListView()}}
     >
             {
@@ -87,7 +86,7 @@ const PostList = ({user_username,search}:{user_username?:string,search?:string})
               <ProfileView username={user_username}/>
             }
             {
-              !user_username || !search
+              !user_username || (!search && !user_username)
               &&
               <div className="postListFilter">
               {

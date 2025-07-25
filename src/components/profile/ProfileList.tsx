@@ -5,6 +5,7 @@ import type { ProfileCardActionType, ProfileCardComponentProps, ProfileCardState
 import useHandleProfile from "../../hooks/useHandleProfile"
 import useHandleList from "../../hooks/useHandleList"
 import DataFetcher from "../data/DataFetcher"
+import useHandlePath from "../../hooks/useHandlePath"
 
   const initialProfileListState:ProfileCardStateType = {
       user:null,
@@ -22,7 +23,13 @@ import DataFetcher from "../data/DataFetcher"
     }
   } 
 
-const ProfileList = ({type,username,search}:{type:'followers'|'following'|'search',username?:string,search?:string}) => {
+const ProfileList = ({type,username,search,redirect}
+  :{
+    type:'followers'|'following'|'search',
+    username?:string,
+    search?:string,
+    redirect?:boolean
+  }) => {
 
       const [profileListState,setProfileListState] = 
       useReducer(handleProfileListState,initialProfileListState);
@@ -81,6 +88,7 @@ const ProfileList = ({type,username,search}:{type:'followers'|'following'|'searc
 
       },[])
       const profileListRef = useRef<HTMLDivElement>(null);
+      const {onTransition} = useHandlePath();
 
       const {listState,setListState} = useHandleList<ProfileCardComponentProps>({
         config:{
@@ -100,9 +108,8 @@ const ProfileList = ({type,username,search}:{type:'followers'|'following'|'searc
         }
       });
 
-
   return (
-    <div className="profileListContainer" ref={profileListRef}>
+    <div className={"profileListContainer "+(type === 'search' && " search")} ref={profileListRef}>
       {
         !username
         &&
@@ -169,8 +176,28 @@ const ProfileList = ({type,username,search}:{type:'followers'|'following'|'searc
                   )
                 }
               </DataFetcher>
-
-
+              {
+                
+                !!redirect
+                &&
+                !!listState.data.value.length
+                &&
+                <div className="redirectListContainer">
+                  <button 
+                  className="unfilled_button"
+                  onClick={()=>{
+                    onTransition("/profiles/"
+                      +(!!profileListState.user
+                        ? profileListState.user.username
+                        : ""
+                      )
+                      +"/following")
+                  }}
+                  >
+                    Ver todos
+                  </button>
+                </div>
+              }
             </div>
         </div>
     </div>

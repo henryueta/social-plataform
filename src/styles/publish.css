@@ -40,17 +40,100 @@
     gap: 0.5rem;
 }
 
-
 .publishContainer .formSection form>.fieldFormContainer{
-    height: 90%;
     width: 100%;
 }
+
+.publishContainer .formSection form>.fieldFormContainer:has(textarea){
+    height: 90%;
+}
+
 
 .publishContainer .formSection textarea{
     width: 100%;
     height: 100%;
     padding: 0.5rem;
     font-size: 0.9rem;
+    border-radius: 0.3rem;
+}
+
+.publishContainer .formSection .fileFieldLabel{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    cursor: pointer;
+    width: auto;
+    border-radius: 0.3rem;
+}
+
+.publishContainer .fieldFormContainer .fileNameSpan{
+    font-size: 0.8rem;
+    display: block;
+    width: 100%;
+    margin-bottom: 0.3rem;
+}
+
+.publishContainer .formSection .fileFieldLabel:has(img){
+    padding: 0.3rem;
+    border: 0.1rem solid gray;
+}
+
+.publishContainer .formSection .fileFieldLabel:hover{
+    background-color: var(--color-white-hover);
+}
+
+.publishContainer .formSection .fileFieldLabel>img{
+    opacity: 85%;
+    width: 32px;
+    padding: 0.4rem;
+}
+
+.publishContainer .formSection .fileFieldLabel button{
+    width: 100%;
+    padding: 0.3rem;
+}
+
+.publishContainer .formSection .formActionsContainer{
+    margin-top: 0.5rem;
+}
+
+.imageVisualizerContainer{
+    display: flex;
+    top:0%;
+    left:0%;
+    position: fixed;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    border: 1px solid red;
+    width: 100dvw;
+    height: 100dvh;
+    z-index: 90;
+}
+
+.imageVisualizerContainer>.imageContainer{
+    /* width: 100%; */
+    /* height: 100%; */
+    width: 50%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.imageVisualizerContainer>.imageContainer .actionsContainer{
+    position: absolute;
+    width: 50%;
+    top: 0%;
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+}
+
+.imageVisualizerContainer img{
+    width: 50%;
 }
 
 @media (max-width:1024px) {
@@ -75,5 +158,17 @@
         height: 100%;
     }
 
+    .imageVisualizerContainer>.imageContainer .actionsContainer{
+        width: 90%;
+    }
+
+    .imageVisualizerContainer>.imageContainer{
+    width: 90%;
+    height: 100%;
+    }
+
+    .imageVisualizerContainer img{
+        width: 90%;
+    }
 
 }

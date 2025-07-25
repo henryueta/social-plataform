@@ -19,36 +19,36 @@ const ProfileCard = ({userData,intervalDate,noRedirect}
                 userData.username
             }
             subtitle={
-              !!intervalDate
-              ? "( "+userData.namertag+" )"
+               !!intervalDate
+              ? intervalDate
               : ""
             }
-            style={{
-              subtitle:{
-                color:
-                userData.namertag === 'cube'
-                ? "deepskyblue"
-                : 
-                userData.namertag === 'pyramid'
-                ? "orangered"
-                : 
-                userData.namertag === 'star'
-                ? 'greenyellow'
-                :
-                userData.namertag === 'dodecahedron'
-                ? 'red'
-                :
-                userData.namertag === 'octahedron'
-                ? 'gray'
-                : 'black'
-              }
-            }}
+            // style={{
+            //   subtitle:{
+            //     color:
+            //     userData.namertag === 'cube'
+            //     ? "deepskyblue"
+            //     : 
+            //     userData.namertag === 'pyramid'
+            //     ? "orangered"
+            //     : 
+            //     userData.namertag === 'star'
+            //     ? 'greenyellow'
+            //     :
+            //     userData.namertag === 'dodecahedron'
+            //     ? 'red'
+            //     :
+            //     userData.namertag === 'octahedron'
+            //     ? 'gray'
+            //     : 'black'
+            //   }
+            // }}
             /> 
-            <div className="intervalDateContainer">
+            {/* <div className="intervalDateContainer">
               {  !!intervalDate
               ? intervalDate
               : ""}
-            </div>
+            </div> */}
     </article>
   )
 }

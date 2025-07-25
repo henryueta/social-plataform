@@ -1,9 +1,43 @@
 
 .socialContentContainer{
-       display: flex;
+    display: flex;
     height: 100dvh;
 }
 
 .socialContentContainer>*:not(.profileListContainer){
+    width: var(--mainContentWidth);width: var(--mainContentWidth);
+}
+
+.profileListContainer.search{
     width: var(--mainContentWidth);
+    display: flex;
+    align-items: center;
+    background-color: rgb(247, 247, 247);
+}
+
+.profileListContainer.search>.profileSocialListContainer{
+    width: 100%;
+    height: 100dvh;
+    padding: 1.5rem;
+    margin-top: 6rem;
+}
+
+.profileListContainer.search .profileSocialList{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.profileListContainer.search .profileSocialList:has(.noDataContainer){
+}
+
+.profileListContainer.search .profileSocialList:has(.profileCardArticle){
+    align-items: start;
+    justify-content: start;
+}
+
+.profileListContainer.search .profileSocialList .profileCardArticle{
+    width: 100%;
 }

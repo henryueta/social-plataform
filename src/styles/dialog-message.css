@@ -39,14 +39,7 @@
 }
 
 
-.lockWallContainer{
-    display: block;
-    width: 100dvw;
-    height: 100dvh;
-    position: fixed;
-    z-index: 90;
-    backdrop-filter: blur(0.3rem);
-}
+
 
 @media (max-width:1024px) {
 

@@ -98,10 +98,21 @@
     font-size: 0.8rem;
     margin-top: 1rem;
     padding: 1rem;
-    
 }
 
+.profileSocialListContainer>.profileSocialList{
+    display: flex;
+    flex-direction: column;
+}
 
+.profileSocialListContainer>.profileSocialList .redirectListContainer{
+    flex: 1;
+    padding: 1rem;
+}
+
+.profileSocialListContainer .redirectListContainer button{
+    width: 100%;
+}
 
  .profileListContainer .profileCardArticle .profileImageContainer>img{
     display: block;

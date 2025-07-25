@@ -15,25 +15,26 @@ const post_schema = ZodSchemaFactory.draw({
         })
         .refine((file) => !file || (!!file && file.type?.startsWith("image")), {
             message: "Imagem inválida",
-        }),
+        }).optional()
 })
 
 
 const post_form:FormItemType[] = [
-    {
-        title:"O que você quer compartilhar hoje?",
-        id:"description_id",
-        registerId:"description",
-        tag:"textarea",
-        type:"text"
-    },
     {
         title:"Imagem",
         id:"image_id",
         registerId:"image",
         tag:"input",
         type:"file"
+    },
+    {
+        title:"O que você quer compartilhar hoje?",
+        id:"description_id",
+        registerId:"description",
+        tag:"textarea",
+        type:"text"
     }
+    
 ]
 
 const post_model:ModelType = {

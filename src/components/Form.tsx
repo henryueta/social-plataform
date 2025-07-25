@@ -6,6 +6,8 @@ import Warning from "./Warning";
 import useHandleQuery from "../hooks/useHandleQuery";
 import Load from "./Load";
 import { AxiosHttpClientFactory } from "../adapters/axios-adapter";
+import gallery_icon from "../assets/icons/gallery_icon.png"
+import ImageVisualizer from "./ImageVisualizer";
 
 const Form = (
     {model,
@@ -24,11 +26,13 @@ const Form = (
         reValidateMode:"onChange",
         resolver:zodResolver(model.schema)
     });
+
+    
     const {errors} = formState
     const {onQuery,queryState} = useHandleQuery()
-    const [queryResponseMessage,setQueryResponseMessage] = useState("");
-
-    console.log(errors)
+    const [fileChange,setFileChange] = useState<React.ChangeEvent<HTMLInputElement> | null>(null);
+    const [fileName,setFileName] = useState<null | string>(null);
+    const [isView,setIsView] = useState(false);
 
     useEffect(()=>{
 
@@ -58,8 +62,6 @@ return (
                   treatment.onThen(result)
               },  
               onCatch(error) {
-                const currentError = error as {message:string}
-                setQueryResponseMessage(currentError.message as string)
                 !!treatment
                 &&
                   !!treatment.onCatch
@@ -86,7 +88,7 @@ return (
                     ?errors[field.registerId]?.message
                         ? "0.1rem solid red"
                         : "0.1rem solid gray"
-                    : "0.1rem solid gray",
+                    : "none",
                     border:
                     errorView
                     ?errors[field.registerId]?.message
@@ -108,14 +110,31 @@ return (
                             )?.value
                             : ""
                         }
-                        style = {field_error_style}
+                        style = {{...field_error_style,
+                            display:
+                            field.type === 'file'
+                            ? "none"
+                            : "block"
+                        }}
                         placeholder={
                             setPlacehorders
                             ? field.title
                             : ""
                         }
                         type={field.type} 
-                        {...register(field.registerId)}/>
+                        {...register(field.registerId)}
+                        onChange={(e)=>{
+                            ((field.type === 'file')
+                            ? (
+                                (()=>{
+                                    register(field.registerId).onChange(e)
+                                    setFileChange(e)
+                                })()
+                            )
+                            : null)
+                            
+                        }}
+                        />
                     break;
                     case "textarea":
                         field_tag = 
@@ -142,10 +161,66 @@ return (
                     break;
                 }
                 return (
+                    <>
+                    {   
+                        isView
+                        &&
+                        field.type === 'file'
+                        &&
+                        (
+                        fileChange 
+                        &&
+                        <>
+                        <ImageVisualizer
+                            operations={{
+                                onClose:()=>setIsView(false),
+                                onDelete:()=>setFileChange(null)
+                            }}
+                            event={fileChange}
+                            onView={(value)=>{
+                                setFileName(value)
+                            }}
+                        />
+                        </>
+                        )
+                    }
                     <div 
                     className="fieldFormContainer"
                     key={field.id}>
-                        <label htmlFor={field.id}>
+                        {
+                        field.type === 'file'
+                        &&
+                        fileChange
+                        &&
+                        <>
+                            <span className="fileNameSpan">{fileName}</span>
+                        </>
+                        }
+                        <label htmlFor={field.id}
+                        className={
+                            (field.type === 'file'
+                            ? "fileFieldLabel"
+                            : "")
+                        } 
+                        >
+                            {
+                                field.type === 'file'
+                                &&
+                                (
+                                fileChange === null
+                                ?
+                                    <img src={gallery_icon} alt="file_field_icon" />
+                                : 
+                                    <button
+                                    className="filled_button"
+                                    onClick={()=>{
+                                        setIsView((prev)=>!prev);
+                                    }}
+                                    >
+                                        Visualizar Imagem
+                                    </button>
+                                )
+                            }
                             {field_tag}
                         </label>
                           {
@@ -158,6 +233,7 @@ return (
                             />
                           }
                     </div>
+                    </>
                 )
                }
 
