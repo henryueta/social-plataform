@@ -8,13 +8,14 @@
     width: var(--mainContentWidth);width: var(--mainContentWidth);
 }
 
+
 .profileListContainer.page{
     width: var(--mainContentWidth);
     height: 100%;
-    border: 1px solid red;
     display: flex;
     align-items: center;
     background-color: rgb(247, 247, 247);
+    
 }
 
 .profileListContainer.page>*{
@@ -24,7 +25,6 @@
 .profileListContainer.page>.profileSocialListContainer{
     width: 100%;
     height: 100%;
-    border: 10px solid red;
     /* padding: 1.5rem 1.5rem 1.5rem 1.5rem; */
 }
 
@@ -33,8 +33,6 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 100%;
-    border: 1px solid red;
     overflow-y: auto;
 }
 
@@ -43,11 +41,29 @@
     justify-content: start;
 }
 
+.profileListContainer.page .profileSocialListContainer>.headerSection{
+    height: 8%;
+}
+
 .profileListContainer.page .profileSocialList .profileCardArticle{
     width: 100%;
 }
 
+.profileListContainer.page .profileSocialList{
+    height: 81%;
+}
+
 .profileListContainer.page .rewindContainer{
     width: 100%;
-    padding:1rem 1.5rem 1rem 1.5rem;
+    height: 7%;
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+    /* padding:1rem 1.5rem 1rem 1.5rem; */
+}
+
+@media (max-width:1024px) {
+    .profileListContainer.page .profileSocialList{
+        height: 70%;
+    }
 }

@@ -10,7 +10,7 @@ import useHandlePath from "../../hooks/useHandlePath"
 
 const AuthRecovery = () => {
 
-    const {onForgot,authQueryState} = useHandleAuth();
+    const {onForgot,authQueryState} = useHandleAuth({verifyAuth:false});
     const {token} = useParams();
     const [isDenied,setIsDenied] = useState(false);
     const {onTransition} = useHandlePath();

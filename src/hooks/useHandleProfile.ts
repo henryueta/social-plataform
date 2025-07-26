@@ -49,18 +49,33 @@ const useHandleProfile = ()=>{
         limit?:number,
         page?:number,
         username?:string,
-        search?:string
+        search?:string,
+        post_id?:string
     },treatment?:QueryTreatmentType)=>{
+
+
+        const optional_params = {
+            username:(
+                params?.username ? "&username="+params.username : ""
+            ),
+            search:(
+                params.search ? "&search="+params.search : ""
+            ),
+            post_id:(
+                params.post_id ? "&post_id="+params.post_id : ""
+            )
+        }
 
         onQuery({
             url:api_endpoints.user.get
             +"/"+query.mode
             +"?type="+query.type
             +"&hasImage="+query.hasImage
-            +'&username='+(params?.username ? params.username : "")
-            +"&search="+(params?.search ? params.search : "")
             +"&limit="+params.limit
             +"&page="+params.page
+            +optional_params.username
+            +optional_params.search
+            +optional_params.post_id
             ,
             method:'get',
             cancelToken:AxiosHttpClientFactory.createCancelToken(),

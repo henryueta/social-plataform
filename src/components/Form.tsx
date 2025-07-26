@@ -1,5 +1,5 @@
 import { useForm } from "react-hook-form";
-import {useEffect, useState} from "react";
+import {Fragment, useEffect, useState} from "react";
 import type { FormComponentProps } from "../types/form-type"
 import { zodResolver } from "@hookform/resolvers/zod";
 import Warning from "./Warning";
@@ -78,7 +78,7 @@ return (
             })
     })}>
         {
-            model.form.map((field)=>
+            model.form.map((field,field_index)=>
                 
                {
                 const field_error_style = 
@@ -161,7 +161,7 @@ return (
                     break;
                 }
                 return (
-                    <>
+                    <Fragment key={field_index}>
                     {   
                         isView
                         &&
@@ -233,7 +233,7 @@ return (
                             />
                           }
                     </div>
-                    </>
+                    </Fragment>
                 )
                }
 

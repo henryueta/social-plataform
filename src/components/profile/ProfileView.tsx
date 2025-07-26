@@ -100,7 +100,7 @@ const ProfileView = ({username}:{username:string}) => {
     },[username])
 
     const {onTransition} = useHandlePath()
-    const {onLogout} = useHandleAuth();
+    const {onLogout} = useHandleAuth({verifyAuth:false});
     const {showDialog} = useHandleDialog();
 
   return (

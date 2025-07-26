@@ -19,13 +19,27 @@
     height: 70%;
 }
 
+.authCheckoutPageSection .checkoutContainer .resendActionContainer{
+    width: 80%;
+    height: 10%;
+}
+
 .authCheckoutPageSection .checkoutContainer .resendActionContainer button{
-    border: none;
+    /* border: none;
     background: none;
     font-size: 1rem;
     margin-left: 0.2rem;
     cursor: pointer;
-    color: var(--color-primary);
+    color: var(--color-primary); */
+    width: 100%;
+    height: 100%;
+    gap: 1rem;
+}
+
+.authCheckoutPageSection .checkoutContainer .resendActionContainer button>*{
+    display: flex;
+    gap: 0.5rem;
+    font-weight: bolder;
 }
 
 .authCheckoutPageSection .checkoutContainer .resendActionContainer button:hover{
@@ -46,6 +60,7 @@
     width: 25%;
     font-size: 2rem;
     text-align: center;
+    outline-color: var(--color-primary);
 }
 
 .authCheckoutPageSection .checkoutContainer .headerSection{

@@ -3,6 +3,7 @@ import useHandleLike from "../../hooks/useHandleLike"
 import useHandleList from "../../hooks/useHandleList";
 import type { ProfileCardComponentProps } from "../../types/user-type";
 import { Link } from "react-router-dom";
+import useHandlePath from "../../hooks/useHandlePath";
 
 const LikeUserList = ({post_id,hasImage}:{post_id:string,hasImage:boolean}) => {
 
@@ -32,7 +33,7 @@ const LikeUserList = ({post_id,hasImage}:{post_id:string,hasImage:boolean}) => {
     })
 
   }
-
+  const {onTransition} = useHandlePath();
   const likeUserListDataRef = useRef<HTMLDivElement>(null);
   const {listState,setListState} = useHandleList<ProfileCardComponentProps>({
     config:{
@@ -74,7 +75,9 @@ const LikeUserList = ({post_id,hasImage}:{post_id:string,hasImage:boolean}) => {
           {
             listState.data.value.length > 1
             &&
-            <span >
+            <span onClick={()=>{
+              onTransition("/profile/")
+            }}>
              e
             <b style={{
               cursor:"pointer"

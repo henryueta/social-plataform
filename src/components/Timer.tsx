@@ -1,34 +1,46 @@
+import { useEffect, useState } from "react";
 
-// const Timer = ({minutes}:{minutes:number}) => {
+const Timer = ({minutes,onEnd}:{minutes:number,onEnd:()=>void}) => {
 
-// let currentSeconds = 60;
+const [currentSeconds,setCurrentSeconds] = useState(59);
+const [currentMinutes,setCurrentMinutes] = useState(minutes-1);
 
-// let timerChange = setInterval(()=>{
-//        if(minutes >= 0 && currentSeconds > 0){
-//         currentSeconds-=1; 
+useEffect(()=>{
+    if (currentMinutes < 0) {
+        return;
+    }
 
-//         console.log(
-//         ((minutes < 10 ? ("0"+minutes) : minutes))
-//         +" : "+
-//         ((currentSeconds < 10) ? ("0"+currentSeconds) : currentSeconds)
-//         )
+    let timerChange = setInterval(()=>{
+       if(currentSeconds === 0){
+           if(currentMinutes === 0){
+               clearInterval(timerChange);
+               onEnd()
+               return;
+           }
+           setCurrentMinutes((prev) => prev - 1);
+           setCurrentSeconds(59);
+       } else {
+           setCurrentSeconds((prev) => prev - 1);
+       }
+    }, 1000);
 
-//         if(currentSeconds === 0){
-//             minutes-=1;
-//             currentSeconds = 60;
-//         }
-//         return null
-//        }
-       
-//        return clearInterval(timerChange)
-  
-// }, 1000);
+    return () => {
+        clearInterval(timerChange);
+    }
 
-//   return (
-//     <div>
-      
-//     </div>
-//   )
-// }
+},[currentMinutes, currentSeconds]);
 
-// export default Timer
+  return (
+    <span>
+        <p>
+        {
+        ((currentMinutes < 10 ? ("0"+currentMinutes) : currentMinutes))
+        +" : "+
+        ((currentSeconds < 10) ? ("0"+currentSeconds) : currentSeconds)
+        }
+        </p>
+    </span>
+  )
+}
+
+export default Timer;

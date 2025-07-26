@@ -10,7 +10,7 @@ const AuthForgotten = () => {
     const [emailForSend,setEmailForSend] = useState('');
     const {showDialog} = useHandleDialog();
     const {onTransition} = useHandlePath()
-    const {onForgot} = useHandleAuth();
+    const {onForgot} = useHandleAuth({verifyAuth:false});
 
   return (
     <section className="authForgottenPageSection">

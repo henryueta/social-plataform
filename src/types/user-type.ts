@@ -55,7 +55,7 @@ type UserQueryGetType =
 {
     mode:'group',
     hasImage:boolean,
-    type:'following'|'followers'|'search'
+    type:'following'|'followers'|'search'|'like'
 }
 
 interface ProfileViewState {

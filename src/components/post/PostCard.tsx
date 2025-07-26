@@ -28,6 +28,7 @@ const PostCard = ({postData,liked,detailedView,isSameUser}:
   
     const {onTransition} = useHandlePath();
 
+
   return (
     <>
     <LockWall 
@@ -74,16 +75,16 @@ const PostCard = ({postData,liked,detailedView,isSameUser}:
             onTransition("/post/view/"+postData.post_id)
           }}
         >
-              <p>
-                {
-                detailedView 
-                ? currentDescription 
+              <div 
+              className="descriptionPostViewContainer"
+              dangerouslySetInnerHTML={{
+                __html:(detailedView 
+                ? currentDescription.replace(/\n/g,"<br>") 
                 : 
                 currentDescription.length >= 300 
                   ? currentDescription.slice(0,300).concat("...")
-                  : currentDescription
-                } 
-              </p>
+                  : currentDescription)
+              }}></div>
           </div>
           : <section 
           className="postEditFormSection"

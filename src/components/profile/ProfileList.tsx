@@ -26,7 +26,7 @@ import Rewind from "../Rewind"
 
 const ProfileList = ({type,username,isForPage,search,redirect}
   :{
-    type:'followers'|'following'|'search',
+    type:'followers'|'following'|'search'|'like',
     username?:string,
     search?:string,
     isForPage?:boolean,
@@ -128,11 +128,7 @@ const ProfileList = ({type,username,isForPage,search,redirect}
         title="Sua conta"
         />
       }
-      {/* {
-        (isForPage && type !== 'search')
-        &&
-        <Rewind/>
-      } */}
+
         {
           !username
           &&
@@ -157,6 +153,11 @@ const ProfileList = ({type,username,isForPage,search,redirect}
         //   : "")
         // }}
          >
+            {
+              (isForPage && type !== 'search')
+              &&
+              <Rewind/>
+            }
             {
               type !== 'search'
               &&
@@ -185,104 +186,15 @@ const ProfileList = ({type,username,isForPage,search,redirect}
                 {
                   !!listState.data.value.length
                   &&
-                  type !== 'following'
-                  &&
-                  listState.data.value.map((following)=>
-                    <>
+                  listState.data.value.map((following,following_index)=>
                     <ProfileCard
+                    key={following_index}
                     userData={{
                       image:following.image,
                     username:following.username,
                     namertag:following.namertag
                     }}
                     />
-                    <ProfileCard
-                    userData={{
-                      image:following.image,
-                    username:following.username,
-                    namertag:following.namertag
-                    }}
-                    />
-                    <ProfileCard
-                    userData={{
-                      image:following.image,
-                    username:following.username,
-                    namertag:following.namertag
-                    }}
-                    />
-                    <ProfileCard
-                    userData={{
-                      image:following.image,
-                    username:following.username,
-                    namertag:following.namertag
-                    }}
-                    />
-                    <ProfileCard
-                    userData={{
-                      image:following.image,
-                    username:following.username,
-                    namertag:following.namertag
-                    }}
-                    />
-                    <ProfileCard
-                    userData={{
-                      image:following.image,
-                    username:following.username,
-                    namertag:following.namertag
-                    }}
-                    />
-                    <ProfileCard
-                    userData={{
-                      image:following.image,
-                    username:following.username,
-                    namertag:following.namertag
-                    }}
-                    />
-                    <ProfileCard
-                    userData={{
-                      image:following.image,
-                    username:following.username,
-                    namertag:following.namertag
-                    }}
-                    />
-                    <ProfileCard
-                    userData={{
-                      image:following.image,
-                    username:following.username,
-                    namertag:following.namertag
-                    }}
-                    />
-                    <ProfileCard
-                    userData={{
-                      image:following.image,
-                    username:following.username,
-                    namertag:following.namertag
-                    }}
-                    />
-                    <ProfileCard
-                    userData={{
-                      image:following.image,
-                    username:following.username,
-                    namertag:following.namertag
-                    }}
-                    />
-                    <ProfileCard
-                    userData={{
-                      image:following.image,
-                    username:following.username,
-                    namertag:following.namertag
-                    }}
-                    />
-                    <ProfileCard
-                    userData={{
-                      image:following.image,
-                    username:following.username,
-                    namertag:following.namertag
-                    }}
-                    />
-                    
-                    </>
-                    
                   )
                 }
               </DataFetcher>
