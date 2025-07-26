@@ -6,6 +6,7 @@ import useHandleProfile from "../../hooks/useHandleProfile"
 import useHandleList from "../../hooks/useHandleList"
 import DataFetcher from "../data/DataFetcher"
 import useHandlePath from "../../hooks/useHandlePath"
+import Rewind from "../Rewind"
 
   const initialProfileListState:ProfileCardStateType = {
       user:null,
@@ -23,11 +24,12 @@ import useHandlePath from "../../hooks/useHandlePath"
     }
   } 
 
-const ProfileList = ({type,username,search,redirect}
+const ProfileList = ({type,username,isForPage,search,redirect}
   :{
     type:'followers'|'following'|'search',
     username?:string,
     search?:string,
+    isForPage?:boolean,
     redirect?:boolean
   }) => {
 
@@ -109,7 +111,14 @@ const ProfileList = ({type,username,search,redirect}
       });
 
   return (
-    <div className={"profileListContainer "+(type === 'search' && " search")} ref={profileListRef}>
+    <div 
+    className={"profileListContainer "
+    +(
+      isForPage
+      &&
+      " page"
+    )} 
+    ref={profileListRef}>
       {
         !username
         &&
@@ -118,8 +127,12 @@ const ProfileList = ({type,username,search,redirect}
         <TitleHeader
         title="Sua conta"
         />
-
-        }
+      }
+      {/* {
+        (isForPage && type !== 'search')
+        &&
+        <Rewind/>
+      } */}
         {
           !username
           &&
@@ -136,14 +149,21 @@ const ProfileList = ({type,username,search,redirect}
         />
         }
         
-        <div className="profileSocialListContainer">
+        <div
+         className="profileSocialListContainer"
+        // style={{
+        //   marginTop:(type === 'search'
+        //   ? "6rem"
+        //   : "")
+        // }}
+         >
             {
               type !== 'search'
               &&
               <TitleHeader
               title={
               !!username
-              ? !!(type === 'following')
+              ? !!(type === 'followers')
                 ? "Seguidores de "+username
                 : username+ " está seguindo"
               : "Você está seguindo"
@@ -165,7 +185,10 @@ const ProfileList = ({type,username,search,redirect}
                 {
                   !!listState.data.value.length
                   &&
+                  type !== 'following'
+                  &&
                   listState.data.value.map((following)=>
+                    <>
                     <ProfileCard
                     userData={{
                       image:following.image,
@@ -173,6 +196,93 @@ const ProfileList = ({type,username,search,redirect}
                     namertag:following.namertag
                     }}
                     />
+                    <ProfileCard
+                    userData={{
+                      image:following.image,
+                    username:following.username,
+                    namertag:following.namertag
+                    }}
+                    />
+                    <ProfileCard
+                    userData={{
+                      image:following.image,
+                    username:following.username,
+                    namertag:following.namertag
+                    }}
+                    />
+                    <ProfileCard
+                    userData={{
+                      image:following.image,
+                    username:following.username,
+                    namertag:following.namertag
+                    }}
+                    />
+                    <ProfileCard
+                    userData={{
+                      image:following.image,
+                    username:following.username,
+                    namertag:following.namertag
+                    }}
+                    />
+                    <ProfileCard
+                    userData={{
+                      image:following.image,
+                    username:following.username,
+                    namertag:following.namertag
+                    }}
+                    />
+                    <ProfileCard
+                    userData={{
+                      image:following.image,
+                    username:following.username,
+                    namertag:following.namertag
+                    }}
+                    />
+                    <ProfileCard
+                    userData={{
+                      image:following.image,
+                    username:following.username,
+                    namertag:following.namertag
+                    }}
+                    />
+                    <ProfileCard
+                    userData={{
+                      image:following.image,
+                    username:following.username,
+                    namertag:following.namertag
+                    }}
+                    />
+                    <ProfileCard
+                    userData={{
+                      image:following.image,
+                    username:following.username,
+                    namertag:following.namertag
+                    }}
+                    />
+                    <ProfileCard
+                    userData={{
+                      image:following.image,
+                    username:following.username,
+                    namertag:following.namertag
+                    }}
+                    />
+                    <ProfileCard
+                    userData={{
+                      image:following.image,
+                    username:following.username,
+                    namertag:following.namertag
+                    }}
+                    />
+                    <ProfileCard
+                    userData={{
+                      image:following.image,
+                    username:following.username,
+                    namertag:following.namertag
+                    }}
+                    />
+                    
+                    </>
+                    
                   )
                 }
               </DataFetcher>

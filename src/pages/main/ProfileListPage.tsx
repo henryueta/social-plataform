@@ -9,12 +9,13 @@ const ProfileListPage = () => {
 
   return (
     <SocialLayout>
-      <section className="profileListPageSection">
+      {/* <section className="profileListPageSection"> */}
         <ProfileList
+        isForPage
         type={type as 'following'|'followers'}
         username={username}
         />
-      </section>
+      {/* </section> */}
     </SocialLayout>
   )
 }

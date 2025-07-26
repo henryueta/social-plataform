@@ -14,15 +14,22 @@
 }
 
 
-.postListContainer.search .postList{
+.postList.search{
     margin-top: 6rem;
+}
+
+.postList.search:has(.noDataContainer){
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
 }
 
 .postListContainer .postList{
     padding: 2rem;
     /* background-color: rgb(247, 247, 247); */
     /* border: 1px solid red; */
-    min-height: 100dvh;
+    max-height: 100dvh;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -279,6 +286,8 @@
     gap: 1rem;
     overflow-y: auto;
 }
+
+
 
 .postInfoContainer .commentaryQuantityContainer{
     padding: 0rem 2rem 0rem 2rem;

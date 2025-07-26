@@ -4,7 +4,12 @@ const useHandlePath = ()=>{
         const onNavigate = useNavigate();
         const {pathname} = useLocation();
 
+    const onRewind = ()=>{
+        return onNavigate(-1)
+    }
+
     const onTransition = (path:string,replace?:boolean)=>{
+
         return onNavigate(path,{
             replace:!!replace
             ? replace
@@ -19,6 +24,7 @@ const useHandlePath = ()=>{
 
     return {
         onTransition,
+        onRewind,
         onMatch,
         pathname
     }

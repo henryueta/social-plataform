@@ -46,6 +46,7 @@ const SearchPage = () => {
           &&
           <ProfileList
           type="search"
+          isForPage
           search={searchValue}
           />
         }

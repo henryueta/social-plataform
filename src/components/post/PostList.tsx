@@ -77,7 +77,7 @@ const PostList = ({user_username,search}:{user_username?:string,search?:string})
     });
 
   return (
-    <div className={"postListContainer "+(!!search && "search")} ref={postListDataRef} 
+    <div className={"postListContainer"} ref={postListDataRef} 
     onScroll={()=>{handleListView()}}
     >
             {
@@ -112,7 +112,7 @@ const PostList = ({user_username,search}:{user_username?:string,search?:string})
               
             }
             
-            <div className="postList">
+            <div className={"postList "+(search !== null ? "search": "")}>
               {
                 <DataFetcher
                 noDataMessage={false}
