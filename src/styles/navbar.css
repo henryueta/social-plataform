@@ -2,6 +2,7 @@
     background-color: white;
     box-shadow: 0rem 0rem 0.2rem rgb(0, 0, 0,0.2);
     min-width: 18rem;
+    position: relative;
 }
 
 .navBar ul{
@@ -42,6 +43,15 @@
     
     padding: 2rem;
     /* color: deepskyblue; */
+}
+
+.navBar .developerContactContainer{
+    scale: 0.8;
+    position: absolute;
+    bottom: 5%;
+    left: 0%;
+    right: 0%;
+    width: 100%;
 }
 
 @media (max-width:1024px) {

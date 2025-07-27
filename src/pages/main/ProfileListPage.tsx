@@ -5,7 +5,7 @@ import SocialLayout from "../../layout/SocialLayout";
 
 const ProfileListPage = () => {
 
-  const {username,type} = useParams();
+  const {identifier,identifier_type,type} = useParams();
 
   return (
     <SocialLayout>
@@ -13,7 +13,8 @@ const ProfileListPage = () => {
         <ProfileList
         isForPage
         type={type as 'following'|'followers'}
-        username={username}
+        identifier={identifier}
+        identifier_type={identifier_type as string}
         />
       {/* </section> */}
     </SocialLayout>

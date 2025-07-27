@@ -1,4 +1,4 @@
-import useHandlePath from "../hooks/useHandlePath"
+import useHandlePath from "../../hooks/useHandlePath"
 
 const Rewind = () => {
 

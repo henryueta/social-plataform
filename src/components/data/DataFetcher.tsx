@@ -1,5 +1,5 @@
 import type { DataFetcherComponentPros } from "../../types/data-fetcher-type";
-import NoData from "../NoData"
+import NoData from "./NoData"
 
 const DataFetcher = ({
     data,

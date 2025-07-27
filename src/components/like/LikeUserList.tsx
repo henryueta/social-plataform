@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react"
+import { useRef } from "react"
 import useHandleLike from "../../hooks/useHandleLike"
 import useHandleList from "../../hooks/useHandleList";
 import type { ProfileCardComponentProps } from "../../types/user-type";
@@ -76,7 +76,7 @@ const LikeUserList = ({post_id,hasImage}:{post_id:string,hasImage:boolean}) => {
             listState.data.value.length > 1
             &&
             <span onClick={()=>{
-              onTransition("/profile/")
+              onTransition("/profiles/like/post/"+post_id)
             }}>
              e
             <b style={{

@@ -1,0 +1,21 @@
+.developerContactContainer{
+    text-align: center;
+}
+
+.developerContactContainer:hover{
+    opacity: 75%;
+}
+
+.developerContactContainer a{
+    text-decoration: none;
+    color: black;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    gap: 0.5rem;
+    font-size: 0.9rem;
+}
+
+.developerContactContainer a img{
+    width: 20px;
+}

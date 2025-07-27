@@ -114,7 +114,7 @@ const router = RouterDomFactory.create([
         } 
     },
     {
-        path:"/profiles/:username/:type",
+        path:"/profiles/:type/:identifier_type/:identifier",
         element:
         <Private>
             <NavigationLayout>

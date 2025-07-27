@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import useHandlePath from "../hooks/useHandlePath"
+import useHandlePath from "../../hooks/useHandlePath"
 
 const PathObserver = () => {
 

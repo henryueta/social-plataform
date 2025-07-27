@@ -1,4 +1,4 @@
-.mainLayout{
+.socialMainLayout{
     place-self: center;
     flex: 1;
     height: 100dvh;
@@ -6,7 +6,7 @@
 }
 
 @media (max-width:1024px){
-    .mainLayout{
+    .socialMainLayout{
     --mainContentWidth:100%; 
     }
 }

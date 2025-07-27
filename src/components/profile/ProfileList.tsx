@@ -6,7 +6,7 @@ import useHandleProfile from "../../hooks/useHandleProfile"
 import useHandleList from "../../hooks/useHandleList"
 import DataFetcher from "../data/DataFetcher"
 import useHandlePath from "../../hooks/useHandlePath"
-import Rewind from "../Rewind"
+import Rewind from "../navigation/Rewind"
 
   const initialProfileListState:ProfileCardStateType = {
       user:null,
@@ -24,10 +24,11 @@ import Rewind from "../Rewind"
     }
   } 
 
-const ProfileList = ({type,username,isForPage,search,redirect}
+const ProfileList = ({type,identifier,identifier_type,isForPage,search,redirect}
   :{
     type:'followers'|'following'|'search'|'like',
-    username?:string,
+    identifier?:string,
+    identifier_type:string,
     search?:string,
     isForPage?:boolean,
     redirect?:boolean
@@ -46,8 +47,17 @@ const ProfileList = ({type,username,isForPage,search,redirect}
         },{
           limit:8,
           page:1,
-          username:username,
-          search:search
+          username:(
+            identifier_type === 'user'
+            ? identifier
+            : ""
+          ),
+          search:search,
+          post_id:(
+            identifier_type === 'post'
+            ? identifier
+            : ""
+          )
         },
           {
           onThen(result) {
@@ -68,6 +78,12 @@ const ProfileList = ({type,username,isForPage,search,redirect}
 
       useEffect(()=>{
         
+        !(identifier_type == 'user' && identifier)
+        &&
+        type !== "search"
+        &&
+        type !== 'like'
+        &&
         onGetUser({
           mode:'single',
           type:'small',
@@ -102,13 +118,16 @@ const ProfileList = ({type,username,isForPage,search,redirect}
           query:getUserList
         },
         identifier:
-        !!username
-        ? username
-        : search
-        ,
+        !!identifier
+        ? identifier
+        : search,
         references:{
         }
       });
+  console.log("params",{
+    identifier:identifier,
+    type:identifier_type
+  })
 
   return (
     <div 
@@ -120,19 +139,22 @@ const ProfileList = ({type,username,isForPage,search,redirect}
     )} 
     ref={profileListRef}>
       {
-        !username
+        !(identifier_type === 'user' && identifier)
         &&
         type !== "search"
+        &&
+        type !== 'like'
         &&
         <TitleHeader
         title="Sua conta"
         />
       }
-
         {
-          !username
+          !(identifier_type === 'user' && identifier)
           &&
           type !== 'search'
+          &&
+          type !== "like"
           &&
           !!profileListState.user
           &&
@@ -147,11 +169,11 @@ const ProfileList = ({type,username,isForPage,search,redirect}
         
         <div
          className="profileSocialListContainer"
-        // style={{
-        //   marginTop:(type === 'search'
-        //   ? "6rem"
-        //   : "")
-        // }}
+        style={{
+          marginTop:(type === 'search'
+          ? "6rem"
+          : "")
+        }}
          >
             {
               (isForPage && type !== 'search')
@@ -163,11 +185,15 @@ const ProfileList = ({type,username,isForPage,search,redirect}
               &&
               <TitleHeader
               title={
-              !!username
-              ? !!(type === 'followers')
-                ? "Seguidores de "+username
-                : username+ " está seguindo"
-              : "Você está seguindo"
+              !!(identifier_type === 'user' && identifier)
+              ? 
+                !!(type === 'followers')
+                ? "Seguidores de "+identifier
+                : identifier+ " está seguindo"
+              : 
+                !!(identifier_type === 'post' && identifier)
+                ? "Curtidas"
+                : "Você está seguindo"
             }
             />
             }
@@ -209,11 +235,12 @@ const ProfileList = ({type,username,isForPage,search,redirect}
                   className="unfilled_button"
                   onClick={()=>{
                     onTransition("/profiles/"
+                      +"following/user/"
                       +(!!profileListState.user
                         ? profileListState.user.username
                         : ""
                       )
-                      +"/following")
+                    )
                   }}
                   >
                     Ver todos

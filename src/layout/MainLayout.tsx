@@ -1,11 +1,11 @@
-import NavBar from "../components/NavBar"
+import NavBar from "../components/navigation/NavBar"
 import "../styles/layout/main-layout.css"
 
 const MainLayout = ({children}:{children:React.ReactElement}) => {
   return (
     <>
         <NavBar/>
-        <main className="mainLayout">
+        <main className="socialMainLayout">
             {children}
         </main>
     </>

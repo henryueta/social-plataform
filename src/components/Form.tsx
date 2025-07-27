@@ -7,7 +7,7 @@ import useHandleQuery from "../hooks/useHandleQuery";
 import Load from "./Load";
 import { AxiosHttpClientFactory } from "../adapters/axios-adapter";
 import gallery_icon from "../assets/icons/gallery_icon.png"
-import ImageVisualizer from "./ImageVisualizer";
+import ImageVisualizer from "./image/ImageVisualizer";
 
 const Form = (
     {model,

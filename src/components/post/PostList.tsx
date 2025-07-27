@@ -75,10 +75,9 @@ const PostList = ({user_username,search}:{user_username?:string,search?:string})
         listContainerRef:postListDataRef
       }
     });
-
   return (
     <div className={"postListContainer"} ref={postListDataRef} 
-    onScroll={()=>{handleListView()}}
+    onScrollEnd={()=>{handleListView()}}
     >
             {
               !!user_username

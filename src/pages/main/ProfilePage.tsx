@@ -8,8 +8,6 @@ const ProfilePage = () => {
   return (
     <SocialLayout>
         {
-          !!username
-          &&
           <PostList user_username={username}/>
         }
     </SocialLayout>

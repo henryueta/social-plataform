@@ -172,12 +172,12 @@ const ProfileView = ({username}:{username:string}) => {
                             &&
                             onTransition(
                                 '/profiles/'
-                                +username+"/"
                                 +(
                                     social_info.type === 'followers_qnt'
                                     ? 'followers'
                                     : 'following'
-                                )
+                                )+"/user/"
+                                +username
                             )
                         }}
                         label={{

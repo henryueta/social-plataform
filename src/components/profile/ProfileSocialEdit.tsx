@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import LockWall from "../LockWall"
 import useHandleProfile from "../../hooks/useHandleProfile"
 import Load from "../Load"
-import ImageChoice from "../ImageChoice"
+import ImageChoice from "../image/ImageChoice"
 import { profile_image_select } from "../../constants/profile-constant"
 
 

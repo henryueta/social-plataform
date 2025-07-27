@@ -75,8 +75,7 @@ const useHandleProfile = ()=>{
             +"&page="+params.page
             +optional_params.username
             +optional_params.search
-            +optional_params.post_id
-            ,
+            +optional_params.post_id,
             method:'get',
             cancelToken:AxiosHttpClientFactory.createCancelToken(),
             withCredentials:true
