@@ -1,13 +1,15 @@
 import { Link } from "react-router-dom"
-import Form from "../../components/Form"
-import TitleHeader from "../../components/TitleHeader"
-import "../../styles/auth-form.css"
+import Form from "../../components/forms/Form"
+import TitleHeader from "../../components/visual/TitleHeader"
+import "../../styles/auth/auth-form.css"
 import type { AuthStructureType } from "../../types/auth-type"
 import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
 import useHandlePath from "../../hooks/useHandlePath"
 import { auth_type } from "../../constants/auth-constant"
 import useHandleDialog from "../../hooks/useHandleDialog"
+import FooterBar from "../../components/navigation/FooterBar"
+import Contact from "../../components/visual/Contact"
 
 const AuthPage = () => {
 
@@ -27,6 +29,7 @@ const AuthPage = () => {
   },[type])
 
   return (
+    <>
     <section className="authFormSection">
       <h1
       style={{
@@ -101,8 +104,9 @@ const AuthPage = () => {
               
       </section>
       }
-     
+     <Contact/>
     </section>
+    </>
   )
 }
 

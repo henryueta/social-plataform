@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 import { profile_social_status } from "../../constants/profile-constant";
 import useHandleProfile from "../../hooks/useHandleProfile"
-import CountView from "../CountView"
-import TitleHeader from "../TitleHeader"
+import CountView from "../visual/CountView"
+import TitleHeader from "../visual/TitleHeader"
 import type { ProfileViewState } from "../../types/user-type";
 import DataFetcher from "../data/DataFetcher";
 import useHandlePath from "../../hooks/useHandlePath";
-import Load from "../Load";
+import Load from "../ui/Load";
 import useHandleAuth from "../../hooks/useHandleAuth";
 import useHandleDialog from "../../hooks/useHandleDialog";
 import ProfileSocialEdit from "./ProfileSocialEdit";

@@ -26,7 +26,7 @@ const router = RouterDomFactory.create([
         path:"/auth/:type",
         element:
             <NavigationLayout>
-                    <AuthPage/>
+                        <AuthPage/>  
             </NavigationLayout>
         ,
         handle:{

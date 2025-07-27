@@ -1,13 +1,13 @@
 import { useForm } from "react-hook-form";
 import {Fragment, useEffect, useState} from "react";
-import type { FormComponentProps } from "../types/form-type"
+import type { FormComponentProps } from "../../types/form-type"
 import { zodResolver } from "@hookform/resolvers/zod";
-import Warning from "./Warning";
-import useHandleQuery from "../hooks/useHandleQuery";
-import Load from "./Load";
-import { AxiosHttpClientFactory } from "../adapters/axios-adapter";
-import gallery_icon from "../assets/icons/gallery_icon.png"
-import ImageVisualizer from "./image/ImageVisualizer";
+import Warning from "../message/Warning";
+import useHandleQuery from "../../hooks/useHandleQuery";
+import Load from "../ui/Load";
+import { AxiosHttpClientFactory } from "../../adapters/axios-adapter";
+import gallery_icon from "../../assets/icons/gallery_icon.png"
+import ImageVisualizer from "../image/ImageVisualizer";
 
 const Form = (
     {model,

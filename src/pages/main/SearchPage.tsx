@@ -1,11 +1,11 @@
 import { useParams } from "react-router-dom"
 import SocialLayout from "../../layout/SocialLayout"
-import Search from "../../components/Search";
+import Search from "../../components/search/Search";
 import PostList from "../../components/post/PostList";
 import { useState } from "react";
-import "../../styles/search.css"
+import "../../styles/search/search.css"
 import ProfileList from "../../components/profile/ProfileList";
-import Filter from "../../components/Filter";
+import Filter from "../../components/search/Filter";
 import useHandlePath from "../../hooks/useHandlePath";
 
 const SearchPage = () => {
@@ -45,6 +45,7 @@ const SearchPage = () => {
           type === 'user'
           &&
           <ProfileList
+          identifier_type="user"
           type="search"
           isForPage
           search={searchValue}

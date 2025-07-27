@@ -1,9 +1,9 @@
 import useHandlePath from "../../hooks/useHandlePath"
-import "../../styles/post.css"
+import "../../styles/social/post.css"
 import type { PostCardComponentProps } from "../../types/post-type"
 import CommentAction from "../commentary/CommentAction"
 import CommentInputCard from "../commentary/CommentInputCard"
-import Form from "../Form"
+import Form from "../forms/Form"
 import LikeAction from "../like/LikeAction"
 import LikeUserList from "../like/LikeUserList"
 import ProfileCard from "../profile/ProfileCard"
@@ -13,7 +13,7 @@ import type { UserNamertagType } from "../../types/user-type"
 import { useState } from "react"
 import post_model from "../../models/post-model"
 import api_endpoints from "../../config/api"
-import LockWall from "../LockWall"
+import LockWall from "../ui/LockWall"
 
 const PostCard = ({postData,liked,detailedView,isSameUser}:
   {

@@ -1,6 +1,6 @@
-import useHandleDialog from "../hooks/useHandleDialog"
-import "../styles/dialog-message.css"
-import TitleHeader from "./TitleHeader";
+import useHandleDialog from "../../hooks/useHandleDialog"
+import "../../styles/message/dialog-message.css"
+import TitleHeader from "../visual/TitleHeader";
 
 const DialogMessage = () => {
 

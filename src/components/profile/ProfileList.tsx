@@ -1,5 +1,5 @@
 import { useEffect, useReducer, useRef } from "react"
-import TitleHeader from "../TitleHeader"
+import TitleHeader from "../visual/TitleHeader"
 import ProfileCard from "./ProfileCard"
 import type { ProfileCardActionType, ProfileCardComponentProps, ProfileCardStateType } from "../../types/user-type"
 import useHandleProfile from "../../hooks/useHandleProfile"

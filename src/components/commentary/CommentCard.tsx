@@ -5,6 +5,7 @@ import ProfileCard from "../profile/ProfileCard"
 import CommentList from "./CommentList"
 import CommentInputCard from "./CommentInputCard"
 import useHandleComment from "../../hooks/useHandleComment"
+import type { UserNamertagType } from "../../types/user-type"
 
 const CommentCard = ({commentaryData,isLiked,type}:
     {commentaryData:CommentCardComponentProps,isLiked:boolean,type:'commentary'|'response'}) => {
@@ -18,7 +19,7 @@ const CommentCard = ({commentaryData,isLiked,type}:
         
         <ProfileCard
         userData={{
-            namertag:commentaryData.namertag,
+            namertag:commentaryData.namertag as UserNamertagType,
             username:commentaryData.username,
             image:commentaryData.user_small_photo
         }}

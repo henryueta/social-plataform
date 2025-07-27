@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react"
-import Form from "../../components/Form"
+import Form from "../../components/forms/Form"
 import api_endpoints from "../../config/api"
 import useHandleAuth from "../../hooks/useHandleAuth"
 import recovery_model from "../../models/recovery-model"
 import { useParams } from "react-router-dom"
-import Load from "../../components/Load"
-import TitleHeader from "../../components/TitleHeader"
+import Load from "../../components/ui/Load"
+import TitleHeader from "../../components/visual/TitleHeader"
 import useHandlePath from "../../hooks/useHandlePath"
+import Contact from "../../components/visual/Contact"
 
 const AuthRecovery = () => {
 
@@ -87,6 +88,7 @@ const AuthRecovery = () => {
                 </div>
         }
         </div>
+        <Contact/>
     </section>
   )
 }

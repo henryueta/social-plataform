@@ -1,5 +1,5 @@
-import useHandleDialog from "../hooks/useHandleDialog"
-import "../styles/dialog-message.css"
+import useHandleDialog from "../../hooks/useHandleDialog"
+import "../../styles/ui/lock-wall.css"
 
 const LockWall = ({isLock}:{isLock?:boolean}) => {
 

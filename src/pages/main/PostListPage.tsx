@@ -1,4 +1,4 @@
-import "../../styles/post.css"
+import "../../styles/social/post.css"
 import PostList from "../../components/post/PostList"
 import SocialLayout from "../../layout/SocialLayout"
 

@@ -1,5 +1,5 @@
-import github_icon from "../assets/icons/github_icon.png"
-import "../styles/contact.css"
+import github_icon from "../../assets/icons/github_icon.png"
+import "../../styles/contact/contact.css"
 
 const Contact = () => {
   return (

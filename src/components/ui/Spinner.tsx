@@ -1,4 +1,4 @@
-import "../styles/spinner.css"
+import "../../styles/ui/spinner.css"
 
 const Spinner = () => {
   return (

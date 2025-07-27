@@ -1,5 +1,5 @@
 import { useState } from "react"
-import search_icon from "../assets/icons/search_icon.png"
+import search_icon from "../../assets/icons/search_icon.png"
 
 const Search = ({onSearch}:{onSearch:(value:string)=>void}) => {
     const [searchValue,setSearchValue] = useState("");

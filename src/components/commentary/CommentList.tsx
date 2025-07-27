@@ -1,11 +1,11 @@
 import { useEffect, useRef } from "react";
 import useHandleComment from "../../hooks/useHandleComment"
-import CommentCard from "./CommentCard"
 import useHandleList from "../../hooks/useHandleList";
 import type { CommentCardComponentProps } from "../../types/commentary-type";
 import DataFetcher from "../data/DataFetcher";
-import Load from "../Load";
-import "../../styles/commentary.css"
+import Load from "../ui/Load";
+import "../../styles/social/commentary.css"
+import CommentCard from "./CommentCard";
 
 const CommentList = (
   {table_id,type,externalReference,mode,pushElement}

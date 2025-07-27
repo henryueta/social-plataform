@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import useHandlePost from "../../hooks/useHandlePost"
-import "../../styles/post.css"
+import "../../styles/social/post.css"
 import type { PostCardComponentProps } from "../../types/post-type";
 import PostCard from "./PostCard";
 import CommentList from "../commentary/CommentList";

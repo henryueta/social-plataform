@@ -54,18 +54,18 @@
 
 .commentCardArticle .commentaryInfoContainer .actionsContainer{
     display: flex;
-    gap: 3rem;
+    gap: 2rem;
     padding: 0.5rem;
 }
 
-.commentCardArticle .commentaryInfoContainer .actionsContainer .respondCommentaryButton{
+.commentCardArticle .commentaryInfoContainer .actionsContainer button{
     border: none;
     background: none;
     padding: 0rem 0.5rem 0rem 0.5rem;
     
 }
 
-.commentCardArticle .commentaryInfoContainer .actionsContainer .respondCommentaryButton:hover{
+.commentCardArticle .commentaryInfoContainer .actionsContainer button:hover{
     background-color: rgb(207, 207, 207);
     cursor: pointer;
 }

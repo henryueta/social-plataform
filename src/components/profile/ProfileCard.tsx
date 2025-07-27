@@ -1,6 +1,6 @@
 import useHandlePath from "../../hooks/useHandlePath"
 import type { ProfileCardComponentProps } from "../../types/user-type"
-import TitleHeader from "../TitleHeader"
+import TitleHeader from "../visual/TitleHeader"
 
 const ProfileCard = ({userData,intervalDate,noRedirect}
   :{userData:ProfileCardComponentProps,intervalDate?:string,noRedirect?:boolean}) => {

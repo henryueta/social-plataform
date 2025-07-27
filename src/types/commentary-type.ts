@@ -26,7 +26,8 @@ interface CommentListComponentProps {
 
     commentaryList:CommentCardComponentProps[],
     likedCommentaryList:string[],
-    commentaryListRemaining:number
+    commentaryListRemaining:number,
+    userCommentaryList:string[]
 
 }
 

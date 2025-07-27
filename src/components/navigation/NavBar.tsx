@@ -1,11 +1,11 @@
 import { Link } from "react-router-dom"
 import { home_routers } from "../../pages"
-import "../../styles/navbar.css"
+import "../../styles/navigation/navbar.css"
 import useHandlePath from "../../hooks/useHandlePath"
 import useHandleProfile from "../../hooks/useHandleProfile"
 import { useEffect, useState } from "react"
 import { useHandleScreen } from "../../context/ScreenContext"
-import Contact from "../Contact"
+import Contact from "../visual/Contact"
 
 const NavBar = () => {
     const {onMatch,pathname} = useHandlePath();

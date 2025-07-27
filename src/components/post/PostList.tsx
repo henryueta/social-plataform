@@ -2,7 +2,7 @@ import { Link, useParams } from "react-router-dom"
 import useHandlePath from "../../hooks/useHandlePath"
 import PostCard from "./PostCard"
 import { useRef } from "react";
-import Load from "../Load";
+import Load from "../ui/Load";
 import type { PostCardComponentProps } from "../../types/post-type";
 import ProfileView from "../profile/ProfileView";
 import { post_list_filter } from "../../constants/post-constant";

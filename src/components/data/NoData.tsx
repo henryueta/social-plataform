@@ -1,4 +1,4 @@
-import Load from "../Load"
+import Load from "../ui/Load"
 
 const NoData = (
     {data_title,word_gender,isLoading}:

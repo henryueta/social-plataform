@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import LockWall from "../LockWall";
+import LockWall from "../ui/LockWall";
 
 const ImageVisualizer = ({onView,event,operations}:
     {

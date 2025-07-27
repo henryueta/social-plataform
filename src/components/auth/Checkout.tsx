@@ -1,10 +1,10 @@
 import { useEffect, useRef, useState } from "react"
-import  code_field_list  from "../constants/code-constant";
-import useHandleAuth from "../hooks/useHandleAuth";
-import useHandlePath from "../hooks/useHandlePath";
-import "../styles/auth-checkout.css"
-import TitleHeader from "./TitleHeader";
-import Timer from "./Timer";
+import  code_field_list  from "../../constants/code-constant";
+import useHandleAuth from "../../hooks/useHandleAuth";
+import useHandlePath from "../../hooks/useHandlePath";
+import "../../styles/auth/auth-checkout.css"
+import TitleHeader from "../visual/TitleHeader";
+import Timer from "../visual/Timer";
 
 const Checkout = () => {
 

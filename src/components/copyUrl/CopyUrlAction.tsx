@@ -1,6 +1,6 @@
 import { useState } from "react"
 import link_icon from "../../assets/icons/link_icon.png"
-import Load from "../Load";
+import Load from "../ui/Load";
 
 
 

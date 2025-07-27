@@ -1,7 +1,7 @@
 import useHandlePath from "../../hooks/useHandlePath";
 import { useEffect, useState } from "react";
 import useHandleAuth from "../../hooks/useHandleAuth";
-import Load from "../../components/Load";
+import Load from "../../components/ui/Load";
 import { Navigate } from "react-router-dom";
 
 const Private = ({children}:{children:React.ReactElement}) => {

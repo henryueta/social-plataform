@@ -1,9 +1,10 @@
 import { useState } from "react";
-import TitleHeader from "../../components/TitleHeader";
-import "../../styles/auth-forgotten.css"
+import TitleHeader from "../../components/visual/TitleHeader";
+import "../../styles/auth/auth-forgotten.css"
 import useHandlePath from "../../hooks/useHandlePath";
 import useHandleAuth from "../../hooks/useHandleAuth";
 import useHandleDialog from "../../hooks/useHandleDialog";
+import Contact from "../../components/visual/Contact";
 
 const AuthForgotten = () => {
 
@@ -66,6 +67,7 @@ const AuthForgotten = () => {
                 </button>
             </div>
         </div>
+        <Contact/>
     </section>
   )
 }
