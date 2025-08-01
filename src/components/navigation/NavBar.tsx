@@ -6,6 +6,8 @@ import useHandleProfile from "../../hooks/useHandleProfile"
 import { useEffect, useState } from "react"
 import { useHandleScreen } from "../../context/ScreenContext"
 import Contact from "../visual/Contact"
+import small_logo from "../../assets/imgs/small_social_logo.webp";
+import Logo from "../logo/Logo"
 
 const NavBar = () => {
     const {onMatch,pathname} = useHandlePath();
@@ -38,9 +40,7 @@ const NavBar = () => {
         !isMobile
         &&
         <div className="logoContainer">
-            <h1>
-                🌊 Seaddy
-            </h1>
+            <Logo/>
         </div>
         }
         <ul>

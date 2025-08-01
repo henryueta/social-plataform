@@ -125,7 +125,7 @@
 .imageVisualizerContainer>.imageContainer .actionsContainer{
     position: absolute;
     width: 50%;
-    top: 0%;
+    bottom: 5%;
     padding: 1rem;
     display: flex;
     justify-content: space-between;

@@ -31,9 +31,13 @@ const PostCard = ({postData,liked,detailedView,isSameUser}:
 
   return (
     <>
-    <LockWall 
-    isLock={editPost}
-    />
+    {
+      !!detailedView
+      &&
+      <LockWall 
+      isLock={editPost}
+      />
+    }
     <article 
     style={
       editPost
@@ -131,8 +135,13 @@ const PostCard = ({postData,liked,detailedView,isSameUser}:
         }
         
         <div className="mediaContainer"
+        onClick={()=>{
+            !detailedView
+            &&
+            onTransition("/post/view/"+postData.post_id)
+          }}
         >
-          <img src={postData.image} alt="" />
+          <img src={postData.image} alt="" loading="lazy"/>
         </div>
 
         <div className="actionsContainer">

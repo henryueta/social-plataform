@@ -6,5 +6,6 @@
     top: 0%;
     left: 0%;
     z-index: 90;
-    backdrop-filter: blur(0.3rem);
+    backdrop-filter: blur(0.5rem);
+    background-color: rgba(0, 0, 0, 0.3);
 }

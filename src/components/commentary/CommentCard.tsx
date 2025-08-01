@@ -7,12 +7,17 @@ import CommentInputCard from "./CommentInputCard"
 import useHandleComment from "../../hooks/useHandleComment"
 import type { UserNamertagType } from "../../types/user-type"
 
-const CommentCard = ({commentaryData,isLiked,type}:
-    {commentaryData:CommentCardComponentProps,isLiked:boolean,type:'commentary'|'response'}) => {
+const CommentCard = ({commentaryData,isLiked,onDelete}:
+    {
+        commentaryData:CommentCardComponentProps,
+        isLiked:boolean,
+        type:'commentary'|'response',
+        onDelete:(forDelete:string)=>void
+    }) => {
         const [expandResponse,setExpandResponse] = useState(false);
         const [expandResponseInput,setExpandResponseInput] = useState(false);
-          const {currentCommentary,setCurrentCommentary} = useHandleComment();
-        
+        const {currentCommentary,setCurrentCommentary,onDeleteCommentary} = useHandleComment();
+        const [commentaryForDelete,setCommentaryForDelete] = useState<string | null>(null);
 
     return (
     <article className="commentCardArticle">
@@ -38,10 +43,10 @@ const CommentCard = ({commentaryData,isLiked,type}:
                 isLiked={isLiked}
                 quantity={commentaryData.like_qnt}
                 />
-                <button 
+                {/* <button 
                 className="respondCommentaryButton"
                 onClick={()=>{
-                    setExpandResponseInput((prev)=>!prev)
+                    setExpandResponseInput((prev)=>!prev);
                 }}
                 >
                     {
@@ -49,6 +54,21 @@ const CommentCard = ({commentaryData,isLiked,type}:
                         ? "Cancelar"
                         : "Responder"
                     }
+                </button> */}
+                <button
+                onClick={()=>{
+                    onDeleteCommentary(commentaryData.commentary_id,{
+                        onThen(result) {
+                            setCommentaryForDelete(result.response.data.commentary_id)
+                            onDelete(result.response.data.commentary_id)
+                        },
+                        onCatch(error) {
+                            console.log(error)
+                        },
+                    })
+                }}
+                >
+                    Deletar
                 </button>
             </div>
             
@@ -71,54 +91,62 @@ const CommentCard = ({commentaryData,isLiked,type}:
                 )
             }}
             onComment={(commentary)=>{
-                setCurrentCommentary(commentary)}}
+                setCurrentCommentary(commentary)
+                setExpandResponseInput(false);
+            }}
             isResponse={true}
             />
         }
         {
-            (!!commentaryData.response_quantity
-            &&
-            type !== 'response'
-            )
-            &&
-            <button 
-            className="responseExpansionButton"
-            onClick={()=>{setExpandResponse((prev)=>!prev)}}
-            >
-                <div
-                style={{
-                    fontWeight:"bold",
-                    fontFamily:"initial",
-                    fontSize:"1rem",
-                     transform: `${!!expandResponse ? "rotate(180deg)" : ""} scaleX(-1)`
-                }}
-                >^</div>
-                <span>
-                    {` ${commentaryData.response_quantity}
-                    resposta${(commentaryData.response_quantity > 1 
-                        ? "s"
-                        : ""
-                    )}`}
-                </span>
-            </button>
+            // (!!commentaryData.response_quantity
+            // &&
+            // type !== 'response'
+            // )
+            // &&
+            // <button 
+            // className="responseExpansionButton"
+            // onClick={()=>{setExpandResponse((prev)=>!prev)}}
+            // >
+            //     <div
+            //     style={{
+            //         fontWeight:"bold",
+            //         fontFamily:"initial",
+            //         fontSize:"1rem",
+            //          transform: `${!!expandResponse ? "rotate(180deg)" : ""} scaleX(-1)`
+            //     }}
+            //     >^</div>
+            //     <span>
+            //         {` ${commentaryData.response_quantity}
+            //         resposta${(commentaryData.response_quantity > 1 
+            //             ? "s"
+            //             : ""
+            //         )}`}
+            //     </span>
+            // </button>
         }
+        
         {
-            (
-            (!!expandResponse && !!commentaryData.response_quantity)
-            ||
-            !commentaryData.response_quantity 
-            || 
-            type === 'response' 
-            || 
-            !!currentCommentary)
-            &&
-            <CommentList
-            
-            pushElement={currentCommentary}
-            mode="manual"
-            table_id={commentaryData.commentary_id}
-            type={"response"}
-            />
+        
+            // (
+            // (!!expandResponse && !!commentaryData.response_quantity)
+            // ||
+            // !commentaryData.response_quantity 
+            // || 
+            // type === 'response' 
+            // || 
+            // !!currentCommentary)
+            // &&
+            // <CommentList
+            // deleteElement={
+            //     commentaryForDelete
+            // }
+            // pushElement={
+            //     currentCommentary
+            // }
+            // mode="manual"
+            // table_id={commentaryData.commentary_id}
+            // type={"response"}
+            // />
         }
 
     </article>

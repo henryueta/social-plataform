@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import useHandleComment from "../../hooks/useHandleComment"
 import useHandleList from "../../hooks/useHandleList";
 import type { CommentCardComponentProps } from "../../types/commentary-type";
@@ -22,6 +22,7 @@ const CommentList = (
 
   const commentaryListDataRef = useRef<HTMLDivElement>(null);
   const commentaryListExpansionRef = useRef<HTMLButtonElement>(null) 
+  const [deleteElement,setDeleteElement] = useState<string|null>(null);
 
   const onQueryCommentaryList = ()=>{
     onGetCommentaryList(!!(type === 'response' || type === 'commentary')
@@ -29,13 +30,23 @@ const CommentList = (
       : 'post',{
       onThen(result) {
         const current_result = result.response.data;
+        console.log(!!current_result.commentary_list.length
+          ? current_result.commentary_list.length+"sim"
+          : current_result.commentary_list.length+"nao"
+        )
+        console.log("lista",current_result.commentary_list)
+
         setListState({
           type:"data",
           value:{
             remaining:current_result.commentary_list_count_remaining,
-            value:!!listState.data.value.length 
+            value:
+            (!!current_result.commentary_list.length 
+            && 
+            !!listState.data.value.length 
             ? [...listState.data.value,...current_result.commentary_list]
-            : current_result.commentary_list,
+            : [...current_result.commentary_list])
+            ,
             liked:current_result.commentary_list.filter((commentary:CommentCardComponentProps)=>{
                 return current_result.liked_commentary_list.includes(commentary.commentary_id)
             })
@@ -61,7 +72,7 @@ const CommentList = (
       page:1,
       mode:mode
     },
-    identifier:table_id,
+    identifier:!!deleteElement ? deleteElement  : table_id,
     functions:{
       query:onQueryCommentaryList
     },
@@ -80,9 +91,26 @@ const CommentList = (
       handleListView()
     })
 
-
-
   },[])
+
+  useEffect(()=>{
+
+    !!(deleteElement
+      &&
+      listState.data.value)
+    &&
+    setListState({
+      type:'data',
+      value:{...listState.data,value:(()=>{
+        const currentList = listState.data.value;
+        const updatedList = currentList.filter((commentary)=>{
+          return commentary.commentary_id !== deleteElement
+        })
+        return updatedList
+      })()}
+    })
+
+  },[deleteElement])
 
   useEffect(()=>{
     
@@ -110,7 +138,6 @@ const CommentList = (
       commentaryListDataRef
       : null
       }>
-
           <DataFetcher
           noDataMessage={
             !(type !== 'response')
@@ -122,13 +149,19 @@ const CommentList = (
             word_gender:"m"
             }}
             isLoading={!!commentQueryState.isLoading}
-          >
+          > 
+
+          
             {
               
             (!!listState.data.value)
               &&
-              listState.data.value.map((commentary)=>
+              listState.data.value
+              .map((commentary)=>
               <CommentCard
+              onDelete={(commentary)=>{
+                setDeleteElement(commentary)
+              }}
               key={commentary.commentary_id}
               type={!!(type === 'post' || type === 'commentary')
                 ? 'commentary'

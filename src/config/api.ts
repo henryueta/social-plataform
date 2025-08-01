@@ -29,7 +29,8 @@ const api_endpoints = {
     },
     commentary:{
         get:api_base+"commentary/get",
-        post:api_base+"commentary/post"
+        post:api_base+"commentary/post",
+        delete:api_base+"commentary/delete"
     },
     like:{
         get:api_base+"like/get",

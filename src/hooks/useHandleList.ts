@@ -72,6 +72,7 @@ const initialListState:ListStateType<C> = {
 const handleListState = (state:ListStateType<C>,action:ListActionType<C>)=>{
   switch (action.type) {
     case "data":
+      console.log("DATA",action.value)
       return {...state,data:action.value}
     case "filter":
       return {...state,filter:action.value}

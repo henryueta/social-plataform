@@ -8,8 +8,8 @@ import { useParams } from "react-router-dom"
 import useHandlePath from "../../hooks/useHandlePath"
 import { auth_type } from "../../constants/auth-constant"
 import useHandleDialog from "../../hooks/useHandleDialog"
-import FooterBar from "../../components/navigation/FooterBar"
 import Contact from "../../components/visual/Contact"
+import Logo from "../../components/logo/Logo"
 
 const AuthPage = () => {
 
@@ -29,22 +29,14 @@ const AuthPage = () => {
   },[type])
 
   return (
-    <>
-    <section className="authFormSection">
-      <h1
-      style={{
-        fontSize:"3rem",
-        border:"0.1rem solid deepskyblue",
-        borderRadius:"100%",
-        borderStyle:"outset",
-        padding:"0.5rem"
-      }}
-      >
-        🌊
-      </h1>
-      {
+    
         !!authStructure
         &&
+    <>
+    <section className="authFormSection">
+      <div className="logoContainer">
+        <Logo/>
+      </div>
          <section className="formSection">
         <TitleHeader
         title={authStructure.header.title}
@@ -103,10 +95,11 @@ const AuthPage = () => {
             }
               
       </section>
-      }
+      
      <Contact/>
     </section>
     </>
+    
   )
 }
 

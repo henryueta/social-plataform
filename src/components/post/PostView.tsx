@@ -86,6 +86,7 @@ const PostView = ({id}:{id:string}) => {
       }}
       isResponse={false}/>
       <CommentList
+      deleteElement={null}
       pushElement={currentCommentary}
       mode="automatic"
       externalReference={{

@@ -38,6 +38,17 @@ const useHandleComment = ()=>{
 
     }
 
+    const onDeleteCommentary = (id:string,treatment?:QueryTreatmentType)=>{
+
+        onQuery({
+            method:"delete",
+            url:api_endpoints.commentary.delete+"?commentary_id="+id,
+            cancelToken:AxiosHttpClientFactory.createCancelToken(),
+            withCredentials:true
+        },treatmentProvider(treatment))
+
+    }
+
     const onGetCommentaryList = (type:'post'|'commentary',treatment?:QueryTreatmentType,params?:{
         table_id:string,
         limit:number,
@@ -60,6 +71,7 @@ const useHandleComment = ()=>{
     return {
         onGetCommentaryList,
         onPostCommentary,
+        onDeleteCommentary,
         commentQueryState,
         currentCommentary,
         setCurrentCommentary

@@ -8,6 +8,7 @@ import Load from "../ui/Load";
 import { AxiosHttpClientFactory } from "../../adapters/axios-adapter";
 import gallery_icon from "../../assets/icons/gallery_icon.png"
 import ImageVisualizer from "../image/ImageVisualizer";
+import eye_icon from "../../assets/icons/eye_icon.png"
 
 const Form = (
     {model,
@@ -31,12 +32,32 @@ const Form = (
     const {errors} = formState
     const {onQuery,queryState} = useHandleQuery()
     const [fileChange,setFileChange] = useState<React.ChangeEvent<HTMLInputElement> | null>(null);
-    const [fileName,setFileName] = useState<null | string>(null);
     const [isView,setIsView] = useState(false);
+    const [passwordFieldList,setPasswordFieldList] = useState<null | {
+        register:string,
+        viewValue:boolean
+    }[]>(null);
 
     useEffect(()=>{
 
         reset()
+        
+        setPasswordFieldList(
+            (()=>{
+                const passwordFieldList = model.form.filter((field)=>{
+                    return field.type === 'password'
+                }).map((field_password)=>{
+                    return {
+                        register:field_password.registerId,
+                        viewValue:false
+                    }
+                })
+                return !!passwordFieldList.length
+                ? passwordFieldList
+                : []
+            })()
+            
+       )
 
     },[model])
 
@@ -78,6 +99,8 @@ return (
             })
     })}>
         {
+            passwordFieldList !== null
+            &&
             model.form.map((field,field_index)=>
                 
                {
@@ -121,7 +144,16 @@ return (
                             ? field.title
                             : ""
                         }
-                        type={field.type} 
+                        type={(field.type === 'password'
+                            ? 
+                            (passwordFieldList[passwordFieldList?.findIndex((field_password)=>{
+                                return field_password.register === field.registerId
+                            })].viewValue
+                            ? "text"
+                            : "password"
+                            )
+                            : field.type)
+                        } 
                         {...register(field.registerId)}
                         onChange={(e)=>{
                             ((field.type === 'file')
@@ -177,8 +209,7 @@ return (
                                 onDelete:()=>setFileChange(null)
                             }}
                             event={fileChange}
-                            onView={(value)=>{
-                                setFileName(value)
+                            onView={()=>{
                             }}
                         />
                         </>
@@ -187,15 +218,6 @@ return (
                     <div 
                     className="fieldFormContainer"
                     key={field.id}>
-                        {
-                        field.type === 'file'
-                        &&
-                        fileChange
-                        &&
-                        <>
-                            <span className="fileNameSpan">{fileName}</span>
-                        </>
-                        }
                         <label htmlFor={field.id}
                         className={
                             (field.type === 'file'
@@ -212,6 +234,7 @@ return (
                                     <img src={gallery_icon} alt="file_field_icon" />
                                 : 
                                     <button
+                                    type="button"
                                     className="filled_button"
                                     onClick={()=>{
                                         setIsView((prev)=>!prev);
@@ -222,6 +245,36 @@ return (
                                 )
                             }
                             {field_tag}
+                          {
+                            field.type === 'password'
+                            &&
+                            <button
+                            className="password_view_button"
+                            type="button"
+                            onClick={()=>{
+                                !!passwordFieldList !== null
+                                &&
+                                setPasswordFieldList((prev)=>{
+                                    if(prev !== null){
+                                        const field_index = prev.findIndex((field_password)=>{
+                                            return field_password.register === field.registerId
+                                    })
+                                        const current_list = prev?.splice(field_index,1,{
+                                            register:field.registerId,
+                                            viewValue:!(prev[field_index].viewValue)
+                                        })
+                                        return current_list
+                                    }
+                                    return prev
+                                    
+                                })
+                            }}>
+                                <img src={
+                                    eye_icon
+                                } alt="eye_icon" />
+                            </button>
+                          }
+                            
                         </label>
                           {
                             !!errorView

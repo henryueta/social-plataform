@@ -70,10 +70,15 @@
     cursor: pointer;
 }
 
+.commentCardArticle .profileCardArticle .headerSection{
+    cursor: pointer;
+}
+
 .commentCardArticle .profileCardArticle .profileImageContainer img{
     width: 32px;
     height: 32px;
     padding: 0.5rem;
+    cursor: pointer;
 }
 
 .commentCardArticle .responseExpansionButton{

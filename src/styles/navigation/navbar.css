@@ -40,9 +40,15 @@
 }
 
 .navBar .logoContainer{
-    
-    padding: 2rem;
+    padding: 2rem 2rem 2rem 2rem;
+    width: 100%; 
+    display: flex;
+    align-items: center;
     /* color: deepskyblue; */
+}
+
+.navBar .logoContainer img{
+    width: 120px;
 }
 
 .navBar .developerContactContainer{

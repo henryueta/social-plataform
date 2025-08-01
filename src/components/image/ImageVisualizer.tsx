@@ -58,6 +58,7 @@ const ImageVisualizer = ({onView,event,operations}:
                 <img src={imageValue as string} alt="post_image_view" />
                 <div className="actionsContainer">
                     <button
+                    type="button"
                     className="filled_button"
                     onClick={()=>{
                         operations.onDelete()
@@ -66,6 +67,7 @@ const ImageVisualizer = ({onView,event,operations}:
                     Excluir
                     </button>
                     <button
+                    type="button"
                     className="unfilled_button"
                     onClick={()=>operations.onClose()}
                     >Fechar

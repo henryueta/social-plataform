@@ -4,7 +4,7 @@
   box-sizing: border-box;
   font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
   transition: 0.2s ease-in-out;
-  --color-primary:rgb(3, 128, 170);
+  --color-primary:rgb(170, 3, 3);
   --color-white-hover:rgb(195, 193, 193);
   --color-white-active:rgb(53, 53, 53);
   --buttonFontSize:0.85rem;
