@@ -24,13 +24,13 @@ import Rewind from "../navigation/Rewind"
     }
   } 
 
-const ProfileList = ({type,identifier,identifier_type,isForPage,search,redirect}
+const ProfileList = ({type,identifier,identifier_type,isForSearch,search,redirect}
   :{
     type:'followers'|'following'|'search'|'like',
     identifier?:string,
     identifier_type:string,
     search?:string,
-    isForPage?:boolean,
+    isForSearch?:boolean,
     redirect?:boolean
   }) => {
 
@@ -124,16 +124,12 @@ const ProfileList = ({type,identifier,identifier_type,isForPage,search,redirect}
         references:{
         }
       });
-  console.log("params",{
-    identifier:identifier,
-    type:identifier_type
-  })
 
   return (
     <div 
     className={"profileListContainer "
     +(
-      isForPage
+      isForSearch
       &&
       " page"
     )} 
@@ -171,12 +167,12 @@ const ProfileList = ({type,identifier,identifier_type,isForPage,search,redirect}
          className="profileSocialListContainer"
         style={{
           marginTop:(type === 'search'
-          ? "6rem"
+          ? "12rem"
           : "")
         }}
          >
             {
-              (isForPage && type !== 'search')
+              (isForSearch && type !== 'search')
               &&
               <Rewind/>
             }

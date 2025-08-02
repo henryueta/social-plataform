@@ -11,7 +11,7 @@ const ProfileListPage = () => {
     <SocialLayout>
       {/* <section className="profileListPageSection"> */}
         <ProfileList
-        isForPage
+        isForSearch
         type={type as 'following'|'followers'}
         identifier={identifier}
         identifier_type={identifier_type as string}

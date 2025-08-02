@@ -155,11 +155,11 @@ const ProfileView = ({username}:{username:string}) => {
                 <TitleHeader
                 title={profileViewState.data.username}
                 />
-                <div 
+                {/* <div 
                 className="namertagContainer"
                 >
                     {"( "+profileViewState.data.namertag+" )"}
-                </div>  
+                </div>   */}
             </div>
             <div className="activityContainer">
                 {

@@ -60,7 +60,7 @@
     width: 25%;
     font-size: 2rem;
     text-align: center;
-    outline-color: var(--color-primary);
+    outline-color: var(--color-white-hover);
 }
 
 .authCheckoutPageSection .checkoutContainer .headerSection{

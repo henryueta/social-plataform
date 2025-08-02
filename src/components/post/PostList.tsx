@@ -10,7 +10,8 @@ import DataFetcher from "../data/DataFetcher";
 import useHandlePost from "../../hooks/useHandlePost";
 import useHandleList from "../../hooks/useHandleList";
 
-const PostList = ({user_username,search}:{user_username?:string,search?:string}) => {
+const PostList = ({user_username,search,isForSearch}
+  :{user_username?:string,search?:string,isForSearch?:boolean}) => {
 
     const {onGetPost,postQueryState} = useHandlePost();
     const {onMatch,pathname} = useHandlePath();
@@ -76,7 +77,15 @@ const PostList = ({user_username,search}:{user_username?:string,search?:string})
       }
     });
   return (
-    <div className={"postListContainer"} ref={postListDataRef} 
+    <div 
+    style={{
+      paddingTop:
+      isForSearch
+      ? "7rem"
+      : "0rem"
+    }}
+    className={"postListContainer"} 
+    ref={postListDataRef} 
     onScrollEnd={()=>{handleListView()}}
     >
             {

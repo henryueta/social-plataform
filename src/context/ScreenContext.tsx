@@ -5,9 +5,8 @@ const ScreenContext = createContext({} as {isMobile:boolean})
 const ScreenProvider = ({children}:{children:React.ReactNode})=>{
 
     const [isMobile,setIsMobile] = useState(false);
-
     const onCheckScreen = ()=>{
-        return setIsMobile(window.innerWidth < 1024)
+        return setIsMobile(window.innerWidth <= 1024)
     }
 
     useEffect(()=>{

@@ -21,7 +21,7 @@
     border-top-left-radius: 0.3rem;
     border: none;
     background-color: white;
-    outline-color:var(--color-primary);
+    outline-color:var(--color-white-hover);
 }
 
 
@@ -74,10 +74,12 @@
 
     .socialContentContainer .searchContainer{
         width: 80%;
+        top: 10%;
     }
 
     .socialContentContainer .filterContainer{
         width: 80%;
+        top: 15%;
     }
 
     .searchContainer input{

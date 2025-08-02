@@ -39,6 +39,7 @@ const SearchPage = () => {
         {
           type === 'post'
           ? <PostList
+          isForSearch
           search={searchValue}
           />
           : 
@@ -47,7 +48,7 @@ const SearchPage = () => {
           <ProfileList
           identifier_type="user"
           type="search"
-          isForPage
+          isForSearch
           search={searchValue}
           />
         }

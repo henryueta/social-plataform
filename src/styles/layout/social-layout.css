@@ -66,4 +66,18 @@
     .profileListContainer.page .profileSocialList{
         height: 70%;
     }
+
+    .logoMobileContainer{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0.3rem;
+        background-color: rgb(247, 247, 247);
+        position: relative;
+        z-index: 100;
+    }
+
+    .logoMobileContainer img{
+        width: 90px;
+    }
 }
