@@ -8,9 +8,10 @@ const recovery_schema = ZodSchemaFactory.draw({
     password:z.string().refine((val)=>val.length,{
         message:"Campo senha inválido"
     }),
-    repeat_password:z.string().refine((val)=>val.length,{
-        message:"Campo senha inválido"
-    })
+    repeat_password:z.string()
+}).refine((val)=>val.repeat_password === val.password,{
+    message:"Senhas não se equivalem",
+    path:['repeat_password']
 })
 
 const recovery_form:FormItemType[] = [

@@ -8,25 +8,14 @@ import Load from "../../components/ui/Load"
 import TitleHeader from "../../components/visual/TitleHeader"
 import useHandlePath from "../../hooks/useHandlePath"
 import Contact from "../../components/visual/Contact"
+import Logo from "../../components/logo/Logo"
 
 const AuthRecovery = () => {
 
-    const {onForgot,authQueryState} = useHandleAuth({verifyAuth:false});
+    const {onForgot,authQueryState} = useHandleAuth({verifyAuth:false,sendEmail:false});
     const {token} = useParams();
     const [isDenied,setIsDenied] = useState(false);
     const {onTransition} = useHandlePath();
-
-    useEffect(()=>{
-
-        !!(token?.length)
-        ? console.log("com valor")
-        : console.log("vazio")
-
-    },[token])
-
-    useEffect(()=>{
-        console.log(isDenied)
-    },[isDenied])
 
     useEffect(()=>{
 
@@ -46,6 +35,9 @@ const AuthRecovery = () => {
 
   return (
     <section className="authRecoveryPageSection">
+        <div className="logoContainer">
+            <Logo/>
+        </div>
         <div className="authRecoveryContainer">
             {
                 !isDenied
@@ -61,8 +53,9 @@ const AuthRecovery = () => {
             ? <Load
             isLoading={!!authQueryState.isLoading}
             />
-            : !isDenied
-            ? <section className="formSection">
+            : 
+            !isDenied
+            ?<section className="formSection">
                 <Form
                 method="put"
                 model={recovery_model}

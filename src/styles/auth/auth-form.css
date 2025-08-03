@@ -10,6 +10,10 @@
     width: 100dvw;
 }
 
+.authFormSection .logoContainer img{
+    width: 150px;
+}
+
 .authFormSection .formSection{
     background-color: white;
     /* border: 0.1rem solid gray; */
@@ -105,15 +109,16 @@
     align-items: center;
     justify-content: center;
     padding: 0.3rem;
-    height: 100%;
+    height:90%;
     font-size: 1rem;
     border: none;
     cursor: pointer;
     background: white;
     position: absolute;
-    right: 0%;
-    top: 0%;
+    right: 0.2%;
+    top: 5%;
     bottom: 0%;
+    border-radius: 0.5rem;
 }
 
 .authFormSection form .password_view_button img{
@@ -121,7 +126,7 @@
 }
 
 .authFormSection form button:hover{
-    background-color: rgb(191, 20, 20);
+    opacity: 80%;
 }
 
 .authAskSpan{

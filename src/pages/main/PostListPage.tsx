@@ -4,7 +4,6 @@ import SocialLayout from "../../layout/SocialLayout"
 
 const PostListPage = () => {
 
-    
 
   return (
       <SocialLayout>

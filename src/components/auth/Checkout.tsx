@@ -11,9 +11,10 @@ const Checkout = () => {
         const [codeValueList,setCodeValueList] = useState<number[] | null[]>(code_field_list);
         const [checkoutCodeValue,setCheckoutCodeValue] = useState("");
         const [enableResend,setEnableResend] = useState(false);
-        const {onCheckout,currentAuthContext} = useHandleAuth({verifyAuth:true});
+        const {onCheckout,currentAuthContext} = useHandleAuth({verifyAuth:true,sendEmail:true});
         const {onTransition} = useHandlePath();
         const  codeFieldRefList = useRef<HTMLInputElement[]>([]);
+
 
         const setCheckoutValue = ()=>{
             let codeListFormatedValue = "";
@@ -31,7 +32,8 @@ const Checkout = () => {
             
     
         },[checkoutCodeValue])
-    
+        
+
         useEffect(()=>{
     
             !!(currentAuthContext.isChecked)
@@ -129,7 +131,8 @@ const Checkout = () => {
                     }
             }}
             >
-                <span>Reenviar 
+                <span>
+                    Reenviar 
                 {
                 !enableResend
                 &&
@@ -149,16 +152,6 @@ const Checkout = () => {
                 }
                 </span>
             </button>
-            {/* <span>
-                Não recebeu o código?
-                <button
-                onClick={()=>{
-                    onCheckout("get")
-                }}
-                >
-                Reenviar
-                </button>
-            </span> */}
         </div>
     </div>
   )

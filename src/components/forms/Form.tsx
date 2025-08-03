@@ -60,7 +60,6 @@ const Form = (
        )
 
     },[model])
-
 return (
     <form onSubmit={handleSubmit((data)=>{
         !!submit.onAction
@@ -146,12 +145,17 @@ return (
                         }
                         type={(field.type === 'password'
                             ? 
-                            (passwordFieldList[passwordFieldList?.findIndex((field_password)=>{
+                            (()=>{
+                                const current_index = passwordFieldList?.findIndex((field_password)=>{
                                 return field_password.register === field.registerId
-                            })].viewValue
-                            ? "text"
-                            : "password"
-                            )
+                                })
+                                return !!(passwordFieldList[current_index])
+                                &&
+                                (passwordFieldList[current_index].viewValue
+                                ? "text"
+                                : "password"
+                                )
+                            })()
                             : field.type)
                         } 
                         {...register(field.registerId)}
@@ -252,17 +256,25 @@ return (
                             className="password_view_button"
                             type="button"
                             onClick={()=>{
-                                !!passwordFieldList !== null
+                                !!(passwordFieldList !== null)
                                 &&
                                 setPasswordFieldList((prev)=>{
                                     if(prev !== null){
                                         const field_index = prev.findIndex((field_password)=>{
                                             return field_password.register === field.registerId
                                     })
-                                        const current_list = prev?.splice(field_index,1,{
+                                        // const current_list = prev?.splice(field_index,1,{
+                                        //     register:field.registerId,
+                                        //     viewValue:!(prev[field_index].viewValue)
+                                        // })
+                                        const current_list = prev.filter((field_password)=>
+                                            field_password.register !== field.registerId
+                                        )
+                                        current_list.push({
                                             register:field.registerId,
                                             viewValue:!(prev[field_index].viewValue)
                                         })
+                                        console.log(current_list)
                                         return current_list
                                     }
                                     return prev

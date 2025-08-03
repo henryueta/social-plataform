@@ -6,7 +6,7 @@ import type { QueryStateType, QueryTreatmentType } from "../types/query-type";
 import { AxiosHttpClientFactory } from "../adapters/axios-adapter";
 import useHandlePath from "./useHandlePath";
 
-const useHandleAuth = ({verifyAuth}:{verifyAuth:boolean})=>{
+const useHandleAuth = ({verifyAuth,sendEmail}:{verifyAuth:boolean,sendEmail:boolean})=>{
 
     const currentAuthContext = useContext(AuthContext);
     const {onQuery,queryState} = useHandleQuery();
@@ -55,15 +55,14 @@ const useHandleAuth = ({verifyAuth}:{verifyAuth:boolean})=>{
       useEffect(()=>{
         verifyAuth
         &&
-        onCheckout("get")
-
+        onCheckout("get");
     },[])    
 
       const onCheckout = (method:'get'|'post',code?:string)=>{
             
              onQuery({
             method:method,
-            url:api_endpoints.auth.checkout,
+            url:api_endpoints.auth.checkout+"?sendEmail="+sendEmail,
             cancelToken:AxiosHttpClientFactory.createCancelToken(),
             withCredentials:true,
             body:

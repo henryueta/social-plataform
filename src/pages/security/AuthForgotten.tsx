@@ -5,16 +5,21 @@ import useHandlePath from "../../hooks/useHandlePath";
 import useHandleAuth from "../../hooks/useHandleAuth";
 import useHandleDialog from "../../hooks/useHandleDialog";
 import Contact from "../../components/visual/Contact";
+import Load from "../../components/ui/Load";
+import Logo from "../../components/logo/Logo";
 
 const AuthForgotten = () => {
 
     const [emailForSend,setEmailForSend] = useState('');
     const {showDialog} = useHandleDialog();
     const {onTransition} = useHandlePath()
-    const {onForgot} = useHandleAuth({verifyAuth:false});
+    const {onForgot,authQueryState} = useHandleAuth({verifyAuth:false,sendEmail:false});
 
   return (
     <section className="authForgottenPageSection">
+        <div className="logoContainer">
+            <Logo/>
+        </div>
         <div className="authForgottenContainer">
             <TitleHeader
             title="Esqueceu sua senha?"
@@ -63,6 +68,9 @@ const AuthForgotten = () => {
                     })
                 }}
                 className="unfilled_button">
+                    <Load
+                    isLoading={!!authQueryState.isLoading}
+                    />
                     Confirmar
                 </button>
             </div>

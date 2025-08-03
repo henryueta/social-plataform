@@ -8,6 +8,10 @@
     height: 100dvh;
 }
 
+.authCheckoutPageSection .logoContainer img{
+    width: 150px;
+}
+
 .authCheckoutPageSection .checkoutContainer{
     padding: 2rem;
     display: flex;
