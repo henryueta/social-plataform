@@ -6,7 +6,6 @@ import { Navigate } from "react-router-dom";
 
 const Private = ({children}:{children:React.ReactElement}) => {
 
-
   const {currentAuthContext,authQueryState} = useHandleAuth({verifyAuth:true,sendEmail:false});
  const {onTransition} = useHandlePath();
  const [isAllow,setIsAllow] = useState<boolean  | null>(null);

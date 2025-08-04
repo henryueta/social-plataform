@@ -58,7 +58,7 @@ const useHandleAuth = ({verifyAuth,sendEmail}:{verifyAuth:boolean,sendEmail:bool
         onCheckout("get");
     },[])    
 
-      const onCheckout = (method:'get'|'post',code?:string)=>{
+      const onCheckout = (method:'get'|'post',code?:string,treatment?:QueryTreatmentType)=>{
             
              onQuery({
             method:method,
@@ -79,7 +79,10 @@ const useHandleAuth = ({verifyAuth,sendEmail}:{verifyAuth:boolean,sendEmail:bool
                 })()
                     setEmailForCheckout(currentResult.email)
                     currentAuthContext.setIsChecked(currentResult.is_checked)
-             },
+                    !!treatment?.onThen
+                    &&
+                    treatment?.onThen(result);
+            },
              onCatch(error) {
                  console.log("checkout_error",error)
                 method === 'get'
@@ -87,6 +90,9 @@ const useHandleAuth = ({verifyAuth,sendEmail}:{verifyAuth:boolean,sendEmail:bool
                 (()=>{
                     currentAuthContext.setIsAuth(false)
                 })()
+                treatment?.onCatch
+                &&
+                treatment.onCatch(error)
              },
             })
         }

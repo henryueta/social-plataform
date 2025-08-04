@@ -28,6 +28,8 @@ const AuthPage = () => {
 
   },[type])
 
+   
+
   return (
     
         !!authStructure

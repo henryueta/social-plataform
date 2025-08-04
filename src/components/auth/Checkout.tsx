@@ -5,16 +5,17 @@ import useHandlePath from "../../hooks/useHandlePath";
 import "../../styles/auth/auth-checkout.css"
 import TitleHeader from "../visual/TitleHeader";
 import Timer from "../visual/Timer";
+import useHandleDialog from "../../hooks/useHandleDialog";
 
 const Checkout = () => {
 
         const [codeValueList,setCodeValueList] = useState<number[] | null[]>(code_field_list);
         const [checkoutCodeValue,setCheckoutCodeValue] = useState("");
         const [enableResend,setEnableResend] = useState(false);
-        const {onCheckout,currentAuthContext} = useHandleAuth({verifyAuth:true,sendEmail:true});
+        const {onCheckout,currentAuthContext} = useHandleAuth({verifyAuth:true,sendEmail:false});
         const {onTransition} = useHandlePath();
         const  codeFieldRefList = useRef<HTMLInputElement[]>([]);
-
+        const {showDialog} = useHandleDialog();
 
         const setCheckoutValue = ()=>{
             let codeListFormatedValue = "";
@@ -28,7 +29,19 @@ const Checkout = () => {
         useEffect(()=>{
     
             !!(checkoutCodeValue.length === 4)
-            && onCheckout("post",checkoutCodeValue)
+            && onCheckout("post",checkoutCodeValue,{
+                onCatch(error) {
+                    const currentError = error as {message:string}
+                        showDialog({
+                            title:"Revise seus dados",
+                            message:currentError.message,
+                            type:"warn",
+                            onConfirm:null,
+                            onCancel:null,
+                            onFinally:null
+                        })
+                },
+            })
             
     
         },[checkoutCodeValue])
