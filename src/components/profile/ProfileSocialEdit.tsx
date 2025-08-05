@@ -3,7 +3,7 @@ import LockWall from "../ui/LockWall"
 import useHandleProfile from "../../hooks/useHandleProfile"
 import Load from "../ui/Load"
 import ImageChoice from "../image/ImageChoice"
-import { profile_image_select } from "../../constants/profile-constant"
+import { profile_image_select, profile_image_type } from "../../constants/profile-constant"
 
 
 const ProfileSocialEdit = ({username,editTreatment}:{username:string,editTreatment:{
@@ -37,8 +37,6 @@ const ProfileSocialEdit = ({username,editTreatment}:{username:string,editTreatme
     const [usernameValue,setUsernameValue] = useState<string | null>(null);
     const [imageValue,setImageValue] = useState<string | null>(null);
     const [rejectMessage,setRejectMessage] = useState<string | null>(null);
-
-
 
 
   return (
@@ -83,11 +81,12 @@ const ProfileSocialEdit = ({username,editTreatment}:{username:string,editTreatme
                 <button
                 onClick={()=>{
                     onEditUser({
-                    image:imageValue,
+                    type:profile_image_type.find((profile)=>{
+                        return profile.image === imageValue
+                    })?.type,
                     username:usernameValue
                 },{
-                    onThen(result) {
-                        console.log(result)
+                    onThen() {
                         editTreatment.onEdit({
                         image:imageValue,
                         username:usernameValue

@@ -1,3 +1,4 @@
+import type { ZodObject, ZodRawShape } from "zod";
 import api_endpoints from "../config/api";
 import user_model from "../models/user-model";
 import type { AuthStructureType } from "../types/auth-type";
@@ -30,7 +31,7 @@ const auth_type:AuthStructureType[] = [
       },
       form:{
         model:{
-                schema:user_model.schema.omit({
+                schema:(user_model.schema as ZodObject<ZodRawShape>).omit({
                     username:true
                 }),
                 form:user_model.form.filter((field)=>

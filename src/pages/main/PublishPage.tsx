@@ -25,7 +25,6 @@ const PublishPage = () => {
           username:""
         },{
           onThen(result) {
-            console.log(result)
             setUserProfileCard(result.response.data.user)
           },
           onCatch(error) {
@@ -62,8 +61,7 @@ const PublishPage = () => {
             }}
             submitButtonTitle="Postar"
             treatment={{
-              onThen(result) {
-                console.log(result)
+              onThen() {
                 onTransition("/posts/all")
               },
               onCatch(error) {

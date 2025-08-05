@@ -1,0 +1,35 @@
+.imageChoiceContainer{
+    display: flex;
+    gap: 1rem;
+    border-radius: 0.5rem;
+}
+
+.imageChoiceContainer img{
+    background-color: black;
+    border-radius: 100%;
+}
+
+.imageChoiceContainer .changeImageContainer button{
+    height: 100%;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    border: none;
+    background-color: white;
+    cursor: pointer;
+}
+
+.imageChoiceContainer .changeImageContainer button:hover{
+    background-color: var(--color-white-hover);
+}
+
+.imageChoiceContainer .changeImageContainer button:active{
+    background-color: var(--color-white-active);
+}
+
+.imageChoiceContainer .changeImageLabel{
+    font-weight: bolder;
+}
+
+.imageChoiceContainer #previousImageLabel{
+    transform: rotate(180deg);
+}

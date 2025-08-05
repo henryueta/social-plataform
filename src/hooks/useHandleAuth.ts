@@ -23,16 +23,6 @@ const useHandleAuth = ({verifyAuth,sendEmail}:{verifyAuth:boolean,sendEmail:bool
 
     },[queryState])
 
-    useEffect(()=>{
-
-        console.log(currentAuthContext.isAuth)
-
-    },[currentAuthContext.isAuth])
-
-    useEffect(()=>{
-        console.log(currentAuthContext.isChecked)
-    },[currentAuthContext.isChecked])
-
     const onLogout = ()=>{
 
         onQuery({

@@ -274,7 +274,6 @@ return (
                                             register:field.registerId,
                                             viewValue:!(prev[field_index].viewValue)
                                         })
-                                        console.log(current_list)
                                         return current_list
                                     }
                                     return prev

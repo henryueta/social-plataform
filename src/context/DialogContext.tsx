@@ -1,4 +1,4 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useState } from "react";
 import type { DialogStructureProps } from "../types/dialog-type";
 
 const DialogContext = createContext({} as {
@@ -13,6 +13,7 @@ const DialogProvider = ({children}:{children:React.ReactNode})=>{
 
         const initialDialogStructureValue = {
             isOpen:false,
+            type:"confirmation" as "confirmation",
             title:"",
             message:"",
             onConfirm:null,

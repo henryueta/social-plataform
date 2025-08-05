@@ -30,11 +30,7 @@ const CommentList = (
       : 'post',{
       onThen(result) {
         const current_result = result.response.data;
-        console.log(!!current_result.commentary_list.length
-          ? current_result.commentary_list.length+"sim"
-          : current_result.commentary_list.length+"nao"
-        )
-        console.log("lista",current_result.commentary_list)
+
 
         setListState({
           type:"data",

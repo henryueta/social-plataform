@@ -12,7 +12,7 @@ const PostView = ({id}:{id:string}) => {
   const {onGetPost} = useHandlePost();
   const postViewRef = useRef<HTMLDivElement>(null)
   const [commentaryListUpdate,setCommentaryListUpdate] = useState<()=>void>(()=>{
-    return ()=>console.log("QAQAAA")
+    return ()=>{}
   });
   const {currentCommentary,setCurrentCommentary} = useHandleComment();
   const [postViewState,setPostViewState] = useState<{
@@ -34,7 +34,6 @@ const PostView = ({id}:{id:string}) => {
       type:'especific'
     },{
       onThen(result) {
-        console.log("RESULTADOI",result)
         setPostViewState({
           data:result.response.data.post,
           isLiked:result.response.data.liked_post,
@@ -50,9 +49,6 @@ const PostView = ({id}:{id:string}) => {
 
   },[])
 
-  useEffect(()=>{
-    console.log("FUNCTION",commentaryListUpdate)
-  },[commentaryListUpdate])
 
   return (
     <div className="postInfoContainer" ref={postViewRef} onScrollEnd={()=>{
@@ -86,7 +82,6 @@ const PostView = ({id}:{id:string}) => {
       }}
       isResponse={false}/>
       <CommentList
-      deleteElement={null}
       pushElement={currentCommentary}
       mode="automatic"
       externalReference={{

@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import "../../styles/image/image.css"
 
 const ImageChoice = ({imageList,choicedIndex,onChoice}:
     {imageList:string[],choicedIndex?:number,onChoice:(image:string)=>void}) => {
@@ -8,12 +9,11 @@ const ImageChoice = ({imageList,choicedIndex,onChoice}:
         useEffect(()=>{
 
             onChoice(imageList[currentChoice])
-            console.log(currentChoice)
         },[currentChoice])
 
   return (
     <div className="imageChoiceContainer">
-        <div className="previousImage">
+        <div id="previousImage" className="changeImageContainer">
             <button
             onClick={()=>{
                 setCurrentChoice((prev)=>{
@@ -23,11 +23,16 @@ const ImageChoice = ({imageList,choicedIndex,onChoice}:
                 })
             }}
             >
-            prev
+            <div 
+            className="changeImageLabel"
+            id="previousImageLabel"
+            >
+                {">"}
+            </div>
             </button>
         </div>
         <img src={imageList[currentChoice]} alt="currentChoice_image" />
-        <div className="nextImage">
+        <div id="nextImage" className="changeImageContainer">
             <button
             onClick={()=>{
                 setCurrentChoice((prev)=>{
@@ -37,7 +42,12 @@ const ImageChoice = ({imageList,choicedIndex,onChoice}:
                 })
             }}
             >
-            next
+            <div
+            className="changeImageLabel"
+            id="nextImageLabel"
+            >
+                {">"}
+            </div>
             </button>
         </div>
     </div>

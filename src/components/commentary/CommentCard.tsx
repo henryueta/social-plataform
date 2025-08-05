@@ -2,7 +2,6 @@ import { useState } from "react"
 import type { CommentCardComponentProps } from "../../types/commentary-type"
 import LikeAction from "../like/LikeAction"
 import ProfileCard from "../profile/ProfileCard"
-import CommentList from "./CommentList"
 import CommentInputCard from "./CommentInputCard"
 import useHandleComment from "../../hooks/useHandleComment"
 import type { UserNamertagType } from "../../types/user-type"
@@ -14,10 +13,8 @@ const CommentCard = ({commentaryData,isLiked,onDelete}:
         type:'commentary'|'response',
         onDelete:(forDelete:string)=>void
     }) => {
-        const [expandResponse,setExpandResponse] = useState(false);
         const [expandResponseInput,setExpandResponseInput] = useState(false);
         const {currentCommentary,setCurrentCommentary,onDeleteCommentary} = useHandleComment();
-        const [commentaryForDelete,setCommentaryForDelete] = useState<string | null>(null);
 
     return (
     <article className="commentCardArticle">
@@ -59,7 +56,6 @@ const CommentCard = ({commentaryData,isLiked,onDelete}:
                 onClick={()=>{
                     onDeleteCommentary(commentaryData.commentary_id,{
                         onThen(result) {
-                            setCommentaryForDelete(result.response.data.commentary_id)
                             onDelete(result.response.data.commentary_id)
                         },
                         onCatch(error) {

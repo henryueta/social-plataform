@@ -72,7 +72,6 @@ const initialListState:ListStateType<C> = {
 const handleListState = (state:ListStateType<C>,action:ListActionType<C>)=>{
   switch (action.type) {
     case "data":
-      console.log("DATA",action.value)
       return {...state,data:action.value}
     case "filter":
       return {...state,filter:action.value}
@@ -108,27 +107,16 @@ const handleListState = (state:ListStateType<C>,action:ListActionType<C>)=>{
 
             })()
     }
-  useEffect(()=>{
-    console.log("page",listState.filter.page)
-  },[listState.filter.page])
 
 
     useEffect(()=>{
       !!(listState.data.remaining)
       &&
       (()=>{
-        console.log("QUERY")
         functions.query()
       })()
 
     },[listState.filter.page,identifier,listState.data.remaining])
-
-    useEffect(()=>{
-
-      console.log("state",listState)
-
-    },[listState])
-
 
     useEffect(()=>{
       setListState({

@@ -32,7 +32,7 @@ const useHandleProfile = ()=>{
 
     const onEditUser = (body:{
         username?:string,
-        image?:string
+        type?:string
     },treatment?:QueryTreatmentType)=>{
 
         onQuery({

@@ -25,7 +25,6 @@ const LikeUserList = ({post_id,hasImage}:{post_id:string,hasImage:boolean}) => {
             value:current_result.like_user_list
           }
         })
-        console.log(result)
       },
       onCatch(error) {
         console.log(error)

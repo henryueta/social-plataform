@@ -16,7 +16,6 @@ const CommentInputCard = (
           thread_id:data.thread_id
         },{
           onThen(result) {
-            console.log(result.response.data.commentary)
             onComment(result.response.data.commentary)
             setDescriptionValue("")
           },

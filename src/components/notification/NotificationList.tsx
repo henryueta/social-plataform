@@ -1,10 +1,6 @@
-import { useEffect, useState } from "react";
-import useHandleNotification from "../../hooks/useHandleNotification"
-import useHandleList from "../../hooks/useHandleList";
 
 const NotificationList = () => {
 
-  const {onGetNotificationList} = useHandleNotification();
   
   // const {listState} = useHandleList({
   //   config:{
@@ -14,7 +10,6 @@ const NotificationList = () => {
   //   },
 
   // });
-  const [notificationListData,setNotificationListData] = useState(null);
   
   
 

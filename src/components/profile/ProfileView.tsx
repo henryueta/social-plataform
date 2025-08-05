@@ -25,7 +25,6 @@ const ProfileView = ({username}:{username:string}) => {
         &&
         onPostFollow(profileViewState.data.username,{
             onThen(result) {
-                console.log(result)
                 const current_result = result.response.data; 
                 setProfileViewState((prev)=>{
                     const social_status = prev?.data?.social_status
@@ -76,7 +75,6 @@ const ProfileView = ({username}:{username:string}) => {
             username:username
         },{
             onThen(result) {
-                console.log(result)
                 setProfileViewState({
                     data:{
                         image:result.response.data.user.image,

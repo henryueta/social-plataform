@@ -43,7 +43,6 @@
 .profileInfoContainer .profileImageContainer>img{
     width: 150px;
     height: 150px;
-    padding: 1rem;
 }
 
 .profileImageContainer>img{
@@ -119,7 +118,6 @@
     display: block;
     height: 32px;
     width: 32px;
-    padding: 0.5rem;
 }
 
 .profileListContainer .profileCardArticle:active{

@@ -92,7 +92,6 @@ const ProfileList = ({type,identifier,identifier_type,isForSearch,search,redirec
           username:""
         },{
           onThen(result) {
-            console.log(result)
             setProfileListState({
             type:"user",
             value:result.response.data.user

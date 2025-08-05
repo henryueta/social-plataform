@@ -2,7 +2,6 @@ import useHandlePath from "../../hooks/useHandlePath"
 import "../../styles/social/post.css"
 import type { PostCardComponentProps } from "../../types/post-type"
 import CommentAction from "../commentary/CommentAction"
-import CommentInputCard from "../commentary/CommentInputCard"
 import Form from "../forms/Form"
 import LikeAction from "../like/LikeAction"
 import LikeUserList from "../like/LikeUserList"
@@ -108,7 +107,6 @@ const PostCard = ({postData,liked,detailedView,isSameUser}:
             treatment={{
               onThen(result) {
                 const current_response = result.response.data;
-                console.log("result",result)
                 setCurrentDescription(current_response.description)
                 setEditPost(false)
               },

@@ -1,4 +1,4 @@
-import axios, { AxiosError, type AxiosResponse, type CancelToken } from "axios";
+import axios, { AxiosError, type AxiosResponse } from "axios";
 import type { HttpClientType, HttpDataType } from "../types/http-type";
 
 class AxiosHttpClientAdapter implements HttpClientType{
@@ -15,14 +15,10 @@ class AxiosHttpClientAdapter implements HttpClientType{
         !!data.body
         &&
         Object.entries(data.body as object).forEach(([key,value])=>{
-            console.log(key,value)
             formData.append(key,value)
         })
 
         try{
-            formData.forEach((item,index)=>{
-                console.log(index,item)
-            })
             
             axiosResponse = await axios.request({
                 url:data.url,
@@ -34,7 +30,6 @@ class AxiosHttpClientAdapter implements HttpClientType{
                 cancelToken:data.cancelToken,
                 withCredentials:!!data.withCredentials
             })
-            console.log(axiosResponse)
             
         }
         catch(error){
