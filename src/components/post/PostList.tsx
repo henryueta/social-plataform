@@ -76,6 +76,7 @@ const PostList = ({user_username,search,isForSearch}
         listContainerRef:postListDataRef
       }
     });
+
   return (
     <div 
     style={{
@@ -86,7 +87,9 @@ const PostList = ({user_username,search,isForSearch}
     }}
     className={"postListContainer"} 
     ref={postListDataRef} 
-    onScrollEnd={()=>{handleListView()}}
+    onScrollEnd={()=>{
+      handleListView()
+    }}
     >
             {
               !!user_username
@@ -120,7 +123,11 @@ const PostList = ({user_username,search,isForSearch}
               
             }
             
-            <div className={"postList "+(search !== null ? "search": "")}>
+            <div 
+            style={{
+                    paddingBottom:"10rem"
+            }}
+            className={"postList "+(!!search ? "search": "")}>
               {
                 <DataFetcher
                 noDataMessage={false}

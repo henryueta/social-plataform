@@ -6,12 +6,13 @@ import CommentInputCard from "./CommentInputCard"
 import useHandleComment from "../../hooks/useHandleComment"
 import type { UserNamertagType } from "../../types/user-type"
 
-const CommentCard = ({commentaryData,isLiked,onDelete}:
+const CommentCard = ({commentaryData,isLiked,onDelete,isSameUser}:
     {
         commentaryData:CommentCardComponentProps,
         isLiked:boolean,
         type:'commentary'|'response',
-        onDelete:(forDelete:string)=>void
+        onDelete:(forDelete:string)=>void,
+        isSameUser:boolean
     }) => {
         const [expandResponseInput,setExpandResponseInput] = useState(false);
         const {currentCommentary,setCurrentCommentary,onDeleteCommentary} = useHandleComment();
@@ -52,6 +53,9 @@ const CommentCard = ({commentaryData,isLiked,onDelete}:
                         : "Responder"
                     }
                 </button> */}
+                {
+                isSameUser
+                &&
                 <button
                 onClick={()=>{
                     onDeleteCommentary(commentaryData.commentary_id,{
@@ -66,6 +70,7 @@ const CommentCard = ({commentaryData,isLiked,onDelete}:
                 >
                     Deletar
                 </button>
+                }
             </div>
             
         </div>

@@ -23,6 +23,7 @@ const CommentList = (
   const commentaryListDataRef = useRef<HTMLDivElement>(null);
   const commentaryListExpansionRef = useRef<HTMLButtonElement>(null) 
   const [deleteElement,setDeleteElement] = useState<string|null>(null);
+  const [userCommentaryList,setUserCommentaryList] = useState<string[]>([]);
 
   const onQueryCommentaryList = ()=>{
     onGetCommentaryList(!!(type === 'response' || type === 'commentary')
@@ -30,8 +31,7 @@ const CommentList = (
       : 'post',{
       onThen(result) {
         const current_result = result.response.data;
-
-
+        setUserCommentaryList(current_result.user_commentary_list)
         setListState({
           type:"data",
           value:{
@@ -155,6 +155,9 @@ const CommentList = (
               listState.data.value
               .map((commentary)=>
               <CommentCard
+              isSameUser={
+                userCommentaryList.includes(commentary.commentary_id)
+              }
               onDelete={(commentary)=>{
                 setDeleteElement(commentary)
               }}

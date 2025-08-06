@@ -163,8 +163,9 @@ const ProfileView = ({username}:{username:string}) => {
                 {
                     !!profileViewState.data
                     &&
-                    profile_social_status.map((social_info)=>
+                    profile_social_status.map((social_info,social_info_index)=>
                         <CountView
+                        key={social_info_index}
                         onClick={()=>{
                             social_info.type !== 'post_qnt'
                             &&

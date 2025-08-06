@@ -139,7 +139,11 @@ const PostCard = ({postData,liked,detailedView,isSameUser}:
             onTransition("/post/view/"+postData.post_id)
           }}
         >
+          {
+            !!(postData.image.length)
+            &&
           <img src={postData.image} alt="" loading="lazy"/>
+          }
         </div>
 
         <div className="actionsContainer">
