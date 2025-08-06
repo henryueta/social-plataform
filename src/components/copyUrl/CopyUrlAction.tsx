@@ -10,7 +10,7 @@ const CopyUrlAction = ({url,hasIcon}:{url:string,hasIcon:boolean}) => {
 
   const onCopyUrl = ()=>{
     setIsCopyng(true)
-  navigator.clipboard.writeText("https://yokurt.vercel.app/"+url)
+  navigator.clipboard.writeText("https://yokurt.vercel.app"+url)
   .then(()=>{
     
   })
