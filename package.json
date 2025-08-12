@@ -48,6 +48,10 @@
   "browserslist":[
     ">0.2%",
     "not dead",
-    "not op_mini all"
+    "not op_mini all",
+    "last 2 versions",
+    "iOS >= 11",
+    "Safari >= 11",
+    "Samsung >= 8"
   ]
 }
