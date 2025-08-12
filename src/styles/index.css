@@ -2,7 +2,7 @@
   padding: 0;
   margin:0;
   box-sizing: border-box;
-  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  font-family: sans-serif;
   transition: 0.2s ease-in-out;
   --color-primary:rgb(170, 3, 3);
   --color-white-hover:rgb(195, 193, 193);

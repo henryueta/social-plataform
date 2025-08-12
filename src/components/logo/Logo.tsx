@@ -1,4 +1,4 @@
-import logo from "../../assets/imgs/small_social_logo.webp"
+import logo from "../../assets/imgs/yokurt_logo.webp"
 import useHandlePath from "../../hooks/useHandlePath"
 
 

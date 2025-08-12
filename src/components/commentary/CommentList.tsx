@@ -64,7 +64,7 @@ const CommentList = (
   const {onGetCommentaryList,commentQueryState} = useHandleComment();
   const {setListState,listState,handleListView} = useHandleList<CommentCardComponentProps>({
     config:{
-      limit:2,
+      limit:10,
       page:1,
       mode:mode
     },

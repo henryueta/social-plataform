@@ -1,13 +1,12 @@
 .authFormSection{
-    /* padding: 1rem; */
     padding-top: 3rem;
     padding-bottom: 3rem;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    /* height: 100dvh; */
     width: 100dvw;
+    background-color: white;
 }
 
 .authFormSection .logoContainer img{
@@ -15,11 +14,7 @@
 }
 
 .authFormSection .formSection{
-    background-color: white;
-    /* border: 0.1rem solid gray; */
     width: 500px;
-    border-radius: 0.5rem;
-    /* height: 90%; */
     display: flex;
     flex-direction: column;
     align-items: center;
