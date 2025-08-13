@@ -45,7 +45,7 @@ const ProfileList = ({type,identifier,identifier_type,isForSearch,search,redirec
           type:type,
           hasImage:true,
         },{
-          limit:8,
+          limit:5,
           page:1,
           username:(
             identifier_type === 'user'
@@ -109,7 +109,11 @@ const ProfileList = ({type,identifier,identifier_type,isForSearch,search,redirec
 
       const {listState,setListState} = useHandleList<ProfileCardComponentProps>({
         config:{
+<<<<<<< HEAD
           limit:8,
+=======
+          limit:5,
+>>>>>>> cad97b8 (profileListLimitUpdate)
           mode:"manual",
           page:1
         },
