@@ -14,7 +14,7 @@ const PostView = ({id}:{id:string}) => {
   const [commentaryListUpdate,setCommentaryListUpdate] = useState<()=>void>(()=>{
     return ()=>{}
   });
-  const {currentCommentary,setCurrentCommentary} = useHandleComment();
+  const {currentCommentary,setCurrentCommentary,commentQueryState} = useHandleComment();
   const [postViewState,setPostViewState] = useState<{
     data:PostCardComponentProps | null,
     isLiked:boolean | null,
@@ -22,9 +22,11 @@ const PostView = ({id}:{id:string}) => {
   }>();
 
   const updateComentaryList = (action:()=>void)=>{
+    (!commentQueryState.isLoading
+      &&
       setCommentaryListUpdate(()=>{
         return ()=>action()
-      })
+      }))
   }
 
   useEffect(()=>{

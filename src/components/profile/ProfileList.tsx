@@ -45,7 +45,10 @@ const ProfileList = ({type,identifier,identifier_type,isForSearch,search,redirec
           type:type,
           hasImage:true,
         },{
-          limit:5,
+          limit:(!!redirect
+            ? 5
+            : 15
+          ),
           page:1,
           username:(
             identifier_type === 'user'
@@ -112,7 +115,10 @@ const ProfileList = ({type,identifier,identifier_type,isForSearch,search,redirec
 <<<<<<< HEAD
           limit:8,
 =======
-          limit:5,
+          limit:(!!redirect
+            ? 5
+            : 15
+          ),
 >>>>>>> cad97b8 (profileListLimitUpdate)
           mode:"manual",
           page:1

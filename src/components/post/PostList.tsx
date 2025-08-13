@@ -88,7 +88,9 @@ const PostList = ({user_username,search,isForSearch}
     className={"postListContainer"} 
     ref={postListDataRef} 
     onScrollEnd={()=>{
-      handleListView()
+      (!postQueryState.isLoading
+      &&
+      handleListView())
     }}
     >
             {
