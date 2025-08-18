@@ -7,9 +7,18 @@ const user_schema = ZodSchemaFactory.draw({
     username:z.string().min(1,{
         message:"Campo username inválido"
     }),
-    email:z.string().min(1,{
-        message:"Campo email inválido"
-    }),
+    email:z.string().refine((val)=>{
+        return !!(
+            val.match(/^[a-zA-Z0-9._%+-]+@(gmail\.com|outlook\.com|hotmail\.com|yahoo\.com)$/i)
+            &&
+            !!val.trim().length
+        )
+    },
+    {
+        message:"Campo e-mail inválido"
+    }
+        
+    ),
     password:z.string().min(1,{
         message:"Campo senha inválido"
     })

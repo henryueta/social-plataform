@@ -1,4 +1,3 @@
-import Logo from "../components/logo/Logo";
 import ProfileList from "../components/profile/ProfileList"
 import { useHandleScreen } from "../context/ScreenContext"
 import "../styles/layout/social-layout.css"
@@ -9,13 +8,13 @@ const SocialLayout = ({children}:{children:React.ReactNode}) => {
 
   return (
     <>
-        {
+        {/* {
         isMobile
             &&
           <div className="logoMobileContainer">
             <Logo/>
           </div>
-        }
+        } */}
         <section className="socialContentContainer">
           
             {children}

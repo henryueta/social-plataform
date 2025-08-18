@@ -64,8 +64,8 @@ const initialListState:ListStateType<C> = {
     },
     filter:{
       dataType:"recent",
-      limit:!!config.limit ? config.limit : 5,
-      page:!!config.page ? config.page : 1
+      limit:(!!config.limit ? config.limit : 5),
+      page:(!!config.page ? config.page : 1)
     }
 }
 
@@ -96,7 +96,7 @@ const handleListState = (state:ListStateType<C>,action:ListActionType<C>)=>{
               !!(references.listContainerRef.current.scrollTop + references.listContainerRef.current.clientHeight >= references.listContainerRef.current.scrollHeight - 1))
               : true)
               &&
-              setListState({
+                setListState({
               type:"filter",
               value:{
                 limit:listState.filter.limit,
@@ -104,7 +104,7 @@ const handleListState = (state:ListStateType<C>,action:ListActionType<C>)=>{
                 dataType:"recent"
               }
             })
-
+              console.log("limit",listState.filter.limit)
             })()
     }
 
@@ -129,8 +129,8 @@ const handleListState = (state:ListStateType<C>,action:ListActionType<C>)=>{
           },
           filter:{
             dataType:"recent",
-            limit:5,
-            page:!!config.page ? config.page : 1
+            limit:(!!config.limit ? config.limit : 5),
+            page:(!!config.page ? config.page : 1)
           }
         }
       })

@@ -46,7 +46,7 @@
 .authFormSection form{
     display: flex;
     flex-direction: column;
-    gap: 2rem;
+    gap: 1rem;
     padding: 1rem;
     width: 100%;
     /* height: 50%; */
@@ -60,7 +60,7 @@
 }
 
 .authFormSection form>.fieldFormContainer{
-    margin-bottom: 0.5rem;
+    /* margin-bottom: 0.1rem; */
 }
 
 .authFormSection form>.fieldFormContainer label{

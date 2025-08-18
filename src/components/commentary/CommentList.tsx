@@ -31,6 +31,7 @@ const CommentList = (
       : 'post',{
       onThen(result) {
         const current_result = result.response.data;
+        console.log(result)
         setUserCommentaryList(current_result.user_commentary_list)
         setListState({
           type:"data",
@@ -59,7 +60,6 @@ const CommentList = (
     })
   }
 
-  
 
   const {onGetCommentaryList,commentQueryState} = useHandleComment();
   const {setListState,listState,handleListView} = useHandleList<CommentCardComponentProps>({
@@ -189,6 +189,21 @@ const CommentList = (
               && <button ref={commentaryListExpansionRef}>
                   Mostrar mais respostas
                 </button>
+            }
+            {
+              (!!listState.data.remaining && mode === 'manual')
+              &&
+              !commentQueryState.isLoading
+              &&
+              <button
+              className="filled_button"
+              onClick={()=>{
+                handleListView()
+              }}
+              >
+                
+                Mostrar mais respostas
+              </button>
             }
   </div>
   )

@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import useHandlePost from "../../hooks/useHandlePost"
 import "../../styles/social/post.css"
 import type { PostCardComponentProps } from "../../types/post-type";
@@ -10,24 +10,12 @@ import useHandleComment from "../../hooks/useHandleComment";
 const PostView = ({id}:{id:string}) => {
 
   const {onGetPost} = useHandlePost();
-  const postViewRef = useRef<HTMLDivElement>(null)
-  const [commentaryListUpdate,setCommentaryListUpdate] = useState<()=>void>(()=>{
-    return ()=>{}
-  });
-  const {currentCommentary,setCurrentCommentary,commentQueryState} = useHandleComment();
+  const {currentCommentary,setCurrentCommentary} = useHandleComment();
   const [postViewState,setPostViewState] = useState<{
     data:PostCardComponentProps | null,
     isLiked:boolean | null,
     isSameUser:boolean | null
   }>();
-
-  const updateComentaryList = (action:()=>void)=>{
-    (!commentQueryState.isLoading
-      &&
-      setCommentaryListUpdate(()=>{
-        return ()=>action()
-      }))
-  }
 
   useEffect(()=>{
 
@@ -53,9 +41,7 @@ const PostView = ({id}:{id:string}) => {
 
 
   return (
-    <div className="postInfoContainer" ref={postViewRef} onScrollEnd={()=>{
-      commentaryListUpdate()
-    }}>
+    <div className="postInfoContainer">
       {
       !!postViewState
       &&
@@ -85,11 +71,11 @@ const PostView = ({id}:{id:string}) => {
       isResponse={false}/>
       <CommentList
       pushElement={currentCommentary}
-      mode="automatic"
-      externalReference={{
-        ref:postViewRef,
-        functionRef:updateComentaryList
-      }}
+      mode="manual"
+        // externalReference={{
+        //   ref:postViewRef,
+        //   functionRef:updateComentaryList
+        // }}
       table_id={id}
       type="post"
       />
