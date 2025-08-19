@@ -42,6 +42,7 @@ const useHandleDialog = ()=>{
 
     return {
         dialogStructure,
+        currentDialogContext,
         showDialog,
         resetDialog
     }

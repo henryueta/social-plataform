@@ -17,14 +17,30 @@ const AuthPage = () => {
 
   const [authStructure,setAuthStructure] = useState<AuthStructureType| null>(null)
   const {onTransition} = useHandlePath();
-  const {showDialog} = useHandleDialog();
-
+  const {showDialog,currentDialogContext} = useHandleDialog();
+  
   useEffect(()=>{
 
     const currentStructure = auth_type.find((structure=>structure.type === type))
     !!currentStructure
     &&
     setAuthStructure(currentStructure)
+
+    {
+      (type === 'login'
+      &&
+      !currentDialogContext.importantMessageIsRead  
+      )
+      &&
+      showDialog({
+        title:"ATENÇÃO!",
+        message:`"Yokurt" não possui nenhuma associação a plataforma "Orkut".`,
+        type:"warn",
+        onConfirm:null,
+        onCancel:null,
+        onFinally:()=>currentDialogContext.onReadImportantMessage()
+      })
+    }
 
   },[type])
 
